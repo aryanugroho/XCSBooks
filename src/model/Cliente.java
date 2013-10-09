@@ -12,7 +12,6 @@ public class Cliente {
 	
 	public Cliente(String username, String senha, String nome, String cpf,
 			String email, String telefone1, String telefone2, Endereco endereco) {
-		super();
 		this.username = username;
 		this.senha = senha;
 		this.nome = nome;
@@ -24,7 +23,6 @@ public class Cliente {
 	}
 
 	public Cliente() {
-		super();
 	}
 
 	public String getUsername() {

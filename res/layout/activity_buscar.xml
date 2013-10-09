@@ -3,12 +3,11 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <GridView
-        android:id="@+id/gridHomeView"
+    <ListView 
+        android:id="@+id/listaResultadosView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:numColumns="2"
-        android:gravity="center" >
-    </GridView>
-
+        android:layout_height="wrap_content">
+        
+    </ListView>
+    
 </LinearLayout>

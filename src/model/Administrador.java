@@ -5,13 +5,11 @@ public class Administrador {
 	private String senha;
 	
 	public Administrador(String username, String senha) {
-		super();
 		this.username = username;
 		this.senha = senha;
 	}
 
 	public Administrador() {
-		super();
 	}
 
 	public String getUsername() {

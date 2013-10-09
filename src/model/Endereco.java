@@ -2,7 +2,7 @@ package model;
 
 public class Endereco {
 	private int codigo;
-	private String Logradouro;
+	private String logradouro;
 	private int numero;
 	private String complemento;
 	private String bairro;
@@ -15,7 +15,7 @@ public class Endereco {
 			String cep) {
 		super();
 		this.codigo = codigo;
-		Logradouro = logradouro;
+		this.logradouro = logradouro;
 		this.numero = numero;
 		this.complemento = complemento;
 		this.bairro = bairro;
@@ -37,11 +37,11 @@ public class Endereco {
 	}
 
 	public String getLogradouro() {
-		return Logradouro;
+		return logradouro;
 	}
 
 	public void setLogradouro(String logradouro) {
-		Logradouro = logradouro;
+		this.logradouro = logradouro;
 	}
 
 	public int getNumero() {
