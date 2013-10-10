@@ -86,14 +86,17 @@ public class HomeActivity extends Activity {
 		case R.id.action_carrinho:
 			intent = new Intent(this, CarrinhoActivity.class);
 			startActivity(intent);
+			finish();
 			break;
 		case R.id.action_home:
 			intent = new Intent(this, HomeActivity.class);
 			startActivity(intent);
+			finish();
 			break;
 		case R.id.action_logar:
 			intent = new Intent(this, LogarActivity.class);
 			startActivity(intent);
+			finish();
 			break;
 		case R.id.action_sair:
 			finish();
