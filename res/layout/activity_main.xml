@@ -20,7 +20,7 @@
         android:layerType="software"/>
     
     <EditText
-        android:id="@+id/caixa_busca"
+        android:id="@+id/home_caixa_busca"
         android:layout_width="340dp"
         android:layout_height="50dp"
         android:hint="@string/buscar_livro"
@@ -38,13 +38,25 @@
            android:layout_height="wrap_content"
            android:id="@+id/relativeLayout">
        
+            <Button 
+		        android:id="@+id/home_btn_buscar"
+		        android:layout_width="100dp"
+		        android:layout_height="wrap_content"
+		        android:layout_gravity="right"
+		        android:textColor="#000000"
+		        android:layout_marginTop="10dp"
+		        android:layout_centerHorizontal="true"
+		        android:text="@string/buscar"
+		        />
+            
              <TextView 
 		        android:id="@+id/textoIntro"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:textSize="20sp"
-		        android:layout_marginTop="10dp"
-		        android:layout_marginLeft="20dp"
+		        android:layout_marginTop="30dp"
+		        android:layout_marginLeft="65dp"
+		        android:layout_below="@id/home_btn_buscar"
 		        android:text="@string/ja_registrou" />
 		    
      	    <TextView 
@@ -52,9 +64,9 @@
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:textSize="20sp"
-		        android:layout_marginTop="10dp"
+		        android:layout_marginTop="25dp"
 		        android:layout_below="@id/textoIntro"
-		        android:layout_marginLeft="20dp"
+		        android:layout_marginLeft="30dp"
 		        android:textColor="#666666" 
 		        android:text="@string/logue_para_comprar" />
      	    
@@ -64,9 +76,10 @@
 		        android:layout_height="wrap_content"
 		        android:layout_gravity="right"
 		        android:textColor="#000000"
+		        android:layout_marginTop="15dp"
 		        android:layout_marginRight="10dp"
 		        android:layout_alignParentRight="true"
-		        android:layout_toRightOf="@id/textoIntro"
+		        android:layout_below="@id/home_btn_buscar"
 		        android:text="@string/cadastrar"
 		        />
 		    
@@ -77,7 +90,6 @@
 		        android:layout_marginRight="10dp"
 		        android:layout_alignParentRight="true"
 		        android:textColor="#000000"
-		        android:layout_toRightOf="@id/textoLogin"
 		        android:layout_below="@id/home_cadastrar"
 		        android:text="@string/logar"
 		        />

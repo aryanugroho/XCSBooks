@@ -6,27 +6,26 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.DashPathEffect;
-import android.graphics.Paint;
-import android.graphics.Paint.Style;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.GridView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
 public class HomeActivity extends Activity {
-	private GridView mGridView;
+	private Button mBtnBuscar;
+	private Button mBtnCadastar;
+	private Button mBtnLogar;
+	private EditText mEditBuscar;
+	
 	public static final String KEY_BUSCA = "com.example.xcsbooks.KEY_BUSCA";
 	
 	@Override
@@ -34,39 +33,42 @@ public class HomeActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		/* mGridView = (GridView) findViewById(R.id.gridHomeView);
-		mGridView.setAdapter(new GridAdapter(this));
-		
-		mGridView.setOnItemClickListener(new OnItemClickListener() {
+		mBtnBuscar = (Button) findViewById(R.id.home_btn_buscar);
+		mBtnCadastar = (Button)findViewById(R.id.home_cadastrar);
+		mBtnLogar = (Button)findViewById(R.id.home_logar);
+		mEditBuscar = (EditText)findViewById(R.id.home_caixa_busca);
 
+		mEditBuscar.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
+
+		mBtnBuscar.setOnClickListener(new OnClickListener() {
+			
 			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
-					long arg3) {
-				//Abrir activities
-				Intent intent = null;
-				switch (position) {
-				case 0:
-					intent = new Intent(getApplicationContext(), BuscarActivity.class);
-					startActivity(intent);
-					break;
-				case 1:
-					intent = new Intent(getApplicationContext(), LogarActivity.class);
-					startActivity(intent);
-					break;
-				case 2:
-					intent = new Intent(getApplicationContext(), CarrinhoActivity.class);
-					startActivity(intent);
-					break;
-				case 3:
-					//Sair
-					finish();
-					break;
-				default:
-					break;
-				}
+			public void onClick(View v) {
+				Intent intent = new Intent(HomeActivity.this, BuscarActivity.class);
+				String termoBusca = mEditBuscar.getText().toString();
+				intent.putExtra(KEY_BUSCA, termoBusca);
+				startActivity(intent);
 			}
-		}); */
+		});
 		
+		mBtnCadastar.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(HomeActivity.this, CadastrarActivity.class);
+				startActivity(intent);
+			}
+		});
+		
+		mBtnLogar.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(HomeActivity.this, LogarActivity.class);
+				startActivity(intent);
+			}
+		});
+				
 		getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM | ActionBar.DISPLAY_SHOW_HOME);
 		
 	}
