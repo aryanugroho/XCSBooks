@@ -6,6 +6,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.DashPathEffect;
+import android.graphics.Paint;
+import android.graphics.Paint.Style;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.KeyEvent;
@@ -18,6 +21,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
@@ -30,7 +34,7 @@ public class HomeActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		mGridView = (GridView) findViewById(R.id.gridHomeView);
+		/* mGridView = (GridView) findViewById(R.id.gridHomeView);
 		mGridView.setAdapter(new GridAdapter(this));
 		
 		mGridView.setOnItemClickListener(new OnItemClickListener() {
@@ -61,7 +65,7 @@ public class HomeActivity extends Activity {
 					break;
 				}
 			}
-		});
+		}); */
 		
 		getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM | ActionBar.DISPLAY_SHOW_HOME);
 		

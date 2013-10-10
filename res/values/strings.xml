@@ -11,17 +11,23 @@
     <string name="username">Usuário</string>
     <string name="password">Senha</string>
     <string name="logar">Logar</string>
+    <string name="cadastrar">Cadastrar</string>
     <string name="icone_home">Icone da HomeScreen</string>
-    
     <string name="buscar">Buscar</string>
- 	<string name="carrinho">Carrinho</string>
- 	<string name="sair">Sair</string>
-    
+    <string name="buscar_livro">Buscar Livros</string>
+    <string name="carrinho">Carrinho</string>
+    <string name="sair">Sair</string>
+
     <string-array name="desricao_home">
         <item>@string/buscar</item>
         <item>@string/logar</item>
         <item>@string/carrinho</item>
         <item>@string/sair</item>
     </string-array>
+
+    <string name="ja_registrou">Já se registrou?</string>
+    <string name="logue_para_comprar">Logue para poder comprar</string>
+    <string name="title_activity_cadastrar">CadastrarActivity</string>
+    <string name="hello_world">Hello world!</string>
 
 </resources>

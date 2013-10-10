@@ -6,11 +6,12 @@
 	    android:showAsAction="always"
 	    android:title="@string/buscar"
 	    android:icon="@android:drawable/ic_menu_search"/>
-    
+	
     <item
         android:id="@+id/action_carrinho"
-        android:orderInCategory="100"
-        android:showAsAction="never"
+        android:orderInCategory="2"
+        android:showAsAction="always"
+        android:icon="@drawable/cart"
         android:title="@string/title_activity_carrinho"/>
     
     <item

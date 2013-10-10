@@ -38,6 +38,10 @@
             android:name="com.example.xcsbooks.DetalhesLivroActivity"
             android:label="@string/title_activity_detalhes_livro" >
         </activity>
+        <activity
+            android:name="com.example.xcsbooks.CadastrarActivity"
+            android:label="@string/title_activity_cadastrar" >
+        </activity>
     </application>
 
 </manifest>
