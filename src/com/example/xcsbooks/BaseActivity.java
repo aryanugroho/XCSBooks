@@ -49,34 +49,7 @@ public class BaseActivity extends Activity {
 			break;
 		case R.id.action_busca:
 			intent = new Intent(this, BuscarActivity.class);
-			startActivity(intent);	
-			
-			/*LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
-			EditText busca = new EditText(this);
-			busca.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
-			busca.setTextColor(Color.WHITE);
-			busca.setInputType(InputType.TYPE_CLASS_TEXT);
-			
-			getActionBar().setCustomView(busca, lp);
-			busca.requestFocus();
-			
-			InputMethodManager imm = (InputMethodManager)
-					getSystemService(Context.INPUT_METHOD_SERVICE);
-			imm.showSoftInput(busca, InputMethodManager.SHOW_IMPLICIT);
-			
-			busca.setOnEditorActionListener(new OnEditorActionListener() {
-				
-				@Override
-				public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-					String termo = v.getText().toString();
-					Intent intent = new Intent(BaseActivity.this, BuscarActivity.class);
-					intent.putExtra(KEY_BUSCA, termo);
-					startActivity(intent);
-					finish();
-					return true;
-				}
-			}); */
-			
+			startActivity(intent);
 		default:
 			//Adicionar erro
 			return false;
