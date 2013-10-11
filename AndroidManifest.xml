@@ -15,7 +15,8 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="com.example.xcsbooks.HomeActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:windowSoftInputMode="stateHidden" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,23 +25,32 @@
         </activity>
         <activity
             android:name="com.example.xcsbooks.BuscarActivity"
-            android:label="@string/title_activity_buscar" >
+            android:label="@string/title_activity_buscar"
+            android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
             android:name="com.example.xcsbooks.LogarActivity"
-            android:label="@string/title_activity_logar" >
+            android:label="@string/title_activity_logar"
+            android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
             android:name="com.example.xcsbooks.CarrinhoActivity"
-            android:label="@string/title_activity_carrinho" >
+            android:label="@string/title_activity_carrinho"
+            android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
             android:name="com.example.xcsbooks.DetalhesLivroActivity"
-            android:label="@string/title_activity_detalhes_livro" >
+            android:label="@string/title_activity_detalhes_livro"
+            android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
             android:name="com.example.xcsbooks.CadastrarActivity"
-            android:label="@string/title_activity_cadastrar" >
+            android:label="@string/title_activity_cadastrar"
+            android:windowSoftInputMode="stateHidden" >
+        </activity>
+        <activity
+            android:name="com.example.xcsbooks.BaseActivity"
+            android:label="@string/title_activity_base" >
         </activity>
     </application>
 
