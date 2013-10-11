@@ -9,7 +9,7 @@
         android:layout_height="wrap_content">
     
 	    <ImageView
-	        android:id="@+id/imagemLivro" 
+	        android:id="@+id/detalheLivro_imagemLivro" 
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_margin="8dp" >
@@ -21,35 +21,35 @@
 	        android:layout_height="wrap_content">
 	     
 		    <TextView 
-		        android:id="@+id/nomeLivro"
+		        android:id="@+id/detalheLivro_txtTitulo"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:textSize="18sp" >    
 		    </TextView>
 		    
 		    <TextView 
-		        android:id="@+id/autorLivro"
+		        android:id="@+id/detalheLivro_txtAutor"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:textSize="18sp" >    
 		    </TextView>
 		    
 		    <TextView 
-		        android:id="@+id/editoraLivro"
+		        android:id="@+id/detalheLivro_txtEditora"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:textSize="18sp" >    
 		    </TextView>
 		    
 		    <TextView 
-		        android:id="@+id/isbnLivro"
+		        android:id="@+id/detalheLivro_txtIsbn"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:textSize="15sp" >    
 		    </TextView>
 		    
 		    <TextView 
-		        android:id="@+id/precoLivro"
+		        android:id="@+id/detalheLivro_txtPreco"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:textSize="15sp" >    
@@ -58,12 +58,12 @@
 	    </LinearLayout>    
 	    
 	    <Button 
-	        android:id="@+id/botaoComprar"
+	        android:id="@+id/detalheLivro_btnComprar"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"/>
 	    
 	    <Button 
-	        android:id="@+id/botaoAdicionarCarrinho"
+	        android:id="@+id/detalheLivro_btnAdicionarCarrinho"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"/>
 	    

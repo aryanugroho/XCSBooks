@@ -5,7 +5,7 @@
 
     <EditText
         android:layout_marginTop="50dp"
-        android:id="@+id/editText1"
+        android:id="@+id/logar_txtName"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -17,7 +17,7 @@
 
     <EditText
         android:layout_marginTop="20dp"
-        android:id="@+id/editText2"
+        android:id="@+id/logar_txtPassword"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -27,7 +27,7 @@
 
     <Button
         android:layout_marginTop="20dp"
-        android:id="@+id/button1"
+        android:id="@+id/logar_btnLogar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

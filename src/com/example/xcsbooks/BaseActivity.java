@@ -3,19 +3,9 @@ package com.example.xcsbooks;
 import android.os.Bundle;
 import android.app.ActionBar;
 import android.app.Activity;
-import android.app.ActionBar.LayoutParams;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.text.InputType;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.TextView.OnEditorActionListener;
 
 public class BaseActivity extends Activity {
 	public static final String KEY_BUSCA = "com.example.xcsbooks.KEY_BUSCA";
@@ -32,6 +22,7 @@ public class BaseActivity extends Activity {
 		return true;
 	}
 	
+	@Override
 	public boolean onOptionsItemSelected(MenuItem item){
 		Intent intent = null;
 		switch (item.getItemId()) {

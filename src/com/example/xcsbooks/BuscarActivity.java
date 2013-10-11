@@ -14,7 +14,7 @@ public class BuscarActivity extends BaseActivity {
 		setContentView(R.layout.activity_buscar);
 	
 		termo = getIntent().getStringExtra(BaseActivity.KEY_BUSCA);
-		mEditBusca = (EditText) findViewById(R.id.buscar_caixa_busca);
+		mEditBusca = (EditText) findViewById(R.id.busca_txtBusca);
 		mEditBusca.setText(termo);
 		mEditBusca.clearFocus();
 		

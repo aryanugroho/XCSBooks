@@ -44,13 +44,17 @@
             android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
-            android:name="com.example.xcsbooks.CadastrarActivity"
+            android:name="com.example.xcsbooks.CadastrarClienteActivity"
             android:label="@string/title_activity_cadastrar"
             android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
             android:name="com.example.xcsbooks.BaseActivity"
             android:label="@string/title_activity_base" >
+        </activity>
+        <activity
+            android:name="com.example.xcsbooks.CadastrarEnderecoActivity"
+            android:label="@string/title_activity_cadastrar_endereco" >
         </activity>
     </application>
 

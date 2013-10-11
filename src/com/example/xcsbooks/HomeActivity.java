@@ -22,10 +22,10 @@ public class HomeActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		mBtnBuscar = (Button) findViewById(R.id.home_btn_buscar);
-		mBtnCadastar = (Button)findViewById(R.id.home_cadastrar);
-		mBtnLogar = (Button)findViewById(R.id.home_logar);
-		mEditBuscar = (EditText)findViewById(R.id.home_caixa_busca);
+		mBtnBuscar = (Button) findViewById(R.id.home_btnBuscar);
+		mBtnCadastar = (Button)findViewById(R.id.home_btnCadastrar);
+		mBtnLogar = (Button)findViewById(R.id.home_btnLogar);
+		mEditBuscar = (EditText)findViewById(R.id.home_txtBusca);
 
 		mEditBuscar.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
 
@@ -44,7 +44,7 @@ public class HomeActivity extends BaseActivity {
 			
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(HomeActivity.this, CadastrarActivity.class);
+				Intent intent = new Intent(HomeActivity.this, CadastrarClienteActivity.class);
 				startActivity(intent);
 			}
 		});
@@ -69,6 +69,7 @@ public class HomeActivity extends BaseActivity {
 		return true;
 	}
 
+	@Override
 	public boolean onOptionsItemSelected(MenuItem item){
 		return super.onOptionsItemSelected(item);
 	}

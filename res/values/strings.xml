@@ -17,6 +17,19 @@
     <string name="buscar_livro">Buscar Livros</string>
     <string name="carrinho">Carrinho</string>
     <string name="sair">Sair</string>
+    <string name="nome">Nome</string>
+    <string name="cpf">CPF</string>
+    <string name="email">Email</string>
+    <string name="valide_password">Confirmar senha</string>
+    <string name="proximo">Proximo</string>
+    <string name="logradouro">Logradouro</string>
+    <string name="numero">Numero</string>
+    <string name="complemento">Complemento</string>
+    <string name="bairro">Bairro</string>
+    <string name="cidade">Cidade</string>
+    <string name="estado">UF</string>
+    <string name="cep">CEP</string>
+
 
     <string-array name="desricao_home">
         <item>@string/buscar</item>
@@ -30,5 +43,6 @@
     <string name="title_activity_cadastrar">CadastrarActivity</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_base">BaseActivity</string>
+    <string name="title_activity_cadastrar_endereco">CadastrarEnderecoActivity</string>
 
 </resources>
