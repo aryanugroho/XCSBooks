@@ -27,6 +27,22 @@
         android:hint="@string/email"
         android:ems="10"
         android:inputType="textEmailAddress" />
+    
+    <EditText
+        android:id="@+id/cadastrarCliente_txtTel1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/telefone2"
+        android:ems="10"
+        android:inputType="phone" />
+    
+    <EditText
+        android:id="@+id/cadastrarCliente_txtTel2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/telefone1"
+        android:ems="10"
+        android:inputType="phone" />
 
     <EditText
         android:id="@+id/cadastrarCliente_txtUsername"

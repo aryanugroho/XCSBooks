@@ -52,7 +52,8 @@ public class RequestTask extends AsyncTask<URI, Integer, String>{
         		HttpGet get = new HttpGet(urlArg);
         		response = httpclient.execute(get);
         	} else {
-        		HttpPost post = new HttpPost(uri[0]);
+        		HttpPost post = new HttpPost(urlArg);
+        		System.out.println(urlArg);
             	post.setEntity(new UrlEncodedFormEntity(args));
                 response = httpclient.execute(post);
         	}

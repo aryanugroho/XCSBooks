@@ -10,11 +10,10 @@ public class Endereco {
 	private String uf;
 	private String cep;
 	
-	public Endereco(int codigo, String logradouro, int numero,
+	public Endereco(String logradouro, int numero,
 			String complemento, String bairro, String cidade, String uf,
 			String cep) {
 		super();
-		this.codigo = codigo;
 		this.logradouro = logradouro;
 		this.numero = numero;
 		this.complemento = complemento;
