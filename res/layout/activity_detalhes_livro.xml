@@ -55,19 +55,20 @@
 		        android:textSize="15sp" >    
 		    </TextView>
 	    
-	    </LinearLayout>    
-	    
-	    <Button 
-	        android:id="@+id/detalheLivro_btnComprar"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"/>
-	    
-	    <Button 
-	        android:id="@+id/detalheLivro_btnAdicionarCarrinho"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"/>
+	    </LinearLayout>
 	    
     </LinearLayout>
-    
+
+    <Button
+        android:id="@+id/detalheLivro_btnComprar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/comprar" />
+
+    <Button
+        android:id="@+id/detalheLivro_btnAdicionarCarrinho"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/addCarrinho" />
 
 </LinearLayout>

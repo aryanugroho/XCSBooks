@@ -8,12 +8,19 @@ import java.util.Map;
 import control.TestListBooks;
 
 import android.app.ActionBar;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 public class BuscarActivity extends BaseActivity {
 	private String termo;
@@ -51,7 +58,17 @@ public class BuscarActivity extends BaseActivity {
 		
 		lv.setAdapter(adapter);
 		
-		//getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM | ActionBar.DISPLAY_SHOW_HOME);
+		lv.setOnItemClickListener(new OnItemClickListener() {
+			
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				Intent intent = new Intent(BuscarActivity.this, DetalhesLivroActivity.class);
+				startActivity(intent);
+			}
+		});
+		
+		getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM | ActionBar.DISPLAY_SHOW_HOME);
+		
 	}
 
 	@Override
@@ -63,4 +80,5 @@ public class BuscarActivity extends BaseActivity {
 	public boolean onOptionsItemSelected(MenuItem item){
 		return super.onOptionsItemSelected(item);
 	}
+	
 }

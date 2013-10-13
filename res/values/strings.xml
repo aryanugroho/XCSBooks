@@ -34,6 +34,8 @@
     <string name="cidade">Cidade</string>
     <string name="estado">UF</string>
     <string name="cep">CEP</string>
+    <string name="comprar">Comprar</string>
+    <string name="addCarrinho">Adicionar ao Carrinho</string>
     
     <string name="login_erro">Não foi possível logar</string>
     <string name="login_erro_info">Usuário ou senha errados</string>
