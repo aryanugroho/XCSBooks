@@ -17,7 +17,7 @@ public class JSONParser {
 
 	public static Map<String, Object> parseLogin(String JSONStr){
 		Map<String, Object> map = new HashMap<String, Object>();
-		
+		Log.d("JSON_LOGIN", JSONStr);
 		try{
 			JSONObject jobj = new JSONObject(JSONStr);
 			JSONObject login = jobj.getJSONObject("login");

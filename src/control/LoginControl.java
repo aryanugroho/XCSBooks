@@ -62,7 +62,7 @@ public class LoginControl {
 						(String) u.get("telefone2"), 
 						new Endereco(
 									(String) u.get("logradouro"),
-									(Integer) u.get("numero"),
+									(Integer)u.get("numero"),
 									(String) u.get("complemento"),
 									(String) u.get("bairro"),
 									(String) u.get("cidade"),
@@ -70,10 +70,11 @@ public class LoginControl {
 									(String) u.get("cep")) );
 			
 			// Salvar sessionId e informações do usuário logado na persistência
-			SharedPreferences prefs = LogarActivity.getInstance().getPreferences(LogarActivity.MODE_PRIVATE);
+			SharedPreferences prefs = LogarActivity.getInstance().getSharedPreferences("LOGIN_CREDENTIALS", LogarActivity.MODE_PRIVATE);
 			SharedPreferences.Editor editor = prefs.edit();
 			
-			editor.putString("session", (String) u.get("sessionId"));
+			editor.putString("session", (String) u.get("session_id"));
+			Log.d("SESSION", "Value: " + u.get("session_id"));
 			editor.putString("username", username);
 			editor.putString("nome", cli.getNome());
 			editor.putString("cpf", cli.getCpf());
@@ -100,7 +101,7 @@ public class LoginControl {
 	
 	public static Cliente getClienteLogado(){
 		Cliente cli = null;
-		SharedPreferences prefs = HomeActivity.getInstance().getPreferences(LogarActivity.MODE_PRIVATE);
+		SharedPreferences prefs = HomeActivity.getInstance().getSharedPreferences("LOGIN_CREDENTIALS", HomeActivity.MODE_PRIVATE);
 		
 		if(isLogged(prefs)){
 			cli = new Cliente(prefs.getString("username", "NULL"),
@@ -118,7 +119,7 @@ public class LoginControl {
 	}
 	
 	public static void logout(){
-		SharedPreferences prefs = HomeActivity.getInstance().getPreferences(LogarActivity.MODE_PRIVATE);
+		SharedPreferences prefs = HomeActivity.getInstance().getSharedPreferences("LOGIN_CREDENTIALS", HomeActivity.MODE_PRIVATE);
 		SharedPreferences.Editor editor = prefs.edit();
 		
 		editor.remove("session").remove("username").remove("senha").remove("nome").remove("cpf")

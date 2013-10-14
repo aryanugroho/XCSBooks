@@ -15,8 +15,7 @@ public class Fragment_Home_Logado extends Fragment{
 		View myFragmentView = inflater.inflate(R.layout.fragment_home, container, false);
 		
 		TextView tv = (TextView) myFragmentView.findViewById(R.id.fragLogado_txtMsgNomeUsuario);
-		tv.setText(tv.getText().toString() + 
-				LoginControl.getClienteLogado().getNome());
+		tv.setText("Bem Vindo, X");
 		
 		return myFragmentView;
 	}
