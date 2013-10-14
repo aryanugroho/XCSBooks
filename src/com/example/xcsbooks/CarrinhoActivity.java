@@ -29,7 +29,7 @@ public class CarrinhoActivity extends BaseActivity {
 		
 		mBtnComprar = (Button) findViewById(R.id.carrinho_btnComprar);
 		ListView mLv = (ListView) findViewById(R.id.carrinho_listaItensView);
-		
+			
 		//...
 		TestListBooks livros = new TestListBooks();
 		

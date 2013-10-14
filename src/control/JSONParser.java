@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
+
+import model.LivroNovo;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -68,6 +69,58 @@ public class JSONParser {
 			Log.e("JSON", "Error parsing JSONString: " + JSONStr);
 		}
 		
+		return list;
+	}
+	
+	public static String LivroToJSON(ArrayList<LivroNovo> list){
+		String json = null;
+		json += "{ \"livros\": [";
+		
+		for(int i = 0; i < list.size(); i++){
+			json += "{";
+				LivroNovo ln = list.get(i);
+				json += "\"isbn\":\"" + ln.getIsbn() + "\"";
+				json += "\"titulo\":\"" + ln.getTitulo() + "\"";
+				json += "\"autor\":\"" + ln.getAutor() + "\"";
+				json += "\"editora\":\"" + ln.getEditora() + "\"";
+				json += "\"quantidade\":\"" + ln.getQuantidade() + "\"";
+				json += "\"preco\":\"" + ln.getPreco() + "\"";
+				
+				if(i < list.size() - 1)
+					json += "},";
+				else
+					json += "}";			
+		}
+
+		json += "]}";
+		return json;
+	}
+	
+	public static List<LivroNovo> LivroFromJSON(String json){
+		List<LivroNovo> list = new ArrayList<LivroNovo>();
+		
+		try{
+			JSONObject jobj = new JSONObject(json);
+			JSONArray livros = jobj.getJSONArray("livros");
+			LivroNovo ln;
+			for(int i = 0; i < livros.length(); i++){
+				JSONObject t = livros.getJSONObject(i);
+				ln = new LivroNovo(
+						0,
+						Integer.parseInt(t.getString("quantidade")),
+						Double.parseDouble(t.getString("preco")),
+						t.getString("isbn"),
+						t.getString("titulo"),
+						t.getString("autor"),
+						t.getString("editora"));
+				
+				list.add(ln);
+			}
+			
+		} catch (JSONException e) {
+			Log.e("JSON", "Error parsing JSONString: " + json);
+		}
+
 		return list;
 	}
 }

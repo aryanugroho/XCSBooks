@@ -5,10 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import model.Livro;
+import model.LivroNovo;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,8 +24,10 @@ import control.BuscaControl;
 public class BuscarActivity extends BaseActivity {
 	private String termo;
 	private EditText mEditBusca;
-	private List<Livro> livros;
+	private List<LivroNovo> livros;
 	private List searchList;
+	
+	public static final String KEY_LIVRO = "com.example.xcsbooks.buscar.LIVRO";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +60,7 @@ public class BuscarActivity extends BaseActivity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				Intent intent = new Intent(BuscarActivity.this, DetalhesLivroActivity.class);
+				intent.putExtra(KEY_LIVRO, livros.get(position));
 				startActivity(intent);
 			}
 		});
@@ -86,8 +88,7 @@ public class BuscarActivity extends BaseActivity {
 			map.put("itemLista_thumbLivro", R.drawable.book_icon);
 			map.put("itemLista_tituloLivro", livros.get(i).getTitulo());
 			map.put("itemLista_autorLivro", livros.get(i).getAutor());
-			//map.put("itemLista_precoLivro", String.valueOf(livros.get(i).getPreco()));
-			map.put("itemLista_precoLivro", 10.5);
+			map.put("itemLista_precoLivro", String.valueOf(livros.get(i).getPreco()));
 			searchList.add(map);
 		}
 	}

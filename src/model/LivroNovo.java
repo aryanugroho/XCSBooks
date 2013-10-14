@@ -1,6 +1,9 @@
 package model;
 
-public class LivroNovo extends Produto {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class LivroNovo extends Produto implements Parcelable {
 	private Livro livro;
 
 	public LivroNovo(int codigo, int quantidade, double preco, Livro livro) {
@@ -13,7 +16,7 @@ public class LivroNovo extends Produto {
 		super(codigo, quantidade, preco);
 		this.livro = new Livro(isbn,titulo,autor,editora);
 	}
-
+	
 	public LivroNovo() {
 		super();
 	}
@@ -57,4 +60,41 @@ public class LivroNovo extends Produto {
 	public void setEditora(String editora) {
 		this.livro.setEditora(editora);
 	}
+
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeInt(getCodigo());
+		dest.writeInt(getQuantidade());
+		dest.writeDouble(getPreco());
+		dest.writeString(getIsbn());
+		dest.writeString(getTitulo());
+		dest.writeString(getAutor());
+		dest.writeString(getEditora());
+	}
+
+	public static final Parcelable.Creator<LivroNovo> CREATOR = new Parcelable.Creator<LivroNovo>() {
+
+		@Override
+		public LivroNovo createFromParcel(Parcel source) {
+			return new LivroNovo(source);
+		}
+
+		@Override
+		public LivroNovo[] newArray(int size) {
+			return new LivroNovo[size];
+		}
+	};
+	
+	private LivroNovo(Parcel in){
+		setCodigo(in.readInt());
+		setQuantidade(in.readInt());
+		setPreco(in.readDouble());
+		livro = new Livro(in.readString(),in.readString(),in.readString(),in.readString());
+	}
+	
 }

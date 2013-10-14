@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import model.Livro;
+import model.LivroNovo;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -17,7 +18,7 @@ import android.util.Log;
 public class BuscaControl {
 	public static String BUSCA_URI = "http://diskexplosivo.com/xcsbooks/search.php";
 	
-	public static List <Livro> buscar(String termo){
+	public static List<LivroNovo> buscar(String termo){
 		AsyncTask<URI, Integer, String> task;
 		String resposta = null;
 		
@@ -49,11 +50,13 @@ public class BuscaControl {
 			List <? extends Map<String, ?>> u = JSONParser.parseBusca(resposta);
 		
 			Map t = null;
-			List<Livro> list = new ArrayList<Livro>();
+			List<LivroNovo> list = new ArrayList<LivroNovo>();
 			for(int i = 0; i < u.size(); i++){
 				t = new HashMap();
 				t = u.get(i);
-				Livro l = new Livro(
+				LivroNovo l = new LivroNovo(
+						i, Integer.parseInt((String) t.get("quantidade")),
+						Double.parseDouble((String) t.get("preco")),
 						(String)t.get("isbn"),
 						(String)t.get("titulo"),
 						(String)t.get("autor"),

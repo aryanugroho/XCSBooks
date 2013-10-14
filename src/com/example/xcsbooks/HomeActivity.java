@@ -7,6 +7,7 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,11 +15,11 @@ import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+import control.LoginControl;
 
 public class HomeActivity extends FragmentActivity {
 	public static final String KEY_BUSCA = "com.example.xcsbooks.KEY_BUSCA";
-	
+	public static HomeActivity instance;
 	private Button mBtnBuscar;
 	private EditText mEditBuscar;
 	
@@ -26,7 +27,7 @@ public class HomeActivity extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
+		instance = this;
 		mBtnBuscar = (Button) findViewById(R.id.home_btnBuscar);
 		mEditBuscar = (EditText)findViewById(R.id.home_txtBusca);
 
@@ -46,11 +47,13 @@ public class HomeActivity extends FragmentActivity {
 		FragmentManager fm = getFragmentManager();
 		Fragment fragment = fm.findFragmentById(R.id.home_fragment);
 		
-		if(fragment==null) {
+		if(fragment == null) {
 			FragmentTransaction ft = fm.beginTransaction();
-			if(getClienteLogado()==null){
+			if(LoginControl.getClienteLogado() == null){
+				Log.d("LOGGED", "Cliente não está logado");
 				ft.add(R.id.home_fragment, new Fragment_Home());
 			} else {
+				Log.d("LOGGED", "Cliente está logado");
 				ft.add(R.id.home_fragment, new Fragment_Home_Logado());
 			}
 			ft.commit();
@@ -91,5 +94,9 @@ public class HomeActivity extends FragmentActivity {
 			return false;
 		}
 		return true;
+	}
+	
+	public static HomeActivity getInstance(){
+		return instance;
 	}
 }

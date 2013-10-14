@@ -11,12 +11,12 @@ import model.Endereco;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
-import com.example.xcsbooks.LogarActivity;
-
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
+
+import com.example.xcsbooks.HomeActivity;
+import com.example.xcsbooks.LogarActivity;
 
 public class LoginControl {
 	public static String LOGIN_URI = "http://diskexplosivo.com/xcsbooks/login_cliente.php";
@@ -73,17 +73,56 @@ public class LoginControl {
 			SharedPreferences prefs = LogarActivity.getInstance().getPreferences(LogarActivity.MODE_PRIVATE);
 			SharedPreferences.Editor editor = prefs.edit();
 			
-			editor.putString("session", (String) u.get("sessionId")); 
+			editor.putString("session", (String) u.get("sessionId"));
+			editor.putString("username", username);
 			editor.putString("nome", cli.getNome());
 			editor.putString("cpf", cli.getCpf());
 			editor.putString("email", cli.getEmail());
 			editor.putString("telefone1", cli.getTelefone1());
 			editor.putString("telefone2", cli.getTelefone2());
 			editor.commit();
+			//TODO: Colocar endereço (serializar)
 			
 			return cli;
 		}
 		
 		return null;
+	}
+	
+	public static boolean isLogged(SharedPreferences prefs){
+		String sessionId = prefs.getString("session", "-1");
+		Log.d("SESSION", "Value: " + sessionId);
+		if(!sessionId.equals("-1")){
+			return true;
+		}
+		return false;
+	}
+	
+	public static Cliente getClienteLogado(){
+		Cliente cli = null;
+		SharedPreferences prefs = HomeActivity.getInstance().getPreferences(LogarActivity.MODE_PRIVATE);
+		
+		if(isLogged(prefs)){
+			cli = new Cliente(prefs.getString("username", "NULL"),
+							prefs.getString("senha", "NULL"), 
+							prefs.getString("nome", "NULL"),
+							prefs.getString("cpf", "NULL"),
+							prefs.getString("email", "NULL"),
+							prefs.getString("telefone1", "NULL"),
+							prefs.getString("telefone2", "NULL"),
+							null);
+			//TODO: Obter Endereço
+		}
+		
+		return cli;
+	}
+	
+	public static void logout(){
+		SharedPreferences prefs = HomeActivity.getInstance().getPreferences(LogarActivity.MODE_PRIVATE);
+		SharedPreferences.Editor editor = prefs.edit();
+		
+		editor.remove("session").remove("username").remove("senha").remove("nome").remove("cpf")
+		.remove("email").remove("telefone1").remove("telefone2").commit();
+		//TODO: Remover endereço
 	}
 }

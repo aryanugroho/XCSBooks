@@ -1,7 +1,8 @@
 package com.example.xcsbooks;
 
-import control.TestListBooks;
-import android.app.ActionBar;
+import java.util.List;
+
+import model.LivroNovo;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+import control.JSONParser;
 
 public class DetalhesLivroActivity extends BaseActivity {
 	
@@ -20,6 +22,7 @@ public class DetalhesLivroActivity extends BaseActivity {
 	private TextView mTxtIsbaLivro;
 	private Button mBtnAdicionarCarrinho;
 	private Button mBtnComprar;
+	private LivroNovo livro;
 	
 
 	@Override
@@ -35,19 +38,20 @@ public class DetalhesLivroActivity extends BaseActivity {
 		mBtnAdicionarCarrinho = (Button) findViewById(R.id.detalheLivro_btnAdicionarCarrinho);
 		mBtnComprar = (Button) findViewById(R.id.detalheLivro_btnComprar);
 		
+		//Obtém o objeto livro passado
+		Intent i = getIntent();
+		livro = (LivroNovo) i.getParcelableExtra(BuscarActivity.KEY_LIVRO);
 		
-		TestListBooks livros = new TestListBooks();
-		mTxtTituloLivro.setText(livros.listaLivro.get(0).getTitulo());
-		mTxtAutorLivro.setText(livros.listaLivro.get(0).getAutor());
-		mTxtEditoraLivro.setText(livros.listaLivro.get(0).getEditora());
-		mTxtPrecoLivro.setText(String.valueOf(livros.listaLivro.get(0).getPreco()));
-		mTxtIsbaLivro.setText(livros.listaLivro.get(0).getIsbn());
+		mTxtTituloLivro.setText(livro.getTitulo());
+		mTxtAutorLivro.setText(livro.getAutor());
+		mTxtEditoraLivro.setText(livro.getEditora());
+		mTxtPrecoLivro.setText(String.valueOf(livro.getPreco()));
+		mTxtIsbaLivro.setText(livro.getIsbn());
 		
 		mBtnAdicionarCarrinho.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				
 			}
 		});
 		
@@ -59,15 +63,12 @@ public class DetalhesLivroActivity extends BaseActivity {
 			}
 		});
 		
-		
-		getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM | ActionBar.DISPLAY_SHOW_HOME);
+
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
+		return super.onCreateOptionsMenu(menu);
 	}
 
 	@Override
