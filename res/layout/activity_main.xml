@@ -37,71 +37,21 @@
         android:textSize="25sp"
         android:layout_gravity="center"                  
         android:layout_marginTop="20dp"        
-        android:drawableLeft="@android:drawable/ic_menu_search" /> 
+        android:drawableLeft="@android:drawable/ic_menu_search" />
+
+    <Button
+        android:id="@+id/home_btnBuscar"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/buscar"
+        android:textColor="#000000" />
     
-        <RelativeLayout 
-           android:layout_width="fill_parent"
-           android:layout_height="wrap_content"
-           android:id="@+id/relativeLayout">
-       
-            <Button 
-		        android:id="@+id/home_btnBuscar"
-		        android:layout_width="100dp"
-		        android:layout_height="wrap_content"
-		        android:layout_gravity="right"
-		        android:textColor="#000000"
-		        android:layout_marginTop="10dp"
-		        android:layout_centerHorizontal="true"
-		        android:text="@string/buscar"
-		        />
-            
-             <TextView 
-		        android:id="@+id/home_lblIntro"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:textSize="20sp"
-		        android:layout_marginTop="30dp"
-		        android:layout_marginLeft="65dp"
-		        android:layout_below="@id/home_btnBuscar"
-		        android:text="@string/ja_registrou" />
-		    
-     	    <TextView 
-		        android:id="@+id/home_lblLogin"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:textSize="20sp"
-		        android:layout_marginTop="25dp"
-		        android:layout_below="@id/home_lblIntro"
-		        android:layout_marginLeft="30dp"
-		        android:textColor="#666666" 
-		        android:text="@string/logue_para_comprar" />
-     	    
-     	    <Button 
-		        android:id="@+id/home_btnCadastrar"
-		        android:layout_width="100dp"
-		        android:layout_height="wrap_content"
-		        android:layout_gravity="right"
-		        android:textColor="#000000"
-		        android:layout_marginTop="15dp"
-		        android:layout_marginRight="10dp"
-		        android:layout_alignParentRight="true"
-		        android:layout_below="@id/home_btnBuscar"
-		        android:text="@string/cadastrar"
-		        />
-		    
-    		<Button 
-		        android:id="@+id/home_btnLogar"
-		        android:layout_width="100dp"
-		        android:layout_height="wrap_content"
-		        android:layout_marginRight="10dp"
-		        android:layout_alignParentRight="true"
-		        android:textColor="#000000"
-		        android:layout_below="@id/home_btnCadastrar"
-		        android:text="@string/logar"
-		        />
-     	    
-            
-        </RelativeLayout> 	    
+    <FrameLayout
+		android:id="@+id/home_fragment"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent" />
+    	    
      	   
 </LinearLayout>
 </ScrollView>

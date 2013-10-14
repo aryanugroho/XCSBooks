@@ -38,10 +38,10 @@
     <string name="addCarrinho">Adicionar ao Carrinho</string>
     <string name="incremento">+</string>
     <string name="decremento">-</string>
-    
     <string name="login_erro">Não foi possível logar</string>
     <string name="login_erro_info">Usuário ou senha errados</string>
     <string name="ok">OK</string>
+    <string name="msgBemVindo">Bem-Vindo(a) </string>
 
     <string-array name="desricao_home">
         <item>@string/buscar</item>
@@ -52,6 +52,7 @@
 
     <string name="ja_registrou">Já se registrou?</string>
     <string name="logue_para_comprar">Logue para poder comprar</string>
-    
- 
+    <string name="title_activity_basic_fragment">BasicFragment</string>
+    <string name="hello_world">Hello world!</string>
+
 </resources>
