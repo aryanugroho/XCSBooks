@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.LogRecord;
+import java.util.TreeMap;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -43,24 +43,31 @@ public class JSONParser {
 		return map;
 	}
 	
-	public List<Map<String, String>> parseBusca(String JSONStr){
+	public static List<Map<String, String>> parseBusca(String JSONStr){
 		List<Map<String, String>> list = new ArrayList<Map<String, String>>();
-		Map<String, String> map = new HashMap<String, String>();
+		Map<String, String> map = null;
 		
 		try{
 			JSONObject jobj = new JSONObject(JSONStr);
 			JSONArray livros = jobj.getJSONArray("livros");
-			System.out.println(livros.get(0));
+
+			for(int i = 0; i < livros.length(); i++){
+				map = new HashMap<String, String>();
+				JSONObject t = livros.getJSONObject(i);
+				map.put("isbn", t.getString("isbn"));
+				map.put("titulo", t.getString("titulo"));
+				map.put("autor", t.getString("autor"));
+				map.put("editora", t.getString("editora"));
+				map.put("quantidade", t.getString("quantidade"));
+				map.put("preco", t.getString("preco"));
+				list.add(map);
+				//Falta preço, falta estoque
+			}
+			
 		} catch (JSONException e) {
 			Log.e("JSON", "Error parsing JSONString: " + JSONStr);
 		}
 		
 		return list;
-	}
-	
-	public Map<String, String> parseCadastro(String JSONStr){
-		Map<String, String> map = new HashMap<String, String>();
-		
-		return map;
 	}
 }

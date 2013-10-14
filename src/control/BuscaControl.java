@@ -1,11 +1,71 @@
 package control;
 
+import java.net.URI;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import model.Livro;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+
+import android.os.AsyncTask;
+import android.util.Log;
+
 public class BuscaControl {
-	/* TODO:
-	 * 1) Receber termo de busca
-	 * 2) Chamar AsynTask para fazer um POST para o Back-end
-	 * 3) Receber resposta JSON
-	 * 4) Parsear num Map com chave->valor onde o valor é o objeto Model 
-	 * 5) Enviar Map para Activity
-	 */
+	public static String BUSCA_URI = "http://diskexplosivo.com/xcsbooks/search.php";
+	
+	public static List <Livro> buscar(String termo){
+		AsyncTask<URI, Integer, String> task;
+		String resposta = null;
+		
+		List<NameValuePair> searchData = new ArrayList<NameValuePair>();
+		searchData.add(new BasicNameValuePair("s", termo));
+		
+		try {
+			//Faz um request para LOGIN_URI com os dados digitados
+			task = new RequestTask(searchData, BUSCA_URI, RequestTask.REQUEST_GET).execute();
+			//Obtém a resposta do back-end
+			resposta = task.get();
+		} catch (Exception e){
+			Log.e("SEARCH_REQUEST", "Error on GET REQUEST to URL");
+		}
+		
+		if(resposta != null){
+		
+			try{
+				int test = Integer.parseInt(resposta);
+				if(test < 0){
+					Log.d("SEARCH_F", "Resposta: " + test);
+					return new ArrayList();
+				}
+			} catch (NumberFormatException e){
+				Log.e("PARSE_EX", "Error parsing resposta to Integer");
+			}
+			
+			//Obtém resposta JSON parseada
+			List <? extends Map<String, ?>> u = JSONParser.parseBusca(resposta);
+		
+			Map t = null;
+			List<Livro> list = new ArrayList<Livro>();
+			for(int i = 0; i < u.size(); i++){
+				t = new HashMap();
+				t = u.get(i);
+				Livro l = new Livro(
+						(String)t.get("isbn"),
+						(String)t.get("titulo"),
+						(String)t.get("autor"),
+						(String)t.get("editora"));
+				list.add(l);
+				Log.d("LIVRO_I", "Nome: " + l.getTitulo());
+			}
+			
+			//Lê a lista, e cria uma segunda lista, mas com os dados do livro em forma de model
+			return list;
+		}
+		
+		return new ArrayList();
+	}
 }

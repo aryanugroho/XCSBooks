@@ -12,7 +12,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 public class CadastroControl {
-	public static String CADASTRO_URI = "http://192.168.1.18/xcsbooks/register.php";
+	public static String CADASTRO_URI = "http://diskexplosivo.com/xcsbooks/register.php";
 	
 	public static Cliente cadastrar(List<NameValuePair> list) {
 		AsyncTask<URI, Integer, String> task;

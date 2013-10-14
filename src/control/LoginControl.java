@@ -19,7 +19,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 public class LoginControl {
-	public static String LOGIN_URI = "http://192.168.1.18/xcsbooks/login_cliente.php";
+	public static String LOGIN_URI = "http://diskexplosivo.com/xcsbooks/login_cliente.php";
 	
 	public static Cliente logar(String username, String password){
 		AsyncTask<URI, Integer, String> task;

@@ -3,7 +3,6 @@ package control;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.HttpResponse;
@@ -15,10 +14,11 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 public class RequestTask extends AsyncTask<URI, Integer, String>{
 	private List<NameValuePair> args;
@@ -43,12 +43,13 @@ public class RequestTask extends AsyncTask<URI, Integer, String>{
  
         try {
         	if(method == REQUEST_GET){
-        		urlArg += "?";
-        		for(int i = 0; i < args.size(); i++){
-        			urlArg += args.get(i).getName() + "=" + args.get(i).getValue() + "&";
-        		}
-        		urlArg =  urlArg.substring(0, urlArg.length()-1);
+        		if(!urlArg.endsWith("?"));
+        			urlArg += "?";
+        			
+        		String paramStr = URLEncodedUtils.format(args, "utf-8");
+        		urlArg += paramStr;
         		
+        		Log.d("URL_GET", "URL: " + urlArg);
         		HttpGet get = new HttpGet(urlArg);
         		response = httpclient.execute(get);
         	} else {
