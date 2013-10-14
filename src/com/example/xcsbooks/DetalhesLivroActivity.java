@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import control.JSONParser;
@@ -39,11 +40,13 @@ public class DetalhesLivroActivity extends BaseActivity {
 		mTxtIsbaLivro = (TextView) findViewById(R.id.detalheLivro_txtIsbn);
 		mBtnAdicionarCarrinho = (Button) findViewById(R.id.detalheLivro_btnAdicionarCarrinho);
 		mBtnComprar = (Button) findViewById(R.id.detalheLivro_btnComprar);
+		ImageView im = (ImageView) findViewById(R.id.detalheLivro_imagemLivro);
 		
-		//Obtém o objeto livro passado
+		//Obtï¿½m o objeto livro passado
 		Intent i = getIntent();
 		livro = (LivroNovo) i.getParcelableExtra(BuscarActivity.KEY_LIVRO);
 		
+		im.setImageResource(R.drawable.book_icon);
 		mTxtTituloLivro.setText(livro.getTitulo());
 		mTxtAutorLivro.setText(livro.getAutor());
 		mTxtEditoraLivro.setText(livro.getEditora());
