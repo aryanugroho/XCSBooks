@@ -41,19 +41,23 @@ public class BaseActivity extends FragmentActivity {
 			break;
 		case R.id.action_home:
 			intent = new Intent(this, HomeActivity.class);
+			intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 			startActivity(intent);
 			break;
 		case R.id.action_logar:
 			intent = new Intent(this, LogarActivity.class);
+			intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 			startActivity(intent);
 			break;
 		case R.id.action_deslogar:
 			LoginControl.logout();
 			intent = new Intent(this, HomeActivity.class);
+			intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 			startActivity(intent);
 			break;
 		case R.id.action_busca:
 			intent = new Intent(this, BuscarActivity.class);
+			intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 			startActivity(intent);
 		default:
 			//Adicionar erro

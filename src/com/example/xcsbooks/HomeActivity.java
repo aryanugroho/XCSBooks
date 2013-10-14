@@ -1,12 +1,10 @@
 package com.example.xcsbooks;
 
-import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,10 +15,10 @@ import android.widget.EditText;
 import control.LoginControl;
 
 public class HomeActivity extends BaseActivity {
-	public static final String KEY_BUSCA = "com.example.xcsbooks.KEY_BUSCA";
 	public static HomeActivity instance;
 	private Button mBtnBuscar;
 	private EditText mEditBuscar;
+	private Fragment frag;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -41,30 +39,36 @@ public class HomeActivity extends BaseActivity {
 				intent.putExtra(KEY_BUSCA, termoBusca);
 				startActivity(intent);
 			}
-		});
-		
+		});		
+	}
+	
+	@Override
+	protected void onStop(){
+		super.onStop();
+	}
+	
+	@Override
+	protected void onResume(){
+		super.onResume();
 		FragmentManager fm = getFragmentManager();
+		FragmentTransaction ft = fm.beginTransaction();
+		
 		Fragment fragment = fm.findFragmentById(R.id.home_fragment);
 		
 		if(fragment == null) {
-			FragmentTransaction ft = fm.beginTransaction();
 			if(LoginControl.getClienteLogado() == null){
-				Log.d("LOGGED", "Cliente n�o est� logado");
-				ft.add(R.id.home_fragment, new Fragment_Home());
+				frag = new Fragment_Home();
+				ft.add(R.id.home_fragment, frag);
 			} else {
-				Log.d("LOGGED", "Cliente est� logado");
-				ft.add(R.id.home_fragment, new Fragment_Home_Logado());
+				frag = new Fragment_Home_Logado();
+				ft.add(R.id.home_fragment, frag);
 			}
 			ft.commit();
 		}
-				
-		getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM | ActionBar.DISPLAY_SHOW_HOME);
-		
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		return super.onCreateOptionsMenu(menu);
 	}
 

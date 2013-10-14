@@ -9,10 +9,13 @@ import model.LivroNovo;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -22,6 +25,7 @@ public class CarrinhoActivity extends BaseActivity {
 	private Button mBtnComprar;
 	private Button mBtnLimpar;
 	private SharedPreferences prefs;
+	private List<LivroNovo> livros;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -35,23 +39,24 @@ public class CarrinhoActivity extends BaseActivity {
 			
 		prefs = getSharedPreferences("CARRINHO", MODE_PRIVATE);
 		String strlivros = prefs.getString("LIVROS", JSONParser.DEFAULT_LIVROS);
-		List<LivroNovo> livros = JSONParser.LivroFromJSON(strlivros);
+		livros = JSONParser.LivroFromJSON(strlivros);
 		
 		List list = new ArrayList();
 		Map map = null;
-		for(int i=0;i<livros.size();i++) {
+		
+		for(int i = 0; i < livros.size(); i++) {
 			map = new HashMap();
 			map.put("itemCarrinho_thumbLivro", R.drawable.book_icon);
 			map.put("itemCarrinho_tituloLivro", livros.get(i).getTitulo().toString());
 			map.put("itemCarrinho_autorLivro", livros.get(i).getAutor().toString());
 			map.put("itemCarrinho_editoraLivro", livros.get(i).getEditora());
 			map.put("itemCarrinho_quantidade", 1);
-			map.put("itemCarrinho_precoLivro", livros.get(i).getPreco());
+			map.put("itemCarrinho_precoLivro", "R$ " + livros.get(i).getPreco());
 			list.add(map);
 		}
 		
 		//Adapter
-		SimpleAdapter adapter = new SimpleAdapter(this, (List <? extends Map<String, ?>>) list, 
+		final SimpleAdapter adapter = new SimpleAdapter(this, (List <? extends Map<String, ?>>) list, 
 			R.layout.item_carrinho, 
 			new String[] {
 				"itemCarrinho_thumbLivro",
