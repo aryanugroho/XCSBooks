@@ -9,13 +9,15 @@ import android.widget.TextView;
 import control.LoginControl;
 
 public class Fragment_Home_Logado extends Fragment{
-
+	private TextView tv;
+	
 	public View onCreateView(LayoutInflater inflater, final ViewGroup container,
 			   Bundle savedInstanceState) {
-		View myFragmentView = inflater.inflate(R.layout.fragment_home, container, false);
 		
-		TextView tv = (TextView) myFragmentView.findViewById(R.id.fragLogado_txtMsgNomeUsuario);
-		tv.setText("Bem Vindo, X");
+		View myFragmentView = inflater.inflate(R.layout.fragment_home_logado, container, false);
+		
+		tv = (TextView) myFragmentView.findViewById(R.id.fragLogado_txtMsgNomeUsuario);
+		tv.setText(tv.getText().toString() + " " + LoginControl.getClienteLogado().getNome());
 		
 		return myFragmentView;
 	}
