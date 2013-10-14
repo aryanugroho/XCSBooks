@@ -20,6 +20,12 @@
         android:showAsAction="never"
         android:title="@string/title_activity_logar"/>
     
+    <item 
+        android:id="@+id/action_deslogar"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/deslogar"/>
+    
     <item
         android:id="@+id/action_home"
         android:orderInCategory="100"

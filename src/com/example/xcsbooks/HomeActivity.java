@@ -6,7 +6,6 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,7 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import control.LoginControl;
 
-public class HomeActivity extends FragmentActivity {
+public class HomeActivity extends BaseActivity {
 	public static final String KEY_BUSCA = "com.example.xcsbooks.KEY_BUSCA";
 	public static HomeActivity instance;
 	private Button mBtnBuscar;
@@ -50,10 +49,10 @@ public class HomeActivity extends FragmentActivity {
 		if(fragment == null) {
 			FragmentTransaction ft = fm.beginTransaction();
 			if(LoginControl.getClienteLogado() == null){
-				Log.d("LOGGED", "Cliente não está logado");
+				Log.d("LOGGED", "Cliente nï¿½o estï¿½ logado");
 				ft.add(R.id.home_fragment, new Fragment_Home());
 			} else {
-				Log.d("LOGGED", "Cliente está logado");
+				Log.d("LOGGED", "Cliente estï¿½ logado");
 				ft.add(R.id.home_fragment, new Fragment_Home_Logado());
 			}
 			ft.commit();
@@ -66,34 +65,12 @@ public class HomeActivity extends FragmentActivity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
+		return super.onCreateOptionsMenu(menu);
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item){
-		Intent intent = null;
-		switch (item.getItemId()) {
-		case R.id.action_carrinho:
-			intent = new Intent(this, CarrinhoActivity.class);
-			startActivity(intent);
-			break;
-		case R.id.action_home:
-			intent = new Intent(this, HomeActivity.class);
-			startActivity(intent);
-			break;
-		case R.id.action_logar:
-			intent = new Intent(this, LogarActivity.class);
-			startActivity(intent);
-			break;
-		case R.id.action_busca:
-			intent = new Intent(this, BuscarActivity.class);
-			startActivity(intent);
-		default:
-			//Adicionar erro
-			return false;
-		}
-		return true;
+		return super.onOptionsItemSelected(item);
 	}
 	
 	public static HomeActivity getInstance(){

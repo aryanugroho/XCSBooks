@@ -1,13 +1,15 @@
 package com.example.xcsbooks;
 
+import control.LoginControl;
 import android.os.Bundle;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class BaseActivity extends Activity {
+public class BaseActivity extends FragmentActivity {
 	public static final String KEY_BUSCA = "com.example.xcsbooks.KEY_BUSCA";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +21,13 @@ public class BaseActivity extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
+		if(LoginControl.getClienteLogado() == null){
+			menu.getItem(2).setVisible(true);
+			menu.getItem(3).setVisible(false);
+		} else {
+			menu.getItem(2).setVisible(false);
+			menu.getItem(3).setVisible(true);
+		}
 		return true;
 	}
 	
@@ -36,6 +45,11 @@ public class BaseActivity extends Activity {
 			break;
 		case R.id.action_logar:
 			intent = new Intent(this, LogarActivity.class);
+			startActivity(intent);
+			break;
+		case R.id.action_deslogar:
+			LoginControl.logout();
+			intent = new Intent(this, HomeActivity.class);
 			startActivity(intent);
 			break;
 		case R.id.action_busca:

@@ -11,6 +11,7 @@
 		    android:layout_alignParentLeft="true"
 		    android:layout_alignParentTop="true"
 		    android:layout_marginLeft="18dp" 
+		    android:textSize="18sp"
 		    android:text="@string/msgBemVindo"/>
 	
 	</RelativeLayout>

@@ -14,6 +14,7 @@
     <string name="username">Usuário</string>
     <string name="password">Senha</string>
     <string name="logar">Logar</string>
+    <string name="deslogar">Deslogar</string>
     <string name="cadastrar">Cadastrar</string>
     <string name="icone_home">Icone da HomeScreen</string>
     <string name="buscar">Buscar</string>
