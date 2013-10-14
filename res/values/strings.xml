@@ -54,5 +54,6 @@
     <string name="logue_para_comprar">Logue para poder comprar</string>
     <string name="title_activity_basic_fragment">BasicFragment</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_comprar">ComprarActivity</string>
 
 </resources>

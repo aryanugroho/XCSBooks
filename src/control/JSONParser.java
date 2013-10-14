@@ -14,6 +14,7 @@ import org.json.JSONObject;
 import android.util.Log;
 
 public class JSONParser {
+	public static final String DEFAULT_LIVROS = "{ login: [] }";
 
 	public static Map<String, Object> parseLogin(String JSONStr){
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -62,7 +63,6 @@ public class JSONParser {
 				map.put("quantidade", t.getString("quantidade"));
 				map.put("preco", t.getString("preco"));
 				list.add(map);
-				//Falta preço, falta estoque
 			}
 			
 		} catch (JSONException e) {
@@ -72,18 +72,17 @@ public class JSONParser {
 		return list;
 	}
 	
-	public static String LivroToJSON(ArrayList<LivroNovo> list){
-		String json = null;
-		json += "{ \"livros\": [";
+	public static String LivroToJSON(List<LivroNovo> list){
+		String json = "{ \"livros\": [";
 		
 		for(int i = 0; i < list.size(); i++){
 			json += "{";
 				LivroNovo ln = list.get(i);
-				json += "\"isbn\":\"" + ln.getIsbn() + "\"";
-				json += "\"titulo\":\"" + ln.getTitulo() + "\"";
-				json += "\"autor\":\"" + ln.getAutor() + "\"";
-				json += "\"editora\":\"" + ln.getEditora() + "\"";
-				json += "\"quantidade\":\"" + ln.getQuantidade() + "\"";
+				json += "\"isbn\":\"" + ln.getIsbn() + "\",";
+				json += "\"titulo\":\"" + ln.getTitulo() + "\",";
+				json += "\"autor\":\"" + ln.getAutor() + "\",";
+				json += "\"editora\":\"" + ln.getEditora() + "\",";
+				json += "\"quantidade\":\"" + ln.getQuantidade() + "\",";
 				json += "\"preco\":\"" + ln.getPreco() + "\"";
 				
 				if(i < list.size() - 1)

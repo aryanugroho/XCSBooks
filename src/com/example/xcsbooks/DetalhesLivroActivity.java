@@ -4,6 +4,7 @@ import java.util.List;
 
 import model.LivroNovo;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 import control.JSONParser;
 
 public class DetalhesLivroActivity extends BaseActivity {
@@ -52,6 +54,16 @@ public class DetalhesLivroActivity extends BaseActivity {
 			
 			@Override
 			public void onClick(View v) {
+				//Obter livros do carrinho
+				SharedPreferences prefs = getSharedPreferences("CARRINHO", MODE_PRIVATE);
+				String carrinho = prefs.getString("LIVROS", JSONParser.DEFAULT_LIVROS);
+				List<LivroNovo> list = JSONParser.LivroFromJSON(carrinho);
+				list.add(livro);
+				carrinho = JSONParser.LivroToJSON(list);
+				SharedPreferences.Editor editor = prefs.edit();
+				editor.putString("LIVROS", carrinho).commit();
+				
+				Toast.makeText(getApplicationContext(), "Livro adicionado ao carrinho", Toast.LENGTH_LONG).show();
 			}
 		});
 		

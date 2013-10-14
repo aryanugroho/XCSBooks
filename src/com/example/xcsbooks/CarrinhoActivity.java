@@ -5,22 +5,23 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import control.TestListBooks;
-import android.app.ActionBar;
-import android.app.Activity;
+import model.LivroNovo;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.AdapterView.OnItemClickListener;
+import control.JSONParser;
 
 public class CarrinhoActivity extends BaseActivity {
 	private Button mBtnComprar;
+	private Button mBtnLimpar;
+	private SharedPreferences prefs;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -28,21 +29,24 @@ public class CarrinhoActivity extends BaseActivity {
 		setContentView(R.layout.activity_carrinho);
 		
 		mBtnComprar = (Button) findViewById(R.id.carrinho_btnComprar);
+		mBtnLimpar = (Button) findViewById(R.id.carrinho_btnLimpar);
+		
 		ListView mLv = (ListView) findViewById(R.id.carrinho_listaItensView);
 			
-		//...
-		TestListBooks livros = new TestListBooks();
+		prefs = getSharedPreferences("CARRINHO", MODE_PRIVATE);
+		String strlivros = prefs.getString("LIVROS", JSONParser.DEFAULT_LIVROS);
+		List<LivroNovo> livros = JSONParser.LivroFromJSON(strlivros);
 		
 		List list = new ArrayList();
 		Map map = null;
-		for(int i=0;i<livros.listaLivro.size();i++) {
+		for(int i=0;i<livros.size();i++) {
 			map = new HashMap();
 			map.put("itemCarrinho_thumbLivro", R.drawable.book_icon);
-			map.put("itemCarrinho_tituloLivro", livros.listaLivro.get(i).getTitulo().toString());
-			map.put("itemCarrinho_autorLivro", livros.listaLivro.get(i).getAutor().toString());
-			map.put("itemCarrinho_editoraLivro", livros.listaLivro.get(i).getEditora());
+			map.put("itemCarrinho_tituloLivro", livros.get(i).getTitulo().toString());
+			map.put("itemCarrinho_autorLivro", livros.get(i).getAutor().toString());
+			map.put("itemCarrinho_editoraLivro", livros.get(i).getEditora());
 			map.put("itemCarrinho_quantidade", 1);
-			map.put("itemCarrinho_precoLivro", livros.listaLivro.get(i).getPreco());
+			map.put("itemCarrinho_precoLivro", livros.get(i).getPreco());
 			list.add(map);
 		}
 		
@@ -64,18 +68,31 @@ public class CarrinhoActivity extends BaseActivity {
 				R.id.itemCarrinho_txtQuantidadeLivro,
 				R.id.itemCarrinho_txtPrecoLivro});
 		
-		
-		
 		mLv.setAdapter(adapter);
 		
-		getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM | ActionBar.DISPLAY_SHOW_HOME);
+		mBtnLimpar.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				SharedPreferences.Editor editor = prefs.edit();
+				editor.clear().commit();
+			}
+		});
+		
+		mBtnComprar.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(CarrinhoActivity.this, ComprarActivity.class);
+				startActivity(intent);
+			}
+		});
+		
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
+		return super.onCreateOptionsMenu(menu);
 	}
 	
 	@Override

@@ -62,6 +62,10 @@
             android:name="com.example.xcsbooks.BasicFragment"
             android:label="@string/title_activity_basic_fragment" >
         </activity>
+        <activity
+            android:name="com.example.xcsbooks.ComprarActivity"
+            android:label="@string/title_activity_comprar" >
+        </activity>
     </application>
 
 </manifest>

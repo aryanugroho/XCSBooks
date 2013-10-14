@@ -90,7 +90,7 @@ public class LoginControl {
 		return null;
 	}
 	
-	public static boolean isLogged(SharedPreferences prefs){
+	private static boolean isLogged(SharedPreferences prefs){
 		String sessionId = prefs.getString("session", "-1");
 		Log.d("SESSION", "Value: " + sessionId);
 		if(!sessionId.equals("-1")){
