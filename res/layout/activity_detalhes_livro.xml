@@ -12,7 +12,7 @@
 	        android:id="@+id/detalheLivro_imagemLivro" 
 	        android:layout_width="150dp"
 	        android:layout_height="150dp"
-	        android:layout_margin="8dp" >
+	        android:layout_marginTop="8dp" >
 	     </ImageView>
 	    
 	    <LinearLayout 
@@ -24,51 +24,81 @@
 		        android:id="@+id/detalheLivro_txtTitulo"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
-		        android:textSize="18sp" >    
+		        android:layout_marginTop="5dp"
+		        android:layout_marginLeft="2dp"
+		        android:textSize="20sp" >    
 		    </TextView>
 		    
 		    <TextView 
 		        android:id="@+id/detalheLivro_txtAutor"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
-		        android:textSize="18sp" >    
+		        android:layout_marginLeft="2dp"
+		        android:layout_marginTop="5dp"
+		        android:textSize="16sp" >    
 		    </TextView>
 		    
 		    <TextView 
 		        android:id="@+id/detalheLivro_txtEditora"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
-		        android:textSize="18sp" >    
+		        android:layout_marginTop="10dp"
+		        android:layout_marginLeft="2dp"
+		        android:textSize="15sp" >    
 		    </TextView>
 		    
 		    <TextView 
 		        android:id="@+id/detalheLivro_txtIsbn"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
+		        android:layout_marginTop="2dp"
+		        android:layout_marginLeft="2dp"
 		        android:textSize="15sp" >    
 		    </TextView>
 		    
-		    <TextView 
-		        android:id="@+id/detalheLivro_txtPreco"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:textSize="15sp" >    
-		    </TextView>
+		    <LinearLayout
+		        android:layout_width="120dp"
+		        android:layout_height="50dp"
+		  		android:layout_marginRight="15dp"
+		  		android:layout_marginTop="10dp"
+		        android:orientation="horizontal"
+		        android:background="#ffbb66"
+		        android:layout_gravity="right"
+				android:gravity="center" >
+		        
+			    <TextView 
+			        android:id="@+id/detalheLivro_txtPreco"
+			        android:layout_gravity="center_vertical|center_horizontal"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:textSize="22sp" >    
+			    </TextView>
+			    
+		    </LinearLayout>
 	    
 	    </LinearLayout>
 	    
     </LinearLayout>
 
-    <Button
-        android:id="@+id/detalheLivro_btnComprar"
-        android:layout_width="wrap_content"
+    <LinearLayout 
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/comprar" />
-
-    <Button
-        android:id="@+id/detalheLivro_btnAdicionarCarrinho"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/addCarrinho" />
+        android:orientation="horizontal"
+        android:gravity="center">
+	    
+	    <Button
+	        android:id="@+id/detalheLivro_btnComprar"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/comprar" />
+	
+	    <Button
+	        android:id="@+id/detalheLivro_btnAdicionarCarrinho"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/addCarrinho" />
+    
+    </LinearLayout>
 
 </LinearLayout>

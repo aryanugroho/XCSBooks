@@ -28,17 +28,20 @@
         <activity
             android:name="com.example.xcsbooks.BuscarActivity"
             android:label="@string/title_activity_buscar"
-            android:windowSoftInputMode="stateHidden" >
+            android:windowSoftInputMode="stateHidden"
+            android:launchMode="singleTop" >
         </activity>
         <activity
             android:name="com.example.xcsbooks.LogarActivity"
             android:label="@string/title_activity_logar"
-            android:windowSoftInputMode="stateHidden" >
+            android:windowSoftInputMode="stateHidden"
+            android:launchMode="singleTop" >
         </activity>
         <activity
             android:name="com.example.xcsbooks.CarrinhoActivity"
             android:label="@string/title_activity_carrinho"
-            android:windowSoftInputMode="stateHidden" >
+            android:windowSoftInputMode="stateHidden"
+            android:launchMode="singleTop" >
         </activity>
         <activity
             android:name="com.example.xcsbooks.DetalhesLivroActivity"
@@ -48,7 +51,8 @@
         <activity
             android:name="com.example.xcsbooks.CadastrarClienteActivity"
             android:label="@string/title_activity_cadastrar"
-            android:windowSoftInputMode="stateHidden" >
+            android:windowSoftInputMode="stateHidden"
+            android:launchMode="singleTop">
         </activity>
         <activity
             android:name="com.example.xcsbooks.BaseActivity"
@@ -64,7 +68,8 @@
         </activity>
         <activity
             android:name="com.example.xcsbooks.ComprarActivity"
-            android:label="@string/title_activity_comprar" >
+            android:label="@string/title_activity_comprar"
+            android:launchMode="singleTop" >
         </activity>
     </application>
 

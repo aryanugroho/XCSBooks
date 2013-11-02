@@ -57,4 +57,9 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_comprar">ComprarActivity</string>
 
+   	<string name="autor">Autor:</string>
+   	<string name="preco">Preço:</string>
+   	<string name="editora">Editora:</string>
+   	<string name="isbn">ISBN:</string> 
+   	 
 </resources>

@@ -5,6 +5,7 @@ import java.util.List;
 import model.LivroNovo;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -42,16 +43,18 @@ public class DetalhesLivroActivity extends BaseActivity {
 		mBtnComprar = (Button) findViewById(R.id.detalheLivro_btnComprar);
 		ImageView im = (ImageView) findViewById(R.id.detalheLivro_imagemLivro);
 		
-		//Obt�m o objeto livro passado
+		//Obtem o objeto livro passado
 		Intent i = getIntent();
+		Resources r = getResources();
+		
 		livro = (LivroNovo) i.getParcelableExtra(BuscarActivity.KEY_LIVRO);
 		
 		im.setImageResource(R.drawable.book_icon);
 		mTxtTituloLivro.setText(livro.getTitulo());
-		mTxtAutorLivro.setText(livro.getAutor());
-		mTxtEditoraLivro.setText(livro.getEditora());
-		mTxtPrecoLivro.setText(String.valueOf(livro.getPreco()));
-		mTxtIsbaLivro.setText(livro.getIsbn());
+		mTxtAutorLivro.setText(r.getString(R.string.autor) + " " + livro.getAutor());
+		mTxtEditoraLivro.setText(r.getString(R.string.editora) + " " + livro.getEditora());
+		mTxtPrecoLivro.setText(r.getString(R.string.preco) + " $" + String.valueOf(livro.getPreco()));
+		mTxtIsbaLivro.setText(r.getString(R.string.isbn) + " " + livro.getIsbn());
 		
 		mBtnAdicionarCarrinho.setOnClickListener(new OnClickListener() {
 			
@@ -77,9 +80,9 @@ public class DetalhesLivroActivity extends BaseActivity {
 				
 			}
 		});
-		
-
+	
 	}
+	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
