@@ -3,10 +3,12 @@ package com.example.xcsbooks;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Cliente;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+
+import com.example.xcsbooks.control.CadastroControl;
+import com.examples.xcsbooks.model.Cliente;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,7 +19,6 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import control.CadastroControl;
 
 public class CadastrarEnderecoActivity extends BaseActivity {
 	private Button mBtnCadastrar;

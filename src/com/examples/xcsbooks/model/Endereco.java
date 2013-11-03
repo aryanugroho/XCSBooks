@@ -1,4 +1,4 @@
-package model;
+package com.examples.xcsbooks.model;
 
 public class Endereco {
 	private int codigo;

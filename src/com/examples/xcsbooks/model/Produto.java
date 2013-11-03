@@ -1,4 +1,4 @@
-package model;
+package com.examples.xcsbooks.model;
 
 public class Produto {
 	private int codigo;

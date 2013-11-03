@@ -1,12 +1,13 @@
 package com.example.xcsbooks;
 
+import com.example.xcsbooks.control.LoginControl;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
-import control.LoginControl;
 
 public class ComprarActivity extends BaseActivity {
 	private TextView tv;

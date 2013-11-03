@@ -2,7 +2,10 @@ package com.example.xcsbooks;
 
 import java.util.List;
 
-import model.LivroNovo;
+import com.example.xcsbooks.control.GetBookCover;
+import com.example.xcsbooks.control.JSONParser;
+import com.examples.xcsbooks.model.LivroNovo;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
@@ -15,7 +18,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import control.JSONParser;
 
 public class DetalhesLivroActivity extends BaseActivity {
 	
@@ -49,7 +51,7 @@ public class DetalhesLivroActivity extends BaseActivity {
 		
 		livro = (LivroNovo) i.getParcelableExtra(BuscarActivity.KEY_LIVRO);
 		
-		im.setImageResource(R.drawable.book_icon);
+		im.setImageBitmap(GetBookCover.getCover(livro.getIsbn()));
 		mTxtTituloLivro.setText(livro.getTitulo());
 		mTxtAutorLivro.setText(r.getString(R.string.autor) + " " + livro.getAutor());
 		mTxtEditoraLivro.setText(r.getString(R.string.editora) + " " + livro.getEditora());

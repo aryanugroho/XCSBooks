@@ -1,6 +1,7 @@
 package com.example.xcsbooks;
 
-import control.LoginControl;
+import com.example.xcsbooks.control.LoginControl;
+
 import android.os.Bundle;
 import android.app.ActionBar;
 import android.app.Activity;
@@ -11,6 +12,7 @@ import android.view.MenuItem;
 
 public class BaseActivity extends FragmentActivity {
 	public static final String KEY_BUSCA = "com.example.xcsbooks.KEY_BUSCA";
+	public static String PACKAGE_NAME = "com.example.xcsbooks";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

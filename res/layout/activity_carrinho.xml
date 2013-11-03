@@ -1,24 +1,7 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical" >
-
-    <ListView
+ <ListView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/carrinho_listaItensView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
-    </ListView>
-
-    <Button
-        android:id="@+id/carrinho_btnComprar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/comprar" />
-    
-    <Button 
-        android:id="@+id/carrinho_btnLimpar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Limpar"/>
-
-</LinearLayout>
+        
+     
+</ListView>

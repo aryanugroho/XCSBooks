@@ -5,7 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import model.LivroNovo;
+import com.example.xcsbooks.control.BuscaControl;
+import com.example.xcsbooks.control.GetBookCover;
+import com.examples.xcsbooks.model.LivroNovo;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -19,7 +22,6 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
-import control.BuscaControl;
 
 public class BuscarActivity extends BaseActivity {
 	private String termo;
@@ -51,7 +53,7 @@ public class BuscarActivity extends BaseActivity {
 		
 		//Adapter
 	
-		final SimpleAdapter adapter = new SimpleAdapter(this, (List <? extends Map<String, ?>>) searchList, R.layout.item_lista, t , i);
+		final ExtendedSimpleAdapter adapter = new ExtendedSimpleAdapter(this, (List<HashMap<String, Object>>) searchList, R.layout.item_lista, t , i);
 		
 		lv.setAdapter(adapter);
 	
@@ -85,10 +87,10 @@ public class BuscarActivity extends BaseActivity {
 		Map map = null;
 		for(int i = 0; i < livros.size(); i++) {
 			map = new HashMap();
-			map.put("itemLista_thumbLivro", R.drawable.book_icon);
+			map.put("itemLista_thumbLivro", GetBookCover.getCover(livros.get(i).getIsbn()));
 			map.put("itemLista_tituloLivro", livros.get(i).getTitulo());
 			map.put("itemLista_autorLivro", livros.get(i).getAutor());
-			map.put("itemLista_precoLivro", String.valueOf(livros.get(i).getPreco()));
+			map.put("itemLista_precoLivro", "R$ " + String.valueOf(livros.get(i).getPreco()));
 			searchList.add(map);
 		}
 	}

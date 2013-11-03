@@ -1,12 +1,13 @@
 package com.example.xcsbooks;
 
+import com.example.xcsbooks.control.LoginControl;
+
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import control.LoginControl;
 
 public class Fragment_Home_Logado extends Fragment{
 	private TextView tv;

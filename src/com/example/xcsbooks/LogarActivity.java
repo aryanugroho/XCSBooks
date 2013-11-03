@@ -1,6 +1,8 @@
 package com.example.xcsbooks;
 
-import model.Cliente;
+import com.example.xcsbooks.control.LoginControl;
+import com.examples.xcsbooks.model.Cliente;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,7 +14,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import control.LoginControl;
 
 public class LogarActivity extends BaseActivity {
 	private EditText mEditLogin;

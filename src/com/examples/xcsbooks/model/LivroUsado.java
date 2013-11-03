@@ -1,4 +1,4 @@
-package model;
+package com.examples.xcsbooks.model;
 
 import java.util.Date;
 

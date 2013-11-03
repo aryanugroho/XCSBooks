@@ -1,12 +1,10 @@
-package control;
+package com.example.xcsbooks.control;
 
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import model.Cliente;
-import model.Endereco;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -17,6 +15,8 @@ import android.util.Log;
 
 import com.example.xcsbooks.HomeActivity;
 import com.example.xcsbooks.LogarActivity;
+import com.examples.xcsbooks.model.Cliente;
+import com.examples.xcsbooks.model.Endereco;
 
 public class LoginControl {
 	public static String LOGIN_URI = "http://diskexplosivo.com/xcsbooks/login_cliente.php";

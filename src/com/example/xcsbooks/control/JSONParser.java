@@ -1,15 +1,16 @@
-package control;
+package com.example.xcsbooks.control;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import model.LivroNovo;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import com.examples.xcsbooks.model.LivroNovo;
 
 import android.util.Log;
 
@@ -56,6 +57,7 @@ public class JSONParser {
 			for(int i = 0; i < livros.length(); i++){
 				map = new HashMap<String, String>();
 				JSONObject t = livros.getJSONObject(i);
+				map.put("codigo", t.getString("codigo"));
 				map.put("isbn", t.getString("isbn"));
 				map.put("titulo", t.getString("titulo"));
 				map.put("autor", t.getString("autor"));
@@ -78,6 +80,7 @@ public class JSONParser {
 		for(int i = 0; i < list.size(); i++){
 			json += "{";
 				LivroNovo ln = list.get(i);
+				json += "\"codigo\":\"" + ln.getCodigo() + "\",";
 				json += "\"isbn\":\"" + ln.getIsbn() + "\",";
 				json += "\"titulo\":\"" + ln.getTitulo() + "\",";
 				json += "\"autor\":\"" + ln.getAutor() + "\",";
@@ -105,7 +108,7 @@ public class JSONParser {
 			for(int i = 0; i < livros.length(); i++){
 				JSONObject t = livros.getJSONObject(i);
 				ln = new LivroNovo(
-						0,
+						Integer.parseInt(t.getString("codigo")),
 						Integer.parseInt(t.getString("quantidade")),
 						Double.parseDouble(t.getString("preco")),
 						t.getString("isbn"),

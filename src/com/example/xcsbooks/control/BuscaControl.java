@@ -1,4 +1,4 @@
-package control;
+package com.example.xcsbooks.control;
 
 import java.net.URI;
 import java.util.ArrayList;
@@ -6,11 +6,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import model.Livro;
-import model.LivroNovo;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+
+import com.examples.xcsbooks.model.Livro;
+import com.examples.xcsbooks.model.LivroNovo;
 
 import android.os.AsyncTask;
 import android.util.Log;

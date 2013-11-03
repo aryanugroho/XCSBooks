@@ -1,8 +1,9 @@
-package control;
+package com.example.xcsbooks.control;
 
 import java.util.ArrayList;
 import java.util.List;
-import model.LivroNovo;
+
+import com.examples.xcsbooks.model.LivroNovo;
 
 public class TestListBooks {
 

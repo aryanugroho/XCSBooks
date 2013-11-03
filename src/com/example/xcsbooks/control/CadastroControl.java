@@ -1,12 +1,13 @@
-package control;
+package com.example.xcsbooks.control;
 
 import java.net.URI;
 import java.util.List;
 
-import model.Cliente;
-import model.Endereco;
 
 import org.apache.http.NameValuePair;
+
+import com.examples.xcsbooks.model.Cliente;
+import com.examples.xcsbooks.model.Endereco;
 
 import android.os.AsyncTask;
 import android.util.Log;

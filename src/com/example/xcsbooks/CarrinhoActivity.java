@@ -4,8 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.zip.Inflater;
 
-import model.LivroNovo;
+import com.example.xcsbooks.control.GetBookCover;
+import com.example.xcsbooks.control.JSONParser;
+import com.examples.xcsbooks.model.LivroNovo;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -19,11 +23,8 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import control.JSONParser;
 
 public class CarrinhoActivity extends BaseActivity {
-	private Button mBtnComprar;
-	private Button mBtnLimpar;
 	private SharedPreferences prefs;
 	private ListView mLv; 
 	private List<LivroNovo> livros;
@@ -33,23 +34,17 @@ public class CarrinhoActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_carrinho);
 		
-		mBtnComprar = (Button) findViewById(R.id.carrinho_btnComprar);
-		mBtnLimpar = (Button) findViewById(R.id.carrinho_btnLimpar);
+		//mBtnComprar = (Button) findViewById(R.id.carrinho_btnComprar);
 		
 		mLv = (ListView) findViewById(R.id.carrinho_listaItensView);
 		
 		buildShoppingCart();
+		View v = getLayoutInflater().inflate(R.layout.carrinho_footer, null);
+		Button footerComprar = (Button) v.findViewById(R.id.carrinho_btnComprar);
+		mLv.addFooterView(v);
 		
-		mBtnLimpar.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				SharedPreferences.Editor editor = prefs.edit();
-				editor.clear().commit();
-			}
-		});
 		
-		mBtnComprar.setOnClickListener(new OnClickListener() {
+		footerComprar.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
@@ -70,7 +65,7 @@ public class CarrinhoActivity extends BaseActivity {
 		
 		for(int i = 0; i < livros.size(); i++) {
 			map = new HashMap();
-			map.put("itemCarrinho_thumbLivro", R.drawable.book_icon);
+			map.put("itemCarrinho_thumbLivro", GetBookCover.getCover(livros.get(i).getIsbn()));
 			map.put("itemCarrinho_tituloLivro", livros.get(i).getTitulo().toString());
 			map.put("itemCarrinho_autorLivro", livros.get(i).getAutor().toString());
 			map.put("itemCarrinho_editoraLivro", livros.get(i).getEditora());
@@ -80,7 +75,7 @@ public class CarrinhoActivity extends BaseActivity {
 		}
 		
 		//Adapter
-		final CarrinhoListAdapter adapter = new CarrinhoListAdapter(this, (List <? extends Map<String, ?>>) list, 
+		final CarrinhoListAdapter adapter = new CarrinhoListAdapter(this, (List<HashMap<String, Object>>) list, 
 			R.layout.item_carrinho, 
 			new String[] {
 				"itemCarrinho_thumbLivro",

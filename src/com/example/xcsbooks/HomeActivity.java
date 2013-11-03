@@ -1,5 +1,7 @@
 package com.example.xcsbooks;
 
+import com.example.xcsbooks.control.LoginControl;
+
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -12,7 +14,6 @@ import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
-import control.LoginControl;
 
 public class HomeActivity extends BaseActivity {
 	public static HomeActivity instance;

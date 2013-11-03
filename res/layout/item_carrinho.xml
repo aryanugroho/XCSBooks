@@ -6,8 +6,8 @@
     
 	<ImageView 
 		android:id="@+id/itemCarrinho_thumbLivro"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="4dp"
         android:layout_marginBottom="4dp"
@@ -25,7 +25,7 @@
 			android:id="@+id/itemCarrinho_txtTituloLivro"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:textSize="15sp"/>
+			android:textSize="16sp"/>
      
 		<TextView 
 			android:id="@+id/itemCarrinho_txtAutorLivro"
@@ -70,17 +70,17 @@
 			    android:id="@+id/itemCarrinho_txtPrecoLivro"
 			    android:layout_width="wrap_content"
 			    android:layout_height="wrap_content"
-			    android:textSize="12sp" />
+			    android:textSize="14sp" />
+			
+				<Button 
+			        android:id="@+id/itemCarrinho_remover"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:textSize="14sp"
+			        android:text="X"
+			        android:layout_gravity="right"/>
 
 		</LinearLayout>
-		
-		<Button 
-        android:id="@+id/itemCarrinho_remover"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="14sp"
-        android:text="X"
-        android:layout_gravity="right"/>
      
 	</LinearLayout>
         

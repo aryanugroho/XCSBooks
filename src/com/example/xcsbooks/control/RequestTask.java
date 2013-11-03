@@ -1,4 +1,4 @@
-package control;
+package com.example.xcsbooks.control;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

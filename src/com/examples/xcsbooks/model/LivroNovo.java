@@ -1,4 +1,4 @@
-package model;
+package com.examples.xcsbooks.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
