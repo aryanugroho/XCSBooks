@@ -2,10 +2,6 @@ package com.example.xcsbooks;
 
 import java.util.List;
 
-import com.example.xcsbooks.control.GetBookCover;
-import com.example.xcsbooks.control.JSONParser;
-import com.examples.xcsbooks.model.LivroNovo;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
@@ -18,6 +14,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.xcsbooks.control.GetBookCover;
+import com.example.xcsbooks.control.JSONParser;
+import com.examples.xcsbooks.model.Dinheiro;
+import com.examples.xcsbooks.model.LivroNovo;
 
 public class DetalhesLivroActivity extends BaseActivity {
 	
@@ -55,7 +56,7 @@ public class DetalhesLivroActivity extends BaseActivity {
 		mTxtTituloLivro.setText(livro.getTitulo());
 		mTxtAutorLivro.setText(r.getString(R.string.autor) + " " + livro.getAutor());
 		mTxtEditoraLivro.setText(r.getString(R.string.editora) + " " + livro.getEditora());
-		mTxtPrecoLivro.setText(r.getString(R.string.preco) + " $" + String.valueOf(livro.getPreco()));
+		mTxtPrecoLivro.setText(r.getString(R.string.preco) + new Dinheiro(livro.getPreco()).toString());
 		mTxtIsbaLivro.setText(r.getString(R.string.isbn) + " " + livro.getIsbn());
 		
 		mBtnAdicionarCarrinho.setOnClickListener(new OnClickListener() {
@@ -66,12 +67,29 @@ public class DetalhesLivroActivity extends BaseActivity {
 				SharedPreferences prefs = getSharedPreferences("CARRINHO", MODE_PRIVATE);
 				String carrinho = prefs.getString("LIVROS", JSONParser.DEFAULT_LIVROS);
 				List<LivroNovo> list = JSONParser.LivroFromJSON(carrinho);
-				list.add(livro);
+				
+				boolean add = true;
+				for(LivroNovo l : list){
+					if(l.getCodigo() == livro.getCodigo())
+						add = false;
+				}
+				
+				if(add)
+					list.add(livro);
+				
 				carrinho = JSONParser.LivroToJSON(list);
 				SharedPreferences.Editor editor = prefs.edit();
-				editor.putString("LIVROS", carrinho).commit();
+				editor.putString("LIVROS", carrinho);
+				if(add){
+					editor.putInt("LIVROS" + livro.getCodigo(), 1);
+				} else {
+					int prev = prefs.getInt("LIVROS" + livro.getCodigo(), 1);
+					editor.remove("LIVROS" + livro.getCodigo()).putInt("LIVROS" + livro.getCodigo(), prev + 1);
+					//Toast.makeText(getApplicationContext(), ""+prev, Toast.LENGTH_LONG).show();
+				}
+				editor.commit();
 				
-				Toast.makeText(getApplicationContext(), "Livro adicionado ao carrinho", Toast.LENGTH_LONG).show();
+				Toast.makeText(getApplicationContext(), "Livro adicionado ao carrinho", Toast.LENGTH_SHORT).show();
 			}
 		});
 		

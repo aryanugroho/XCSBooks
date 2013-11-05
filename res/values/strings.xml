@@ -61,5 +61,7 @@
    	<string name="preco">Preço:</string>
    	<string name="editora">Editora:</string>
    	<string name="isbn">ISBN:</string> 
+   	<string name="confirmar_compra">Confirmar Compra</string>
+   	<string name="confirmar_compra_botao">Confirmar</string>
    	 
 </resources>

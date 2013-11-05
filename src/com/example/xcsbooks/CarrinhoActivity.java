@@ -8,6 +8,8 @@ import java.util.zip.Inflater;
 
 import com.example.xcsbooks.control.GetBookCover;
 import com.example.xcsbooks.control.JSONParser;
+import com.example.xcsbooks.control.LoginControl;
+import com.examples.xcsbooks.model.Dinheiro;
 import com.examples.xcsbooks.model.LivroNovo;
 
 import android.content.Intent;
@@ -48,7 +50,13 @@ public class CarrinhoActivity extends BaseActivity {
 			
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(CarrinhoActivity.this, ComprarActivity.class);
+				Intent intent;
+				if(LoginControl.getClienteLogado() != null) {
+					intent = new Intent(CarrinhoActivity.this, ComprarActivity.class);
+				} else {
+					intent = new Intent(CarrinhoActivity.this, LogarActivity.class);
+					intent.putExtra("WHERE_TO_GO", "ComprarActivity");
+				}
 				startActivity(intent);
 			}
 		});
@@ -60,17 +68,22 @@ public class CarrinhoActivity extends BaseActivity {
 		String strlivros = prefs.getString("LIVROS", JSONParser.DEFAULT_LIVROS);
 		livros = JSONParser.LivroFromJSON(strlivros);
 		
-		List list = new ArrayList();
-		Map map = null;
+		
+		List<HashMap<String,Object>> list = new ArrayList<HashMap<String, Object>>();
+		HashMap<String, Object> map = null;
 		
 		for(int i = 0; i < livros.size(); i++) {
-			map = new HashMap();
+			int quant = prefs.getInt("LIVROS" + livros.get(i).getCodigo(), 1);
+			double preco = livros.get(i).getPreco() * quant;
+			
+			map = new HashMap<String, Object>();
+			map.put("itemCarrinho_codLivro", livros.get(i).getCodigo());
 			map.put("itemCarrinho_thumbLivro", GetBookCover.getCover(livros.get(i).getIsbn()));
 			map.put("itemCarrinho_tituloLivro", livros.get(i).getTitulo().toString());
 			map.put("itemCarrinho_autorLivro", livros.get(i).getAutor().toString());
 			map.put("itemCarrinho_editoraLivro", livros.get(i).getEditora());
-			map.put("itemCarrinho_quantidade", 1);
-			map.put("itemCarrinho_precoLivro", "R$ " + livros.get(i).getPreco());
+			map.put("itemCarrinho_quantidade", quant);
+			map.put("itemCarrinho_precoLivro", new Dinheiro(preco).toString());
 			list.add(map);
 		}
 		
@@ -93,10 +106,6 @@ public class CarrinhoActivity extends BaseActivity {
 				R.id.itemCarrinho_txtPrecoLivro});
 		
 		mLv.setAdapter(adapter);
-	}
-	
-	private void cleanShoppingCart(){
-		mLv.setAdapter(null);
 	}
 	
 	@Override

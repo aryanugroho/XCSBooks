@@ -49,8 +49,8 @@
 			<Button
 			    android:id="@+id/itemCarrinho_btnDecremento"
 			    style="?android:attr/buttonStyleSmall"
-			    android:layout_width="wrap_content"
-			    android:layout_height="wrap_content"
+			    android:layout_width="30dp"
+			    android:layout_height="30dp"
 			    android:text="@string/decremento" />
         
 			<TextView 
@@ -62,23 +62,29 @@
 			<Button
 			    android:id="@+id/itemCarrinho_btnIncremento"
 			    style="?android:attr/buttonStyleSmall"
-			    android:layout_width="wrap_content"
-			    android:layout_height="wrap_content"
+			    android:layout_width="30dp"
+			    android:layout_height="30dp"
 			    android:text="@string/incremento" />
 
 			<TextView
 			    android:id="@+id/itemCarrinho_txtPrecoLivro"
 			    android:layout_width="wrap_content"
 			    android:layout_height="wrap_content"
-			    android:textSize="14sp" />
+			    android:layout_marginLeft="20dp"
+			    android:textSize="16sp" />
 			
+			<LinearLayout
+			    android:layout_width="fill_parent"
+			    android:layout_height="wrap_content"
+			    android:orientation="horizontal"
+			    android:gravity="right" >
 				<Button 
 			        android:id="@+id/itemCarrinho_remover"
-			        android:layout_width="wrap_content"
-			        android:layout_height="wrap_content"
+			        android:layout_width="35dp"
+			        android:layout_height="35dp"
 			        android:textSize="14sp"
-			        android:text="X"
-			        android:layout_gravity="right"/>
+			        android:text="X" />
+			</LinearLayout>
 
 		</LinearLayout>
      

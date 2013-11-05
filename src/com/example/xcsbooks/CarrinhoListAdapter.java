@@ -2,10 +2,10 @@ package com.example.xcsbooks;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -16,16 +16,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.xcsbooks.control.JSONParser;
+import com.examples.xcsbooks.model.Dinheiro;
 import com.examples.xcsbooks.model.LivroNovo;
 
 //TODO: Corrigir bug de não mostrar corretamente a lista
 public class CarrinhoListAdapter extends ExtendedSimpleAdapter {
 	LayoutInflater inflater = null;
 	Context context = null;
-	List<? extends Map<String, ?>> data;
+	List<HashMap<String, Object>> data;
 	
 	public CarrinhoListAdapter(Context context,
-			List<? extends Map<String, ?>> data, int resource, String[] from,
+			List<HashMap<String, Object>> data, int resource, String[] from,
 			int[] to) {
 		super(context, (List<HashMap<String, Object>>) data, resource, from, to);
 		inflater = LayoutInflater.from(context);
@@ -56,8 +57,7 @@ public class CarrinhoListAdapter extends ExtendedSimpleAdapter {
 				
 				@Override
 				public void onClick(View v) {
-					// TODO Auto-generated method stub
-					
+					updateQuantPreco(-1, position);
 				}
 			});
 	    	
@@ -65,8 +65,7 @@ public class CarrinhoListAdapter extends ExtendedSimpleAdapter {
 				
 				@Override
 				public void onClick(View v) {
-					// TODO Auto-generated method stub
-					
+					updateQuantPreco(1, position);
 				}
 			});
 	    	
@@ -75,17 +74,22 @@ public class CarrinhoListAdapter extends ExtendedSimpleAdapter {
 				@Override
 				public void onClick(View v) {
 					data.remove(position);
+					
 					// Efetivamente removendo o livro do carrinho
 					SharedPreferences prefs = context.getSharedPreferences("CARRINHO", context.MODE_PRIVATE);
 					String strlivros = prefs.getString("LIVROS", JSONParser.DEFAULT_LIVROS);
+					
 					// Obtem a lista de livros que está guardada como um JSON
 					List<LivroNovo> livros = JSONParser.LivroFromJSON(strlivros);
+					int cod = livros.get(position).getCodigo();
 					livros.remove(position);
 					// Transforma a nova lista em um JSON
 					String carrinho = JSONParser.LivroToJSON(livros);
 					//Guarda o novo JSON
 					SharedPreferences.Editor editor = prefs.edit();
-					editor.clear().putString("LIVROS", carrinho).commit();
+					//editor.clear();
+					editor.remove("LIVROS").putString("LIVROS", carrinho);
+					editor.remove("LIVROS" + cod).commit();
 					//Notifica o usuario, atualiza a lista
 					Toast.makeText(context, "Item removido", Toast.LENGTH_LONG).show();
 					notifyDataSetChanged();
@@ -109,45 +113,36 @@ public class CarrinhoListAdapter extends ExtendedSimpleAdapter {
 		Button remove;
 	}
 	
-	public class YourWrapper
-	{
-	    private View base;
-	    private Button increment;
-	    private Button decrement;
-	    private Button remove;
-	    private ImageView iv;
-	    
-	    public YourWrapper(View base)
-	    {
-	        this.base = base;
-	    }
-
-	    public Button getIncrementButton()
-	    {
-	        if (increment == null)
-	        {
-	            increment = (Button) base.findViewById(R.id.itemCarrinho_btnIncremento);
-	        }
-	        return (increment);
-	    }
-	    
-	    public Button getDecrementButton()
-	    {
-	        if (decrement == null)
-	        {
-	            decrement = (Button) base.findViewById(R.id.itemCarrinho_btnDecremento);
-	        }
-	        return (decrement);
-	    }
-	    
-	    public Button getRemoveButton()
-	    {
-	        if (remove == null)
-	        {
-	        	remove = (Button) base.findViewById(R.id.itemCarrinho_remover);
-	        }
-	        return (remove);
-	    }
+	private void updateQuantPreco(int q, int position){
+		int quant = (Integer) data.get(position).get("itemCarrinho_quantidade");
+		Dinheiro prevPreco = new Dinheiro((String) data.get(position).get("itemCarrinho_precoLivro"));
+		Log.d("PRECO", "PrevPreco = " + prevPreco.toString());
+		Dinheiro precoOriginal = new Dinheiro(prevPreco.div(quant));
+		Log.d("PRECO", "PrecoOriginal = " + precoOriginal.toString());
+		
+		
+		if(q < 0){
+			if(quant > 1)
+				quant += q;
+			else 
+				return;
+		} else {
+			if(quant >= 1)
+				quant += q;
+		}
+		
+		Dinheiro novoPreco = new Dinheiro(precoOriginal.mult(quant));
+		Log.d("PRECO", "novoPreco = " + novoPreco.toString());
+		data.get(position).put("itemCarrinho_quantidade", quant);
+		data.get(position).put("itemCarrinho_precoLivro", novoPreco.toString());
+		int cod = (Integer) data.get(position).get("itemCarrinho_codLivro");
+		
+		//Update o sharedpref
+		SharedPreferences prefs = context.getSharedPreferences("CARRINHO", context.MODE_PRIVATE);
+		SharedPreferences.Editor editor = prefs.edit();
+		editor.putInt("LIVROS" + cod, quant).commit();
+		
+		notifyDataSetChanged();
 	}
 	
 }

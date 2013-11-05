@@ -1,7 +1,5 @@
 package com.example.xcsbooks;
 
-import com.example.xcsbooks.control.LoginControl;
-
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -14,6 +12,8 @@ import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.example.xcsbooks.control.LoginControl;
 
 public class HomeActivity extends BaseActivity {
 	public static HomeActivity instance;
@@ -41,6 +41,8 @@ public class HomeActivity extends BaseActivity {
 				startActivity(intent);
 			}
 		});		
+		
+		changeLoginFragment();
 	}
 	
 	@Override
@@ -51,23 +53,31 @@ public class HomeActivity extends BaseActivity {
 	@Override
 	protected void onResume(){
 		super.onResume();
+	}
+	
+	@Override
+	protected void onResumeFragments(){
+		super.onResumeFragments();
+		changeLoginFragment();
+	}
+	
+		
+	public void changeLoginFragment(){
 		FragmentManager fm = getFragmentManager();
 		FragmentTransaction ft = fm.beginTransaction();
 		
-		Fragment fragment = fm.findFragmentById(R.id.home_fragment);
-		
-		if(fragment == null) {
-			if(LoginControl.getClienteLogado() == null){
-				frag = new Fragment_Home();
-				ft.add(R.id.home_fragment, frag);
-			} else {
-				frag = new Fragment_Home_Logado();
-				ft.add(R.id.home_fragment, frag);
-			}
-			ft.commit();
+		if(LoginControl.getClienteLogado() == null){
+			frag = new Fragment_Home();
+		} else {
+			frag = new Fragment_Home_Logado();
 		}
+				
+		ft.replace(R.id.home_fragment, frag);
+		//ft.addToBackStack(null);
+		ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+		ft.commitAllowingStateLoss();
 	}
-
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		return super.onCreateOptionsMenu(menu);

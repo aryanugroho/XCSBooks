@@ -56,7 +56,8 @@ public class BuscaControl {
 				t = new HashMap();
 				t = u.get(i);
 				LivroNovo l = new LivroNovo(
-						i, Integer.parseInt((String) t.get("quantidade")),
+						Integer.parseInt((String) t.get("codigo")),
+						Integer.parseInt((String) t.get("quantidade")),
 						Double.parseDouble((String) t.get("preco")),
 						(String)t.get("isbn"),
 						(String)t.get("titulo"),

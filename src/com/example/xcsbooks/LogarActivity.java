@@ -44,8 +44,10 @@ public class LogarActivity extends BaseActivity {
 				Cliente cli = LoginControl.logar(username, password);
 				
 				if(cli != null){
-					Intent intent = new Intent(LogarActivity.this, HomeActivity.class);
-					startActivity(intent);
+					//Intent intent = new Intent(LogarActivity.this, HomeActivity.class);
+					//startActivity(intent);
+					HomeActivity.getInstance().changeLoginFragment();
+					finish();
 				} else {
 					//Login errado
 					AlertDialog.Builder builder = new AlertDialog.Builder(LogarActivity.this, android.R.style.Theme_DeviceDefault_Dialog_MinWidth);
