@@ -17,8 +17,8 @@ import android.widget.Toast;
 
 import com.example.xcsbooks.control.GetBookCover;
 import com.example.xcsbooks.control.JSONParser;
-import com.examples.xcsbooks.model.Dinheiro;
-import com.examples.xcsbooks.model.LivroNovo;
+import com.example.xcsbooks.model.Dinheiro;
+import com.example.xcsbooks.model.LivroNovo;
 
 public class DetalhesLivroActivity extends BaseActivity {
 	

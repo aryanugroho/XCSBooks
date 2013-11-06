@@ -8,7 +8,7 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
 import com.example.xcsbooks.control.CadastroControl;
-import com.examples.xcsbooks.model.Cliente;
+import com.example.xcsbooks.model.Cliente;
 
 import android.content.Intent;
 import android.os.Bundle;

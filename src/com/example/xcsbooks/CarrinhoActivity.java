@@ -9,8 +9,8 @@ import java.util.zip.Inflater;
 import com.example.xcsbooks.control.GetBookCover;
 import com.example.xcsbooks.control.JSONParser;
 import com.example.xcsbooks.control.LoginControl;
-import com.examples.xcsbooks.model.Dinheiro;
-import com.examples.xcsbooks.model.LivroNovo;
+import com.example.xcsbooks.model.Dinheiro;
+import com.example.xcsbooks.model.LivroNovo;
 
 import android.content.Intent;
 import android.content.SharedPreferences;

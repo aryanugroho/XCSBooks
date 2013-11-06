@@ -48,14 +48,12 @@ public class ComprarControl {
 			Log.d("COMPRAR_R", "Resposta: " + resposta);
 			try{
 				int test = Integer.parseInt(resposta);
-				if(test < 0){
 					Log.d("COMPRAR", "Resposta: " + test);
 					return test;
-				}
 			} catch (NumberFormatException e){
 				Log.e("PARSE_EX", "Error parsing resposta to Integer");
+				return -5;
 			}
-			return -5;
 		}
 		return -6;
 	}

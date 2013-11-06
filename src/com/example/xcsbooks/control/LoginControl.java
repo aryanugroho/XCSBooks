@@ -15,8 +15,8 @@ import android.util.Log;
 
 import com.example.xcsbooks.HomeActivity;
 import com.example.xcsbooks.LogarActivity;
-import com.examples.xcsbooks.model.Cliente;
-import com.examples.xcsbooks.model.Endereco;
+import com.example.xcsbooks.model.Cliente;
+import com.example.xcsbooks.model.Endereco;
 
 public class LoginControl {
 	public static String LOGIN_URI = "http://diskexplosivo.com/xcsbooks/login_cliente.php";
@@ -40,14 +40,10 @@ public class LoginControl {
 		
 		if(resposta != null){
 			
-			try{
-				int test = Integer.parseInt(resposta);
-				if(test < 0){
-					Log.d("LOGIN_F", "Resposta: " + test);
+			Integer test = ResponseControl.parseInt(resposta);
+			if(test != null){
+				if(test < 0)
 					return null;
-				}
-			} catch (NumberFormatException e){
-				Log.e("PARSE_EX", "Error parsing resposta to Integer");
 			}
 			
 			//Obtém resposta JSON parseada

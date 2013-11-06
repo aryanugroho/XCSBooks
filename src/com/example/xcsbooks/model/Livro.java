@@ -1,4 +1,4 @@
-package com.examples.xcsbooks.model;
+package com.example.xcsbooks.model;
 
 public class Livro {
 	private String isbn;

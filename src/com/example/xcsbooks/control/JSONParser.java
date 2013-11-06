@@ -10,7 +10,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.examples.xcsbooks.model.LivroNovo;
+import com.example.xcsbooks.model.LivroNovo;
 
 import android.util.Log;
 
@@ -20,6 +20,7 @@ public class JSONParser {
 	public static Map<String, Object> parseLogin(String JSONStr){
 		Map<String, Object> map = new HashMap<String, Object>();
 		Log.d("JSON_LOGIN", JSONStr);
+		
 		try{
 			JSONObject jobj = new JSONObject(JSONStr);
 			JSONObject login = jobj.getJSONObject("login");

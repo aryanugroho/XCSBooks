@@ -3,6 +3,7 @@ package com.example.xcsbooks.control;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.URI;
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.http.HttpResponse;
@@ -40,7 +41,6 @@ public class RequestTask extends AsyncTask<URI, Integer, String>{
         HttpResponse response;
         String responseString = null;
         
- 
         try {
         	if(method == REQUEST_GET){
         		if(!urlArg.endsWith("?"));
@@ -65,9 +65,16 @@ public class RequestTask extends AsyncTask<URI, Integer, String>{
             if(statusLine.getStatusCode() == HttpStatus.SC_OK){
                 ByteArrayOutputStream out = new ByteArrayOutputStream();
                 response.getEntity().writeTo(out);
-                out.close();
                 responseString = out.toString();
-            } else {
+                out.close();
+                
+                byte[] b = out.toByteArray();
+                out = new ByteArrayOutputStream();
+                out.write(Arrays.copyOfRange(b, 3, b.length));
+                
+                responseString = out.toString();
+                
+            } else { 
                 //Closes the connection.
                 response.getEntity().getContent().close();
                 throw new IOException(statusLine.getReasonPhrase());

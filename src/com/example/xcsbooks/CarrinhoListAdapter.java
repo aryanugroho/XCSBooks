@@ -16,8 +16,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.xcsbooks.control.JSONParser;
-import com.examples.xcsbooks.model.Dinheiro;
-import com.examples.xcsbooks.model.LivroNovo;
+import com.example.xcsbooks.model.Dinheiro;
+import com.example.xcsbooks.model.LivroNovo;
 
 //TODO: Corrigir bug de não mostrar corretamente a lista
 public class CarrinhoListAdapter extends ExtendedSimpleAdapter {

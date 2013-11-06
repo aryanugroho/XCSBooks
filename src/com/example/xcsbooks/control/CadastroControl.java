@@ -6,8 +6,8 @@ import java.util.List;
 
 import org.apache.http.NameValuePair;
 
-import com.examples.xcsbooks.model.Cliente;
-import com.examples.xcsbooks.model.Endereco;
+import com.example.xcsbooks.model.Cliente;
+import com.example.xcsbooks.model.Endereco;
 
 import android.os.AsyncTask;
 import android.util.Log;

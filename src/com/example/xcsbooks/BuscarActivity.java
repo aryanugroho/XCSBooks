@@ -7,7 +7,7 @@ import java.util.Map;
 
 import com.example.xcsbooks.control.BuscaControl;
 import com.example.xcsbooks.control.GetBookCover;
-import com.examples.xcsbooks.model.LivroNovo;
+import com.example.xcsbooks.model.LivroNovo;
 
 import android.content.Intent;
 import android.os.Bundle;

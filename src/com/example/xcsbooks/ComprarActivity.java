@@ -7,6 +7,7 @@ import java.util.List;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,8 +22,8 @@ import android.widget.Toast;
 import com.example.xcsbooks.control.ComprarControl;
 import com.example.xcsbooks.control.JSONParser;
 import com.example.xcsbooks.control.LoginControl;
-import com.examples.xcsbooks.model.Dinheiro;
-import com.examples.xcsbooks.model.LivroNovo;
+import com.example.xcsbooks.model.Dinheiro;
+import com.example.xcsbooks.model.LivroNovo;
 
 public class ComprarActivity extends BaseActivity {
 	private TextView tv;
@@ -92,6 +93,7 @@ public class ComprarActivity extends BaseActivity {
 				@Override
 				public void onClick(View v) {
 					int resposta = ComprarControl.comprar(pedido);
+					Log.d("COMPRAR_ACT", "resposta:" + resposta);
 					if(resposta > 0){
 						//TODO trocar para string recurso
 						Toast.makeText(ComprarActivity.this, "Compra realizada com sucesso" , Toast.LENGTH_SHORT).show();

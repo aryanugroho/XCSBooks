@@ -1,7 +1,7 @@
 package com.example.xcsbooks;
 
 import com.example.xcsbooks.control.LoginControl;
-import com.examples.xcsbooks.model.Cliente;
+import com.example.xcsbooks.model.Cliente;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;

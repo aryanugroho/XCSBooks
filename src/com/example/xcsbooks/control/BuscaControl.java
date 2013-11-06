@@ -10,8 +10,8 @@ import java.util.Map;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
-import com.examples.xcsbooks.model.Livro;
-import com.examples.xcsbooks.model.LivroNovo;
+import com.example.xcsbooks.model.Livro;
+import com.example.xcsbooks.model.LivroNovo;
 
 import android.os.AsyncTask;
 import android.util.Log;
