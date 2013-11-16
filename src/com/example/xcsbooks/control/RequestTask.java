@@ -68,9 +68,9 @@ public class RequestTask extends AsyncTask<URI, Integer, String>{
                 responseString = out.toString();
                 out.close();
                 
-                byte[] b = out.toByteArray();
-                out = new ByteArrayOutputStream();
-                out.write(Arrays.copyOfRange(b, 3, b.length));
+                //byte[] b = out.toByteArray();
+                //out = new ByteArrayOutputStream();
+                //out.write(Arrays.copyOfRange(b, 3, b.length));
                 
                 responseString = out.toString();
                 
