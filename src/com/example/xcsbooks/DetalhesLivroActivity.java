@@ -63,31 +63,7 @@ public class DetalhesLivroActivity extends BaseActivity {
 			
 			@Override
 			public void onClick(View v) {
-				//Obter livros do carrinho
-				SharedPreferences prefs = getSharedPreferences("CARRINHO", MODE_PRIVATE);
-				String carrinho = prefs.getString("LIVROS", JSONParser.DEFAULT_LIVROS);
-				List<LivroNovo> list = JSONParser.LivroFromJSON(carrinho);
-				
-				boolean add = true;
-				for(LivroNovo l : list){
-					if(l.getCodigo() == livro.getCodigo())
-						add = false;
-				}
-				
-				if(add)
-					list.add(livro);
-				
-				carrinho = JSONParser.LivroToJSON(list);
-				SharedPreferences.Editor editor = prefs.edit();
-				editor.putString("LIVROS", carrinho);
-				if(add){
-					editor.putInt("LIVROS" + livro.getCodigo(), 1);
-				} else {
-					int prev = prefs.getInt("LIVROS" + livro.getCodigo(), 1);
-					editor.remove("LIVROS" + livro.getCodigo()).putInt("LIVROS" + livro.getCodigo(), prev + 1);
-					//Toast.makeText(getApplicationContext(), ""+prev, Toast.LENGTH_LONG).show();
-				}
-				editor.commit();
+				addLivroAoCarrinho();
 				
 				Toast.makeText(getApplicationContext(), "Livro adicionado ao carrinho", Toast.LENGTH_SHORT).show();
 			}
@@ -97,7 +73,10 @@ public class DetalhesLivroActivity extends BaseActivity {
 			
 			@Override
 			public void onClick(View v) {
+				addLivroAoCarrinho();
 				
+				Intent intent = new Intent(DetalhesLivroActivity.this, CarrinhoActivity.class);
+				startActivity(intent);
 			}
 		});
 	
@@ -112,5 +91,33 @@ public class DetalhesLivroActivity extends BaseActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item){
 		return super.onOptionsItemSelected(item);
+	}
+	
+	private boolean addLivroAoCarrinho() {
+		//Obter livros do carrinho
+		SharedPreferences prefs = getSharedPreferences("CARRINHO", MODE_PRIVATE);
+		String carrinho = prefs.getString("LIVROS", JSONParser.DEFAULT_LIVROS);
+		List<LivroNovo> list = JSONParser.LivroFromJSON(carrinho);
+		
+		boolean add = true;
+		for(LivroNovo l : list){
+			if(l.getCodigo() == livro.getCodigo())
+				add = false;
+		}
+		
+		if(add)
+			list.add(livro);
+		
+		carrinho = JSONParser.LivroToJSON(list);
+		SharedPreferences.Editor editor = prefs.edit();
+		editor.putString("LIVROS", carrinho);
+		if(add){
+			editor.putInt("LIVROS" + livro.getCodigo(), 1);
+		} else {
+			int prev = prefs.getInt("LIVROS" + livro.getCodigo(), 1);
+			editor.remove("LIVROS" + livro.getCodigo()).putInt("LIVROS" + livro.getCodigo(), prev + 1);
+		}
+		editor.commit();
+		return true;
 	}
 }
