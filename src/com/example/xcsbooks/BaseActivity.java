@@ -26,9 +26,11 @@ public class BaseActivity extends FragmentActivity {
 		if(LoginControl.getClienteLogado() == null){
 			menu.getItem(2).setVisible(true);
 			menu.getItem(3).setVisible(false);
+			menu.getItem(5).setVisible(false);
 		} else {
 			menu.getItem(2).setVisible(false);
 			menu.getItem(3).setVisible(true);
+			menu.getItem(5).setVisible(true);
 		}
 		return true;
 	}
@@ -59,6 +61,11 @@ public class BaseActivity extends FragmentActivity {
 			intent = new Intent(this, BuscarActivity.class);
 			intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 			startActivity(intent);
+			break;
+		case R.id.action_cadastrar_livro_usado:
+			intent = new Intent(this, CadastrarLivroUsadoActivity.class);
+			startActivity(intent);
+			break;
 		default:
 			//Adicionar erro
 			return false;

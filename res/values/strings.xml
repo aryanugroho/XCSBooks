@@ -11,6 +11,7 @@
     <string name="title_activity_cadastrar">Cadastrar</string>
     <string name="title_activity_base">BaseActivity</string>
     <string name="title_activity_cadastrar_endereco">Cadastrar Endereço</string>
+    <string name="title_activity_cadastrar_livro_usado">Cadastrar Livro Usado</string>
     <string name="username">Usuário</string>
     <string name="password">Senha</string>
     <string name="logar">Logar</string>
@@ -56,12 +57,11 @@
     <string name="title_activity_basic_fragment">BasicFragment</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_comprar">ComprarActivity</string>
+    <string name="autor">Autor:</string>
+    <string name="preco">Preço:</string>
+    <string name="editora">Editora:</string>
+    <string name="isbn">ISBN:</string>
+    <string name="confirmar_compra">Confirmar Compra</string>
+    <string name="confirmar_compra_botao">Confirmar</string>
 
-   	<string name="autor">Autor:</string>
-   	<string name="preco">Preço:</string>
-   	<string name="editora">Editora:</string>
-   	<string name="isbn">ISBN:</string> 
-   	<string name="confirmar_compra">Confirmar Compra</string>
-   	<string name="confirmar_compra_botao">Confirmar</string>
-   	 
 </resources>

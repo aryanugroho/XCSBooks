@@ -19,10 +19,10 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="com.example.xcsbooks.HomeActivity"
+            android:allowTaskReparenting="true"
             android:label="@string/app_name"
-            android:windowSoftInputMode="stateHidden"
             android:launchMode="singleTop"
-            android:allowTaskReparenting="true" >
+            android:windowSoftInputMode="stateHidden" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,22 +31,22 @@
         </activity>
         <activity
             android:name="com.example.xcsbooks.BuscarActivity"
+            android:allowTaskReparenting="true"
             android:label="@string/title_activity_buscar"
-            android:windowSoftInputMode="stateHidden"
             android:launchMode="singleTop"
-            android:allowTaskReparenting="true" >
+            android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
             android:name="com.example.xcsbooks.LogarActivity"
             android:label="@string/title_activity_logar"
-            android:windowSoftInputMode="stateHidden"
-            android:launchMode="singleTop" >
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
             android:name="com.example.xcsbooks.CarrinhoActivity"
             android:label="@string/title_activity_carrinho"
-            android:windowSoftInputMode="stateHidden"
-            android:launchMode="singleTop" >
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
             android:name="com.example.xcsbooks.DetalhesLivroActivity"
@@ -56,8 +56,8 @@
         <activity
             android:name="com.example.xcsbooks.CadastrarClienteActivity"
             android:label="@string/title_activity_cadastrar"
-            android:windowSoftInputMode="stateHidden"
-            android:launchMode="singleTop">
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
             android:name="com.example.xcsbooks.BaseActivity"
@@ -75,6 +75,10 @@
             android:name="com.example.xcsbooks.ComprarActivity"
             android:label="@string/title_activity_comprar"
             android:launchMode="singleTop" >
+        </activity>
+        <activity
+            android:name="com.example.xcsbooks.CadastrarLivroUsadoActivity"
+            android:label="@string/title_activity_cadastrar_livro_usado" >
         </activity>
     </application>
 
