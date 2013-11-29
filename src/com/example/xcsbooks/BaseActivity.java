@@ -27,10 +27,12 @@ public class BaseActivity extends FragmentActivity {
 			menu.getItem(2).setVisible(true);
 			menu.getItem(3).setVisible(false);
 			menu.getItem(5).setVisible(false);
+			menu.getItem(6).setVisible(false);
 		} else {
 			menu.getItem(2).setVisible(false);
 			menu.getItem(3).setVisible(true);
 			menu.getItem(5).setVisible(true);
+			menu.getItem(6).setVisible(true);
 		}
 		return true;
 	}
@@ -60,6 +62,10 @@ public class BaseActivity extends FragmentActivity {
 		case R.id.action_busca:
 			intent = new Intent(this, BuscarActivity.class);
 			intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+			startActivity(intent);
+			break;
+		case R.id.action_acompanhar_pedido:
+			intent = new Intent(this, AcompanharPedidoActivity.class);
 			startActivity(intent);
 			break;
 		case R.id.action_cadastrar_livro_usado:

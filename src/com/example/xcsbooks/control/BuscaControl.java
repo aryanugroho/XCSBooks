@@ -12,14 +12,15 @@ import org.apache.http.message.BasicNameValuePair;
 
 import com.example.xcsbooks.model.Livro;
 import com.example.xcsbooks.model.LivroNovo;
+import com.example.xcsbooks.model.Pedido;
 
 import android.os.AsyncTask;
 import android.util.Log;
 
 public class BuscaControl {
-	public static String BUSCA_URI = "http://diskexplosivo.com/xcsbooks/search.php";
+	public static String BUSCA_LIVRO_URI = "http://diskexplosivo.com/xcsbooks/search.php";
 	
-	public static List<LivroNovo> buscar(String termo){
+	public static List<LivroNovo> buscarLivro(String termo){
 		AsyncTask<URI, Integer, String> task;
 		String resposta = null;
 		
@@ -28,7 +29,7 @@ public class BuscaControl {
 		
 		try {
 			//Faz um request para LOGIN_URI com os dados digitados
-			task = new RequestTask(searchData, BUSCA_URI, RequestTask.REQUEST_GET).execute();
+			task = new RequestTask(searchData, BUSCA_LIVRO_URI, RequestTask.REQUEST_GET).execute();
 			//Obtém a resposta do back-end
 			resposta = task.get();
 		} catch (Exception e){
@@ -72,5 +73,11 @@ public class BuscaControl {
 		}
 		
 		return new ArrayList();
+	}
+	
+	public static List<Pedido> buscarPedido(String cliente) {
+		List<Pedido> listaPedidos = new ArrayList<Pedido>();
+		
+		return listaPedidos;
 	}
 }

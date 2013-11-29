@@ -80,6 +80,14 @@
             android:name="com.example.xcsbooks.CadastrarLivroUsadoActivity"
             android:label="@string/title_activity_cadastrar_livro_usado" >
         </activity>
+        <activity
+            android:name="com.example.xcsbooks.AcompanharPedidoActivity"
+            android:label="@string/title_activity_acompanhar_pedido" >
+        </activity>
+        <activity
+            android:name="com.example.xcsbooks.DetalhesPedidoActivity"
+            android:label="@string/title_activity_detalhes_pedido" >
+        </activity>
     </application>
 
 </manifest>

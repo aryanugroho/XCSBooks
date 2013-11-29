@@ -81,16 +81,16 @@ public class BuscarActivity extends BaseActivity {
 	
 	private void performSearch(String termo){
 		//Obtém livros da busca
-		livros = BuscaControl.buscar(termo);
+		livros = BuscaControl.buscarLivro(termo);
 		searchList.clear();
 		
 		Map map = null;
-		for(int i = 0; i < livros.size(); i++) {
+		for(LivroNovo livro : livros) {
 			map = new HashMap();
-			map.put("itemLista_thumbLivro", GetBookCover.getCover(livros.get(i).getIsbn()));
-			map.put("itemLista_tituloLivro", livros.get(i).getTitulo());
-			map.put("itemLista_autorLivro", livros.get(i).getAutor());
-			map.put("itemLista_precoLivro", "R$ " + String.valueOf(livros.get(i).getPreco()));
+			map.put("itemLista_thumbLivro", GetBookCover.getCover(livro.getIsbn()));
+			map.put("itemLista_tituloLivro", livro.getTitulo());
+			map.put("itemLista_autorLivro", livro.getAutor());
+			map.put("itemLista_precoLivro", "R$ " + String.valueOf(livro.getPreco()));
 			searchList.add(map);
 		}
 	}
