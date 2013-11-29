@@ -11,7 +11,7 @@ public class Pedido implements Parcelable {
 	private int id;
 	private String datahora;
 	private String estado;
-	private Double total;
+	private Dinheiro total;
 	private List<Produto> produtos; 
 	
 	
@@ -20,7 +20,7 @@ public class Pedido implements Parcelable {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Pedido(int id, String datahora, String estado, Double total) {
+	public Pedido(int id, String datahora, String estado, Dinheiro total) {
 		super();
 		this.id = id;
 		this.datahora = datahora;
@@ -52,10 +52,10 @@ public class Pedido implements Parcelable {
 	public void setProdutos(List<Produto> produtos) {
 		this.produtos = produtos;
 	}
-	public Double getTotal() {
+	public Dinheiro getTotal() {
 		return total;
 	}
-	public void setTotal(Double total) {
+	public void setTotal(Dinheiro total) {
 		this.total = total;
 	}
 	@Override
@@ -69,7 +69,7 @@ public class Pedido implements Parcelable {
 		dest.writeInt(getId());
 		dest.writeString(getDatahora());
 		dest.writeString(getEstado());
-		dest.writeDouble(getTotal());
+		dest.writeString(getTotal().toString());
 	}
 	
 	public static final Parcelable.Creator<Pedido> CREATOR = new Parcelable.Creator<Pedido>() {
@@ -89,7 +89,7 @@ public class Pedido implements Parcelable {
 		setId(in.readInt());
 		setDatahora(in.readString());
 		setEstado(in.readString());
-		setTotal(in.readDouble());
+		setTotal(new Dinheiro(in.readString()));
 	}
 	
 }

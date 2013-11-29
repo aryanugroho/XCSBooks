@@ -10,12 +10,27 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.example.xcsbooks.model.Dinheiro;
 import com.example.xcsbooks.model.LivroNovo;
 
 import android.util.Log;
 
 public class JSONParser {
 	public static final String DEFAULT_LIVROS = "{ login: [] }";
+	
+	public static int parseResposta(String JSONStr){
+		int r = -99;
+		
+		try{
+			JSONObject jobj = new JSONObject(JSONStr);
+			r = jobj.getInt("resposta");
+			Log.d("GENERIC_RESPONSE", "Response: " + r);
+		} catch (JSONException e) {
+			Log.e("JSON", "Error parsing JSONString: " + JSONStr);
+		}
+		
+		return r;
+	}
 
 	public static Map<String, Object> parseLogin(String JSONStr){
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -75,24 +90,39 @@ public class JSONParser {
 		return list;
 	}
 	
-	public static List<Map<String, String>> parseBuscaPedido(String JSONStr){
-		List<Map<String, String>> list = new ArrayList<Map<String, String>>();
-		Map<String, String> map = null;
+	public static List<Map<String, Object>> parseBuscaPedido(String JSONStr){
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+		List<Map<String, Object>> listProdutos;
+		Map<String, Object> map = null;
 		
 		try{
 			JSONObject jobj = new JSONObject(JSONStr);
 			JSONArray pedidos = jobj.getJSONArray("pedidos");
 
 			for(int i = 0; i < pedidos.length(); i++){
-				map = new HashMap<String, String>();
+				map = new HashMap<String, Object>();
 				JSONObject t = pedidos.getJSONObject(i);
-				map.put("id", t.getString("pedidoid"));
+				map.put("id", t.getInt("id"));
 				map.put("datahora", t.getString("datahora"));
 				map.put("estado", t.getString("estado"));
-				map.put("total", t.getString("total"));
+				map.put("total", new Dinheiro(t.getDouble("total")));
+
 				// Produtos
+				JSONArray produtos = t.getJSONArray("produtos");
+				Map<String, Object> map_prod;
+				listProdutos = new ArrayList<Map<String,Object>>();
+				for(int j = 0; j < produtos.length(); j++){
+					map_prod = new HashMap<String, Object>();
+					JSONObject p = produtos.getJSONObject(i);
+					map_prod.put("isbn", p.getString("isbn"));
+					map_prod.put("titulo", p.getString("titulo"));
+					map_prod.put("quantidade", p.getInt("quantidade"));
+					map_prod.put("preco", new Dinheiro(p.getDouble("preco")));
+					
+					listProdutos.add(map_prod);
+				}
 				
-				
+				map.put("produtos", listProdutos);
 				list.add(map);
 			}
 			
