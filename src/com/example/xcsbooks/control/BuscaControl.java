@@ -10,7 +10,6 @@ import java.util.Map;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
-import com.example.xcsbooks.model.Livro;
 import com.example.xcsbooks.model.LivroNovo;
 import com.example.xcsbooks.model.Pedido;
 
@@ -19,6 +18,7 @@ import android.util.Log;
 
 public class BuscaControl {
 	public static String BUSCA_LIVRO_URI = "http://diskexplosivo.com/xcsbooks/search.php";
+	public static String BUSCA_PEDIDO_URI = "http://diskexplosivo.com/xcsbooks/pedido_cliente.php";
 	
 	public static List<LivroNovo> buscarLivro(String termo){
 		AsyncTask<URI, Integer, String> task;
@@ -28,7 +28,7 @@ public class BuscaControl {
 		searchData.add(new BasicNameValuePair("s", termo));
 		
 		try {
-			//Faz um request para LOGIN_URI com os dados digitados
+			//Faz um request para BUSCA_LIVRO_URI com os dados digitados
 			task = new RequestTask(searchData, BUSCA_LIVRO_URI, RequestTask.REQUEST_GET).execute();
 			//Obtém a resposta do back-end
 			resposta = task.get();
@@ -49,7 +49,7 @@ public class BuscaControl {
 			}
 			
 			//Obtém resposta JSON parseada
-			List <? extends Map<String, ?>> u = JSONParser.parseBusca(resposta);
+			List <? extends Map<String, ?>> u = JSONParser.parseBuscaLivro(resposta);
 		
 			Map t = null;
 			List<LivroNovo> list = new ArrayList<LivroNovo>();
@@ -77,6 +77,55 @@ public class BuscaControl {
 	
 	public static List<Pedido> buscarPedido(String cliente) {
 		List<Pedido> listaPedidos = new ArrayList<Pedido>();
+		AsyncTask<URI, Integer, String> task;
+		String resposta = null;
+		
+		List<NameValuePair> searchData = new ArrayList<NameValuePair>();
+		searchData.add(new BasicNameValuePair("s", cliente));
+		
+		try {
+			//Faz um request para BUSCA_PEDIDO_URI com os dados digitados
+			task = new RequestTask(searchData, BUSCA_PEDIDO_URI, RequestTask.REQUEST_GET).execute();
+			//Obtém a resposta do back-end
+			resposta = task.get();
+		} catch (Exception e){
+			Log.e("SEARCH_REQUEST", "Error on GET REQUEST to URL");
+		}
+		
+		if(resposta != null){
+			
+			try{
+				int test = Integer.parseInt(resposta);
+				if(test < 0){
+					Log.d("SEARCH_F", "Resposta: " + test);
+					return listaPedidos;
+				}
+			} catch (NumberFormatException e){
+				Log.e("PARSE_EX", "Error parsing resposta to Integer");
+			}
+			
+			//Obtém resposta JSON parseada
+			List <? extends Map<String, ?>> u = JSONParser.parseBuscaLivro(resposta);
+		
+			Map t = null;
+			
+			for(int i = 0; i < u.size(); i++){
+				t = new HashMap();
+				t = u.get(i);
+				Pedido p = new Pedido(
+						Integer.parseInt((String) t.get("pedidoid")),
+						(String)t.get("datahora"),
+						(String)t.get("estado"),
+						Double.parseDouble((String) t.get("total")));
+				listaPedidos.add(p);
+				Log.d("PEDIDO_I", "ID: " + p.getId());
+			}
+			
+
+			return listaPedidos;
+		}
+		
+		
 		
 		return listaPedidos;
 	}

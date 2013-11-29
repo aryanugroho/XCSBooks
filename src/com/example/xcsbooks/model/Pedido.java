@@ -1,47 +1,63 @@
 package com.example.xcsbooks.model;
 
+import java.util.List;
+
 import android.annotation.SuppressLint;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 @SuppressLint("ParcelCreator")
 public class Pedido implements Parcelable {
-	private int codigo;
-	private String data;
-	private Double preco;
-	private String status;
+	private int id;
+	private String datahora;
+	private String estado;
+	private Double total;
+	private List<Produto> produtos; 
 	
 	
-	
-	public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
-	}
 	public Pedido() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public int getCodigo() {
-		return codigo;
-	}
-	public void setCodigo(int codigo) {
-		this.codigo = codigo;
-	}
-	public String getData() {
-		return data;
-	}
-	public void setData(String data) {
-		this.data = data;
-	}
-	public Double getPreco() {
-		return preco;
-	}
-	public void setPreco(Double preco) {
-		this.preco = preco;
-	}
 	
+	public Pedido(int id, String datahora, String estado, Double total) {
+		super();
+		this.id = id;
+		this.datahora = datahora;
+		this.estado = estado;
+		this.total = total;
+	}
+
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getDatahora() {
+		return datahora;
+	}
+	public void setDatahora(String datahora) {
+		this.datahora = datahora;
+	}
+	public String getEstado() {
+		return estado;
+	}
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+	public List<Produto> getProdutos() {
+		return produtos;
+	}
+	public void setProdutos(List<Produto> produtos) {
+		this.produtos = produtos;
+	}
+	public Double getTotal() {
+		return total;
+	}
+	public void setTotal(Double total) {
+		this.total = total;
+	}
 	@Override
 	public int describeContents() {
 		// TODO Auto-generated method stub
@@ -50,10 +66,10 @@ public class Pedido implements Parcelable {
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
 		// TODO Auto-generated method stub
-		dest.writeInt(getCodigo());
-		dest.writeString(getData());
-		dest.writeDouble(getPreco());
-		dest.writeString(getStatus());
+		dest.writeInt(getId());
+		dest.writeString(getDatahora());
+		dest.writeString(getEstado());
+		dest.writeDouble(getTotal());
 	}
 	
 	public static final Parcelable.Creator<Pedido> CREATOR = new Parcelable.Creator<Pedido>() {
@@ -70,10 +86,10 @@ public class Pedido implements Parcelable {
 	};
 	
 	private Pedido(Parcel in){
-		setCodigo(in.readInt());
-		setData(in.readString());
-		setPreco(in.readDouble());
-		setStatus(in.readString());
+		setId(in.readInt());
+		setDatahora(in.readString());
+		setEstado(in.readString());
+		setTotal(in.readDouble());
 	}
 	
 }

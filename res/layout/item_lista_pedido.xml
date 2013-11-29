@@ -7,19 +7,25 @@
     
       
      <TextView 
-         android:id="@+id/itemListaPedido_codigoPedido"
+         android:id="@+id/itemListaPedido_idPedido"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
          android:textSize="15sp"/>
      
      <TextView 
-         android:id="@+id/itemListaPedido_dataPedido"
+         android:id="@+id/itemListaPedido_datahoraPedido"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
          android:textSize="12sp"/>
      
      <TextView 
-         android:id="@+id/itemListaPedido_precoPedido"
+         android:id="@+id/itemListaPedido_estadoPedido"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:textSize="12sp"/>
+     
+     <TextView 
+         android:id="@+id/itemListaPedido_totalPedido"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
          android:textSize="12sp"/>

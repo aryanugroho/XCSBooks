@@ -47,7 +47,7 @@ public class JSONParser {
 		return map;
 	}
 	
-	public static List<Map<String, String>> parseBusca(String JSONStr){
+	public static List<Map<String, String>> parseBuscaLivro(String JSONStr){
 		List<Map<String, String>> list = new ArrayList<Map<String, String>>();
 		Map<String, String> map = null;
 		
@@ -65,6 +65,34 @@ public class JSONParser {
 				map.put("editora", t.getString("editora"));
 				map.put("quantidade", t.getString("quantidade"));
 				map.put("preco", t.getString("preco"));
+				list.add(map);
+			}
+			
+		} catch (JSONException e) {
+			Log.e("JSON", "Error parsing JSONString: " + JSONStr);
+		}
+		
+		return list;
+	}
+	
+	public static List<Map<String, String>> parseBuscaPedido(String JSONStr){
+		List<Map<String, String>> list = new ArrayList<Map<String, String>>();
+		Map<String, String> map = null;
+		
+		try{
+			JSONObject jobj = new JSONObject(JSONStr);
+			JSONArray pedidos = jobj.getJSONArray("pedidos");
+
+			for(int i = 0; i < pedidos.length(); i++){
+				map = new HashMap<String, String>();
+				JSONObject t = pedidos.getJSONObject(i);
+				map.put("id", t.getString("pedidoid"));
+				map.put("datahora", t.getString("datahora"));
+				map.put("estado", t.getString("estado"));
+				map.put("total", t.getString("total"));
+				// Produtos
+				
+				
 				list.add(map);
 			}
 			

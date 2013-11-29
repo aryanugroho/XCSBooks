@@ -34,10 +34,11 @@ public class DetalhesPedidoActivity extends BaseActivity {
 		
 		pedido = (Pedido) i.getParcelableExtra(AcompanharPedidoActivity.KEY_PEDIDO);
 		
-		mTxtCodigoPedido.setText(r.getString(R.string.codigo) + ": " +pedido.getCodigo());
-		mTxtDataPedido.setText(r.getString(R.string.data)+": "+pedido.getData());
-		mTxtPrecoPedido.setText(r.getString(R.string.preco) + ": " + new Dinheiro(pedido.getPreco()).toString());
-		mTxtStatusPedido.setText(r.getString(R.string.status) + ": " + pedido.getStatus());
+		mTxtCodigoPedido.setText(r.getString(R.string.id) + ": " +pedido.getId());
+		mTxtDataPedido.setText(r.getString(R.string.datahora)+": "+pedido.getDatahora());
+		mTxtStatusPedido.setText(r.getString(R.string.status) + ": " + pedido.getEstado());
+		mTxtPrecoPedido.setText(r.getString(R.string.total) + ": " + new Dinheiro(pedido.getTotal()).toString());
+		
 		
 	}
 

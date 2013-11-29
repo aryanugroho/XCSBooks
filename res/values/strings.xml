@@ -63,9 +63,10 @@
     <string name="editora">Editora</string>
     <string name="isbn">ISBN</string>
     <string name="titulo">Título</string>
-    <string name="codigo">Codigo</string>
-    <string name="status">Status</string>
-    <string name="data">Data</string>
+    <string name="id">Codigo</string>
+    <string name="status">Estado</string>
+    <string name="datahora">Data</string>
+    <string name="total">Total</string>
     <string name="confirmar_compra">Confirmar Compra</string>
     <string name="confirmar_compra_botao">Confirmar</string>
     <string name="title_activity_detalhes_pedido">DetalhesPedidoActivity</string>
