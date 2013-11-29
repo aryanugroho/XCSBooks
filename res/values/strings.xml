@@ -57,10 +57,11 @@
     <string name="title_activity_basic_fragment">BasicFragment</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_comprar">ComprarActivity</string>
-    <string name="autor">Autor:</string>
-    <string name="preco">Preço:</string>
-    <string name="editora">Editora:</string>
-    <string name="isbn">ISBN:</string>
+    <string name="autor">Autor</string>
+    <string name="preco">Preço</string>
+    <string name="editora">Editora</string>
+    <string name="isbn">ISBN</string>
+    <string name="titulo">Título</string>
     <string name="confirmar_compra">Confirmar Compra</string>
     <string name="confirmar_compra_botao">Confirmar</string>
 
