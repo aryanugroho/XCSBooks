@@ -81,7 +81,7 @@ public class BuscaControl {
 		String resposta = null;
 		
 		List<NameValuePair> searchData = new ArrayList<NameValuePair>();
-		searchData.add(new BasicNameValuePair("s", cliente));
+		searchData.add(new BasicNameValuePair("cliente", cliente));
 		
 		try {
 			//Faz um request para BUSCA_PEDIDO_URI com os dados digitados
