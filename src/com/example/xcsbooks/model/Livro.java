@@ -1,5 +1,8 @@
 package com.example.xcsbooks.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 public class Livro extends Produto {
 	private String isbn;
 	private String titulo;
@@ -50,5 +53,33 @@ public class Livro extends Produto {
 		this.editora = editora;
 	}
 	
+	protected Livro(Parcel in){
+		super(in);
+		setIsbn(in.readString());
+		setTitulo(in.readString());
+		setAutor(in.readString());
+		setEditora(in.readString());
+	}
 	
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		super.writeToParcel(dest, flags);
+		dest.writeString(isbn);
+		dest.writeString(titulo);
+		dest.writeString(autor);
+		dest.writeString(editora);
+	}
+
+	public static final Parcelable.Creator<Livro> CREATOR = new Parcelable.Creator<Livro>() {
+
+		@Override
+		public Livro createFromParcel(Parcel source) {
+			return new Livro(source);
+		}
+
+		@Override
+		public Livro[] newArray(int size) {
+			return new Livro[size];
+		}
+	};
 }

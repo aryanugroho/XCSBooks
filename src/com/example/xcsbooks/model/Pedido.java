@@ -1,8 +1,10 @@
 package com.example.xcsbooks.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.annotation.SuppressLint;
+import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -17,7 +19,6 @@ public class Pedido implements Parcelable {
 	
 	public Pedido() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	
 	public Pedido(int id, String datahora, String estado, Dinheiro total) {
@@ -26,6 +27,7 @@ public class Pedido implements Parcelable {
 		this.datahora = datahora;
 		this.estado = estado;
 		this.total = total;
+		this.produtos = new ArrayList<Produto>();
 	}
 
 	public int getId() {
@@ -58,25 +60,29 @@ public class Pedido implements Parcelable {
 	public void setTotal(Dinheiro total) {
 		this.total = total;
 	}
+	
 	@Override
 	public int describeContents() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
-		// TODO Auto-generated method stub
 		dest.writeInt(getId());
 		dest.writeString(getDatahora());
 		dest.writeString(getEstado());
 		dest.writeString(getTotal().toString());
+		dest.writeList(getProdutos());
 	}
 	
 	public static final Parcelable.Creator<Pedido> CREATOR = new Parcelable.Creator<Pedido>() {
 
 		@Override
 		public Pedido createFromParcel(Parcel source) {
-			return new Pedido(source);
+			try {
+				return new Pedido(source);
+			} catch (BadParcelableException e){
+				return null;
+			}
 		}
 
 		@Override
@@ -90,6 +96,8 @@ public class Pedido implements Parcelable {
 		setDatahora(in.readString());
 		setEstado(in.readString());
 		setTotal(new Dinheiro(in.readString()));
+		produtos = new ArrayList<Produto>();
+		in.readList(produtos, Produto.class.getClassLoader());
 	}
 	
 }

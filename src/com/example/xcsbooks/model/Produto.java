@@ -1,6 +1,9 @@
 package com.example.xcsbooks.model;
 
-public class Produto {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Produto implements Parcelable {
 	private int codigo;
 	private int quantidade;
 	private Dinheiro preco;
@@ -38,6 +41,37 @@ public class Produto {
 
 	public void setPreco(Dinheiro preco) {
 		this.preco = preco;
+	}
+
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeInt(codigo);
+		dest.writeInt(quantidade);
+		dest.writeString(preco.toString());
+	}
+	
+	public static final Parcelable.Creator<Produto> CREATOR = new Parcelable.Creator<Produto>() {
+
+		@Override
+		public Produto createFromParcel(Parcel source) {
+			return new Produto(source);
+		}
+
+		@Override
+		public Produto[] newArray(int size) {
+			return new Produto[size];
+		}
+	};
+	
+	protected Produto(Parcel in){
+		setCodigo(in.readInt());
+		setQuantidade(in.readInt());
+		setPreco(new Dinheiro(in.readString()));
 	}
 	
 }

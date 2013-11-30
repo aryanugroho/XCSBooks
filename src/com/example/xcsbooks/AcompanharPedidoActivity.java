@@ -5,19 +5,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.example.xcsbooks.control.BuscaControl;
-import com.example.xcsbooks.control.LoginControl;
-import com.example.xcsbooks.model.Pedido;
-
-import android.os.Bundle;
-import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
+
+import com.example.xcsbooks.control.BuscaControl;
+import com.example.xcsbooks.control.LoginControl;
+import com.example.xcsbooks.model.Pedido;
 
 public class AcompanharPedidoActivity extends BaseActivity {
 	
