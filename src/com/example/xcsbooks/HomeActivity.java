@@ -76,6 +76,7 @@ public class HomeActivity extends BaseActivity {
 		//ft.addToBackStack(null);
 		ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
 		ft.commitAllowingStateLoss();
+		invalidateOptionsMenu();
 	}
 	
 	@Override
