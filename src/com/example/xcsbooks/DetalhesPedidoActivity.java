@@ -37,7 +37,7 @@ public class DetalhesPedidoActivity extends BaseActivity {
 		mTxtCodigoPedido.setText(r.getString(R.string.id) + ": " +pedido.getId());
 		mTxtDataPedido.setText(r.getString(R.string.datahora)+": "+pedido.getDatahora());
 		mTxtStatusPedido.setText(r.getString(R.string.status) + ": " + pedido.getEstado());
-		mTxtPrecoPedido.setText(r.getString(R.string.total) + ": " + new Dinheiro(pedido.getTotal()).toString());
+		mTxtPrecoPedido.setText(r.getString(R.string.total) + ": " + pedido.getTotal().toString());
 		
 		
 	}

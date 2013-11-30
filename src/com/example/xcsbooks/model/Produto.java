@@ -3,9 +3,9 @@ package com.example.xcsbooks.model;
 public class Produto {
 	private int codigo;
 	private int quantidade;
-	private double preco;
+	private Dinheiro preco;
 	
-	public Produto(int codigo, int quantidade, double preco) {
+	public Produto(int codigo, int quantidade, Dinheiro preco) {
 		super();
 		this.codigo = codigo;
 		this.quantidade = quantidade;
@@ -32,11 +32,11 @@ public class Produto {
 		this.quantidade = quantidade;
 	}
 
-	public double getPreco() {
+	public Dinheiro getPreco() {
 		return preco;
 	}
 
-	public void setPreco(double preco) {
+	public void setPreco(Dinheiro preco) {
 		this.preco = preco;
 	}
 	

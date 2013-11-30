@@ -1,6 +1,6 @@
 package com.example.xcsbooks.model;
 
-public class Livro {
+public class Livro extends Produto {
 	private String isbn;
 	private String titulo;
 	private String autor;

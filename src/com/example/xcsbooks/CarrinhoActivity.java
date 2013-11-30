@@ -74,7 +74,7 @@ public class CarrinhoActivity extends BaseActivity {
 		
 		for(int i = 0; i < livros.size(); i++) {
 			int quant = prefs.getInt("LIVROS" + livros.get(i).getCodigo(), 1);
-			double preco = livros.get(i).getPreco() * quant;
+			Dinheiro preco = new Dinheiro(livros.get(i).getPreco().mult(quant));
 			
 			map = new HashMap<String, Object>();
 			map.put("itemCarrinho_codLivro", livros.get(i).getCodigo());
@@ -83,7 +83,7 @@ public class CarrinhoActivity extends BaseActivity {
 			map.put("itemCarrinho_autorLivro", livros.get(i).getAutor().toString());
 			map.put("itemCarrinho_editoraLivro", livros.get(i).getEditora());
 			map.put("itemCarrinho_quantidade", quant);
-			map.put("itemCarrinho_precoLivro", new Dinheiro(preco).toString());
+			map.put("itemCarrinho_precoLivro", preco.toString());
 			list.add(map);
 		}
 		

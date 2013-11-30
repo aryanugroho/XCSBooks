@@ -56,7 +56,7 @@ public class DetalhesLivroActivity extends BaseActivity {
 		mTxtTituloLivro.setText(livro.getTitulo());
 		mTxtAutorLivro.setText(r.getString(R.string.autor) + ": " + livro.getAutor());
 		mTxtEditoraLivro.setText(r.getString(R.string.editora) + ": " + livro.getEditora());
-		mTxtPrecoLivro.setText(r.getString(R.string.preco) + ": " + new Dinheiro(livro.getPreco()).toString());
+		mTxtPrecoLivro.setText(r.getString(R.string.preco) + ": " + livro.getPreco().toString());
 		mTxtIsbaLivro.setText(r.getString(R.string.isbn) + ": " + livro.getIsbn());
 		
 		mBtnAdicionarCarrinho.setOnClickListener(new OnClickListener() {

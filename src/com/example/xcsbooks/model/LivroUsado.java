@@ -9,7 +9,7 @@ public class LivroUsado extends Produto {
 	private Date dataCadastro;
 	private String horaCadastro;
 	
-	public LivroUsado(int codigo, int quantidade, double preco, Livro livro,
+	public LivroUsado(int codigo, int quantidade, Dinheiro preco, Livro livro,
 			String estado, int porcentagemVenda, Date dataCadastro,
 			String horaCadastro) {
 		super(codigo, quantidade, preco);
@@ -20,7 +20,7 @@ public class LivroUsado extends Produto {
 		this.horaCadastro = horaCadastro;
 	}
 	
-	public LivroUsado(int codigo, int quantidade, double preco, String isbn,
+	public LivroUsado(int codigo, int quantidade, Dinheiro preco, String isbn,
 			String titulo, String autor, String editora, String estado,
 			int porcentagemVenda, Date dataCadastro, String horaCadastro) {
 		super(codigo, quantidade, preco);

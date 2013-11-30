@@ -169,7 +169,7 @@ public class JSONParser {
 				ln = new LivroNovo(
 						Integer.parseInt(t.getString("codigo")),
 						Integer.parseInt(t.getString("quantidade")),
-						Double.parseDouble(t.getString("preco")),
+						new Dinheiro(t.getString("preco")),
 						t.getString("isbn"),
 						t.getString("titulo"),
 						t.getString("autor"),

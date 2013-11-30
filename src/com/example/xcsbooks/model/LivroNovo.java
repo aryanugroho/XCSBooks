@@ -6,12 +6,12 @@ import android.os.Parcelable;
 public class LivroNovo extends Produto implements Parcelable {
 	private Livro livro;
 
-	public LivroNovo(int codigo, int quantidade, double preco, Livro livro) {
+	public LivroNovo(int codigo, int quantidade, Dinheiro preco, Livro livro) {
 		super(codigo, quantidade, preco);
 		this.livro = livro;
 	}
 	
-	public LivroNovo(int codigo, int quantidade, double preco, String isbn,
+	public LivroNovo(int codigo, int quantidade, Dinheiro preco, String isbn,
 			String titulo, String autor, String editora) {
 		super(codigo, quantidade, preco);
 		this.livro = new Livro(isbn,titulo,autor,editora);
@@ -70,7 +70,7 @@ public class LivroNovo extends Produto implements Parcelable {
 	public void writeToParcel(Parcel dest, int flags) {
 		dest.writeInt(getCodigo());
 		dest.writeInt(getQuantidade());
-		dest.writeDouble(getPreco());
+		dest.writeString(getPreco().toString());
 		dest.writeString(getIsbn());
 		dest.writeString(getTitulo());
 		dest.writeString(getAutor());
@@ -93,7 +93,7 @@ public class LivroNovo extends Produto implements Parcelable {
 	private LivroNovo(Parcel in){
 		setCodigo(in.readInt());
 		setQuantidade(in.readInt());
-		setPreco(in.readDouble());
+		setPreco(new Dinheiro(in.readString()));
 		livro = new Livro(in.readString(),in.readString(),in.readString(),in.readString());
 	}
 	

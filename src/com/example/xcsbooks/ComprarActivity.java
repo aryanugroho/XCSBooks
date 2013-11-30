@@ -55,16 +55,15 @@ public class ComprarActivity extends BaseActivity {
 			
 			for(int i = 0; i < livros.size(); i++) {
 				int quant = prefs.getInt("LIVROS" + livros.get(i).getCodigo(), 1);
-				double preco = livros.get(i).getPreco() * quant;
-				Dinheiro precoD = new Dinheiro(preco);
+				Dinheiro preco = new Dinheiro(livros.get(i).getPreco().mult(quant));
 				map = new HashMap<String, Object>();
 				map.put("itemCarrinho_codLivro", livros.get(i).getCodigo());
 				map.put("itemCarrinho_tituloLivro", livros.get(i).getTitulo().toString());
 				map.put("itemCarrinho_quantidade", quant);
-				map.put("itemCarrinho_precoLivro", precoD.toString());
+				map.put("itemCarrinho_precoLivro", preco.toString());
 				pedido.add(map);
 				
-				precoFinal.valor = precoFinal.soma(precoD);
+				precoFinal.valor = precoFinal.soma(preco);
 			}
 			
 			//Adapter
