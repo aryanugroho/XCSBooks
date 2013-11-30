@@ -15,6 +15,7 @@ public class Pedido implements Parcelable {
 	private String estado;
 	private Dinheiro total;
 	private List<Produto> produtos; 
+	private List<ItemPedido> itens;
 	
 	
 	public Pedido() {

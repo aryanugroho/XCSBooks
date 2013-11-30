@@ -10,25 +10,25 @@
          android:id="@+id/itemListaPedido_idPedido"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
-         android:textSize="15sp"/>
+         android:textSize="18sp"/>
      
      <TextView 
          android:id="@+id/itemListaPedido_datahoraPedido"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
-         android:textSize="12sp"/>
+         android:textSize="15sp"/>
      
      <TextView 
          android:id="@+id/itemListaPedido_estadoPedido"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
-         android:textSize="12sp"/>
+         android:textSize="15sp"/>
      
      <TextView 
          android:id="@+id/itemListaPedido_totalPedido"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
-         android:textSize="12sp"/>
+         android:textSize="15sp"/>
      
 
 </LinearLayout>
