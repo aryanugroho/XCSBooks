@@ -194,17 +194,25 @@ public class JSONParser {
 		try{
 			JSONObject jobj = new JSONObject(json);
 			JSONArray itensPedido = jobj.getJSONArray("itensPedido");
+			
+			JSONObject jLivro;
+
 			ItemPedido item;
 			for(int i = 0; i < itensPedido.length(); i++){
-				JSONObject it = itensPedido.getJSONObject(i);
-				item = new ItemPedido(0, new LivroNovo(
-						Integer.parseInt(it.getString("codigo")),
-						Integer.parseInt(it.getString("quantidade")),
-						new Dinheiro(it.getString("preco")),
-						it.getString("isbn"),
-						it.getString("titulo"),
-						it.getString("autor"),
-						it.getString("editora")));
+				JSONObject ip = itensPedido.getJSONObject(i);
+				
+				jLivro = ip.getJSONObject("livro");
+				
+				item = new ItemPedido(Integer.parseInt(ip.getString("quantidade")),
+						new LivroNovo(
+							Integer.parseInt(jLivro.getString("codigo")),
+							Integer.parseInt(jLivro.getString("quantidade")),
+							new Dinheiro(jLivro.getString("preco")),
+							jLivro.getString("isbn"),
+							jLivro.getString("titulo"),
+							jLivro.getString("autor"),
+							jLivro.getString("editora")),
+						new Dinheiro(ip.getString("totalItem")));
 				
 				list.add(item);
 			}
@@ -217,23 +225,31 @@ public class JSONParser {
 	}
 	
 	public static String ItemPedidoToJSON(List<ItemPedido> list){
-		String json = "{ \"livros\": [";
-		
-		for(int i = 0; i < list.size(); i++){
+		String json = "{ \"itensPedido\": [";
+		int i=0;
+		for(ItemPedido item : list){
 			json += "{";
-				ItemPedido item = list.get(i);/*
-				json += "\"codigo\":\"" + item.getCodigo() + "\",";
-				json += "\"isbn\":\"" + item.getIsbn() + "\",";
-				json += "\"titulo\":\"" + item.getTitulo() + "\",";
-				json += "\"autor\":\"" + item.getAutor() + "\",";
-				json += "\"editora\":\"" + item.getEditora() + "\",";
-				json += "\"quantidade\":\"" + item.getQuantidade() + "\",";
-				json += "\"preco\":\"" + item.getPreco() + "\"";
+			json += "\"quantidade\":\""+item.getQuantidade()+"\",";
+			json += "\"livro\":{";
+			
 				
+				json += "\"codigo\":\"" + item.getProduto().getCodigo() + "\",";
+				json += "\"isbn\":\"" + ((LivroNovo)item.getProduto()).getIsbn() + "\",";
+				json += "\"titulo\":\"" + ((LivroNovo)item.getProduto()).getTitulo() + "\",";
+				json += "\"autor\":\"" + ((LivroNovo)item.getProduto()).getAutor() + "\",";
+				json += "\"editora\":\"" + ((LivroNovo)item.getProduto()).getEditora() + "\",";
+				json += "\"quantidade\":\"" + ((LivroNovo)item.getProduto()).getQuantidade() + "\",";
+				json += "\"preco\":\"" + ((LivroNovo)item.getProduto()).getPreco() + "\"";
+				
+				json += "},";
+				
+				json += "\"totalItem\":\"" + item.getTotalItem() + "\"";
+				
+				i++;
 				if(i < list.size() - 1)
 					json += "},";
 				else
-					json += "}";			*/
+					json += "}";			
 		}
 
 		json += "]}";
