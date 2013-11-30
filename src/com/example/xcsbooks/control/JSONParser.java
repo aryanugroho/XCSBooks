@@ -201,7 +201,7 @@ public class JSONParser {
 			for(int i = 0; i < itensPedido.length(); i++){
 				JSONObject ip = itensPedido.getJSONObject(i);
 				
-				jLivro = ip.getJSONObject("livro");
+				jLivro = ip.getJSONObject("produto");
 				
 				item = new ItemPedido(Integer.parseInt(ip.getString("quantidade")),
 						new LivroNovo(
@@ -230,7 +230,7 @@ public class JSONParser {
 		for(ItemPedido item : list){
 			json += "{";
 			json += "\"quantidade\":\""+item.getQuantidade()+"\",";
-			json += "\"livro\":{";
+			json += "\"produto\":{";
 			
 				
 				json += "\"codigo\":\"" + item.getProduto().getCodigo() + "\",";
