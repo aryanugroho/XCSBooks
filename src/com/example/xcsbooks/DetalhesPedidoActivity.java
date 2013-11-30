@@ -8,25 +8,36 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
 public class DetalhesPedidoActivity extends BaseActivity {
 
-	private TextView mTxtCodigoPedido;
-	private TextView mTxtDataPedido;
-	private TextView mTxtPrecoPedido;
-	private TextView mTxtStatusPedido;
+	private TextView mTxtIdPedido;
+	private TextView mTxtDatahoraPedido;
+	private TextView mTxtTotalPedido;
+	private TextView mTxtEstadPedido;
 	private Pedido pedido;
+	private ListView mLv; 
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_detalhes_pedido);
 		
-		mTxtCodigoPedido = (TextView) findViewById(R.id.detalhePedido_txtCodigo);
-		mTxtDataPedido = (TextView) findViewById(R.id.detalhePedido_txtData);
-		mTxtPrecoPedido = (TextView) findViewById(R.id.detalhePedido_txtPreco);
-		mTxtStatusPedido = (TextView) findViewById(R.id.detalhePedido_txtStatus);
+		
+		
+		
+		
+		mLv = (ListView) findViewById(R.id.detalhePedido_listaItensView);
+		View v = getLayoutInflater().inflate(R.layout.detalhe_pedido_header, null);
+		mTxtIdPedido = (TextView) findViewById(R.id.detalhePedido_txtId);
+		mTxtDatahoraPedido = (TextView) findViewById(R.id.detalhePedido_txtDatahora);
+		mTxtEstadPedido = (TextView) findViewById(R.id.detalhePedido_txtEstado);
+		mTxtTotalPedido = (TextView) findViewById(R.id.detalhePedido_txtTotal);
+		mLv.addHeaderView(v);
 		
 		//Obtem o objeto pedido passado
 		Intent i = getIntent();
@@ -34,10 +45,10 @@ public class DetalhesPedidoActivity extends BaseActivity {
 		
 		pedido = (Pedido) i.getParcelableExtra(AcompanharPedidoActivity.KEY_PEDIDO);
 		
-		mTxtCodigoPedido.setText(r.getString(R.string.id) + ": " +pedido.getId());
-		mTxtDataPedido.setText(r.getString(R.string.datahora)+": "+pedido.getDatahora());
-		mTxtStatusPedido.setText(r.getString(R.string.status) + ": " + pedido.getEstado());
-		mTxtPrecoPedido.setText(r.getString(R.string.total) + ": " + pedido.getTotal().toString());
+		mTxtIdPedido.setText(r.getString(R.string.id) + ": " +pedido.getId());
+		mTxtDatahoraPedido.setText(r.getString(R.string.datahora)+": "+pedido.getDatahora());
+		mTxtEstadPedido.setText(r.getString(R.string.status) + ": " + pedido.getEstado());
+		mTxtTotalPedido.setText(r.getString(R.string.total) + ": " + pedido.getTotal().toString());
 		
 		
 	}
