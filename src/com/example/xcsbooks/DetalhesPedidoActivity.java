@@ -16,7 +16,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.xcsbooks.control.GetBookCover;
-import com.example.xcsbooks.model.Livro;
 import com.example.xcsbooks.model.LivroNovo;
 import com.example.xcsbooks.model.Pedido;
 import com.example.xcsbooks.model.Produto;
@@ -59,11 +58,11 @@ public class DetalhesPedidoActivity extends BaseActivity {
 		//TODO: Adicionar quantidade em cada um dos itens da lista!
 		for(Produto p : pedido.getProdutos()) {
 			map = new HashMap();
-			map.put("itemProdutoListaPedido_thumbLivro", GetBookCover.getCover(((Livro)p).getIsbn()));
-			map.put("itemProdutoListaPedido_tituloLivro", getResources().getString(R.string.titulo) +": "+((Livro)p).getTitulo());
-			map.put("itemProdutoListaPedido_autorLivro", ((Livro)p).getAutor());
-			map.put("itemProdutoListaPedido_precoLivro", getResources().getString(R.string.preco)+": "+((Livro)p).getPreco());
-			map.put("itemProdutoListaPedido_quantidadeProduto", getResources().getString(R.string.quantidade)+": "+((Livro)p).getQuantidade());
+			map.put("itemProdutoListaPedido_thumbLivro", GetBookCover.getCover(((LivroNovo)p).getIsbn()));
+			map.put("itemProdutoListaPedido_tituloLivro", getResources().getString(R.string.titulo) +": "+((LivroNovo)p).getTitulo());
+			map.put("itemProdutoListaPedido_autorLivro", ((LivroNovo)p).getAutor());
+			map.put("itemProdutoListaPedido_precoLivro", getResources().getString(R.string.preco)+": "+((LivroNovo)p).getPreco());
+			map.put("itemProdutoListaPedido_quantidadeProduto", getResources().getString(R.string.quantidade)+": "+((LivroNovo)p).getQuantidade());
 			searchList.add(map);
 		}
 		String[] t = {"itemProdutoListaPedido_thumbLivro","itemProdutoListaPedido_tituloLivro","itemProdutoListaPedido_autorLivro",

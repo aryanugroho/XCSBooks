@@ -36,8 +36,6 @@ public class CarrinhoActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_carrinho);
 		
-		//mBtnComprar = (Button) findViewById(R.id.carrinho_btnComprar);
-		
 		mLv = (ListView) findViewById(R.id.carrinho_listaItensView);
 		
 		buildShoppingCart();

@@ -4,61 +4,52 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class LivroNovo extends Produto implements Parcelable {
-	private Livro livro;
+	protected String isbn;
+	protected String titulo;
+	protected String autor;
+	protected String editora;
 
-	public LivroNovo(int codigo, int quantidade, Dinheiro preco, Livro livro) {
-		super(codigo, quantidade, preco);
-		this.livro = livro;
-	}
-	
-	public LivroNovo(int codigo, int quantidade, Dinheiro preco, String isbn,
-			String titulo, String autor, String editora) {
-		super(codigo, quantidade, preco);
-		this.livro = new Livro(isbn,titulo,autor,editora);
-	}
-	
 	public LivroNovo() {
 		super();
 	}
-
-	public Livro getLivro() {
-		return livro;
+	public LivroNovo(int codigo, int quantidade, Dinheiro preco, String isbn,
+			String titulo, String autor, String editora) {
+		super(codigo, quantidade, preco);
+		this.isbn = isbn;
+		this.titulo = titulo;
+		this.autor = autor;
+		this.editora = editora;
 	}
-
-	public void setLivro(Livro livro) {
-		this.livro = livro;
-	}
-	
 	public String getIsbn() {
-		return livro.getIsbn();
+		return isbn;
 	}
 	
 	public void setIsbn(String isbn) {
-		this.livro.setIsbn(isbn);
+		this.isbn=isbn;
 	}
 	
 	public String getTitulo() {
-		return livro.getTitulo();
+		return titulo;
 	}
 	
 	public void setTitulo(String titulo) {
-		this.livro.setTitulo(titulo);
+		this.titulo=titulo;
 	}
 	
 	public String getAutor() {
-		return livro.getAutor();
+		return autor;
 	}
 	
 	public void setAutor(String autor) {
-		this.livro.setAutor(autor);
+		this.autor=autor;
 	}
 	
 	public String getEditora() {
-		return livro.getEditora();
+		return editora;
 	}
 	
 	public void setEditora(String editora) {
-		this.livro.setEditora(editora);
+		this.editora=editora;
 	}
 
 	@Override
@@ -94,7 +85,10 @@ public class LivroNovo extends Produto implements Parcelable {
 		setCodigo(in.readInt());
 		setQuantidade(in.readInt());
 		setPreco(new Dinheiro(in.readString()));
-		livro = new Livro(in.readString(),in.readString(),in.readString(),in.readString());
+		setIsbn(in.readString());
+		setTitulo(in.readString());
+		setAutor(in.readString());
+		setEditora(in.readString());
 	}
 	
 }
