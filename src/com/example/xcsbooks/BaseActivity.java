@@ -24,15 +24,17 @@ public class BaseActivity extends FragmentActivity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		if(LoginControl.getClienteLogado() == null){
-			menu.getItem(2).setVisible(true);
-			menu.getItem(3).setVisible(false);
+			menu.getItem(3).setVisible(true);
+			menu.getItem(4).setVisible(false);
 			menu.getItem(5).setVisible(false);
 			menu.getItem(6).setVisible(false);
+			menu.getItem(7).setVisible(false);
 		} else {
-			menu.getItem(2).setVisible(false);
-			menu.getItem(3).setVisible(true);
+			menu.getItem(3).setVisible(false);
+			menu.getItem(4).setVisible(true);
 			menu.getItem(5).setVisible(true);
 			menu.getItem(6).setVisible(true);
+			menu.getItem(7).setVisible(true);
 		}
 		return true;
 	}
@@ -58,6 +60,11 @@ public class BaseActivity extends FragmentActivity {
 		case R.id.action_deslogar:
 			LoginControl.logout();
 			HomeActivity.getInstance().changeLoginFragment();
+			break;
+		case R.id.action_alterar_cadastro:
+			intent = new Intent(this, CadastrarClienteActivity.class);
+			intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+			startActivity(intent);
 			break;
 		case R.id.action_busca:
 			intent = new Intent(this, BuscarActivity.class);

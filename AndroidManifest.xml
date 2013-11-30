@@ -6,6 +6,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <uses-sdk
         android:minSdkVersion="11"
@@ -87,6 +88,10 @@
         <activity
             android:name="com.example.xcsbooks.DetalhesPedidoActivity"
             android:label="@string/title_activity_detalhes_pedido" >
+        </activity>
+        <activity
+            android:name="com.example.xcsbooks.AlterarCadastroClienteActivity"
+            android:label="@string/title_activity_alterar_cadastro_cliente" >
         </activity>
     </application>
 
