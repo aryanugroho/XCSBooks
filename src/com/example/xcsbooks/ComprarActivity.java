@@ -20,9 +20,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.xcsbooks.control.ComprarControl;
+import com.example.xcsbooks.control.GetBookCover;
 import com.example.xcsbooks.control.JSONParser;
 import com.example.xcsbooks.control.LoginControl;
 import com.example.xcsbooks.model.Dinheiro;
+import com.example.xcsbooks.model.ItemPedido;
 import com.example.xcsbooks.model.LivroNovo;
 
 public class ComprarActivity extends BaseActivity {
@@ -42,8 +44,8 @@ public class ComprarActivity extends BaseActivity {
 		} else {
 			//Obtém dados do carrinho para preencher lista
 			prefs = getSharedPreferences("CARRINHO", MODE_PRIVATE);
-			String strlivros = prefs.getString("LIVROS", JSONParser.DEFAULT_PRODUTOS);
-			List<LivroNovo> livros = JSONParser.LivroFromJSON(strlivros);
+			String strlivros = prefs.getString("ITENSPEDIDO", JSONParser.DEFAULT_PRODUTOS);
+			List<ItemPedido> itens = JSONParser.ItemPedidoFromJSON(strlivros);
 			
 			//Preenche lista, adiciona header e footer...
 			ListView lv = (ListView) findViewById(R.id.compra_listaCarrinho);
@@ -53,17 +55,20 @@ public class ComprarActivity extends BaseActivity {
 			
 			Dinheiro precoFinal = new Dinheiro(0);
 			
-			for(int i = 0; i < livros.size(); i++) {
-				int quant = prefs.getInt("LIVROS" + livros.get(i).getCodigo(), 1);
-				Dinheiro preco = new Dinheiro(livros.get(i).getPreco().mult(quant));
-				map = new HashMap<String, Object>();
-				map.put("itemCarrinho_codLivro", livros.get(i).getCodigo());
-				map.put("itemCarrinho_tituloLivro", livros.get(i).getTitulo().toString());
-				map.put("itemCarrinho_quantidade", quant);
-				map.put("itemCarrinho_precoLivro", preco.toString());
+			for(ItemPedido ip : itens) {
+				
+				map.put("itemCarrinho_quantidadeItem", ip.getQuantidade());
+				map.put("itemCarrinho_codLivro", ip.getProduto().getCodigo());
+				map.put("itemCarrinho_thumbLivro", GetBookCover.getCover(((LivroNovo)ip.getProduto()).getIsbn()));
+				map.put("itemCarrinho_tituloLivro", ((LivroNovo)ip.getProduto()).getTitulo().toString());
+				map.put("itemCarrinho_autorLivro", ((LivroNovo)ip.getProduto()).getAutor().toString());
+				map.put("itemCarrinho_editoraLivro", ((LivroNovo)ip.getProduto()).getEditora());
+				ip.setTotalItem(new Dinheiro(ip.getProduto().getPreco().mult(ip.getQuantidade())));
+				map.put("itemCarrinho_totalItem", ip.getTotalItem().toString());
+				
 				pedido.add(map);
 				
-				precoFinal.valor = precoFinal.soma(preco);
+				precoFinal.valor = precoFinal.soma(ip.getTotalItem());
 			}
 			
 			//Adapter
@@ -71,8 +76,8 @@ public class ComprarActivity extends BaseActivity {
 				R.layout.comprar_item, 
 				new String[] {
 					"itemCarrinho_tituloLivro",
-					"itemCarrinho_quantidade",
-					"itemCarrinho_precoLivro"},
+					"itemCarrinho_quantidadeItem",
+					"itemCarrinho_totalItem"},
 				new int[] {
 					R.id.comprar_nomeLivro,
 					R.id.comprar_quantidadeLivro,

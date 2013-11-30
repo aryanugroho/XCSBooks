@@ -26,7 +26,7 @@ public class ComprarControl {
 		for(HashMap<String, Object> m : pedido){
 			pedidoStr += m.get("itemCarrinho_codLivro");
 			pedidoStr += "x";
-			pedidoStr += m.get("itemCarrinho_quantidade");
+			pedidoStr += m.get("itemCarrinho_quantidadeItem");
 			pedidoStr += "/";
 		}
 		pedidoStr = pedidoStr.substring(0, pedidoStr.length()-1);

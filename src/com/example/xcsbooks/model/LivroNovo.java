@@ -20,6 +20,13 @@ public class LivroNovo extends Produto implements Parcelable {
 		this.autor = autor;
 		this.editora = editora;
 	}
+	public LivroNovo(LivroNovo livro) {
+		super(livro.getCodigo(), livro.getQuantidade(), livro.getPreco());
+		this.isbn = livro.getIsbn();
+		this.titulo = livro.getTitulo();
+		this.autor = livro.getAutor();
+		this.editora = livro.getEditora();
+	}
 	public String getIsbn() {
 		return isbn;
 	}

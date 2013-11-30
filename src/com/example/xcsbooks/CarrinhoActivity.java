@@ -10,6 +10,7 @@ import com.example.xcsbooks.control.GetBookCover;
 import com.example.xcsbooks.control.JSONParser;
 import com.example.xcsbooks.control.LoginControl;
 import com.example.xcsbooks.model.Dinheiro;
+import com.example.xcsbooks.model.ItemPedido;
 import com.example.xcsbooks.model.LivroNovo;
 
 import android.content.Intent;
@@ -29,7 +30,7 @@ import android.widget.SimpleAdapter;
 public class CarrinhoActivity extends BaseActivity {
 	private SharedPreferences prefs;
 	private ListView mLv; 
-	private List<LivroNovo> livros;
+	private List<ItemPedido> itens;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -63,25 +64,25 @@ public class CarrinhoActivity extends BaseActivity {
 	
 	private void buildShoppingCart(){
 		prefs = getSharedPreferences("CARRINHO", MODE_PRIVATE);
-		String strlivros = prefs.getString("LIVROS", JSONParser.DEFAULT_PRODUTOS);
-		livros = JSONParser.LivroFromJSON(strlivros);
+		String stritenspedido = prefs.getString("ITENSPEDIDO", JSONParser.DEFAULT_PRODUTOS);
+		itens = JSONParser.ItemPedidoFromJSON(stritenspedido);
 		
 		
 		List<HashMap<String,Object>> list = new ArrayList<HashMap<String, Object>>();
 		HashMap<String, Object> map = null;
 		
-		for(int i = 0; i < livros.size(); i++) {
-			int quant = prefs.getInt("LIVROS" + livros.get(i).getCodigo(), 1);
-			Dinheiro preco = new Dinheiro(livros.get(i).getPreco().mult(quant));
+		for(ItemPedido ip : itens) {
+			//int quant = prefs.getInt("LIVROS" + livros.get(i).getCodigo(), 1);
+			ip.setTotalItem(new Dinheiro( ((LivroNovo)ip.getProduto()).getPreco().mult(ip.getQuantidade()) ));
 			
 			map = new HashMap<String, Object>();
-			map.put("itemCarrinho_codLivro", livros.get(i).getCodigo());
-			map.put("itemCarrinho_thumbLivro", GetBookCover.getCover(livros.get(i).getIsbn()));
-			map.put("itemCarrinho_tituloLivro", livros.get(i).getTitulo().toString());
-			map.put("itemCarrinho_autorLivro", livros.get(i).getAutor().toString());
-			map.put("itemCarrinho_editoraLivro", livros.get(i).getEditora());
-			map.put("itemCarrinho_quantidade", quant);
-			map.put("itemCarrinho_precoLivro", preco.toString());
+			map.put("itemCarrinho_quantidadeItem", ip.getQuantidade());
+			map.put("itemCarrinho_codLivro", ip.getProduto().getCodigo());
+			map.put("itemCarrinho_thumbLivro", GetBookCover.getCover(((LivroNovo)ip.getProduto()).getIsbn()));
+			map.put("itemCarrinho_tituloLivro", ((LivroNovo)ip.getProduto()).getTitulo().toString());
+			map.put("itemCarrinho_autorLivro", ((LivroNovo)ip.getProduto()).getAutor().toString());
+			map.put("itemCarrinho_editoraLivro", ((LivroNovo)ip.getProduto()).getEditora());
+			map.put("itemCarrinho_totalItem", ip.getTotalItem().toString());
 			list.add(map);
 		}
 		
@@ -93,8 +94,8 @@ public class CarrinhoActivity extends BaseActivity {
 				"itemCarrinho_tituloLivro",
 				"itemCarrinho_autorLivro",
 				"itemCarrinho_editoraLivro",
-				"itemCarrinho_quantidade",
-				"itemCarrinho_precoLivro"},
+				"itemCarrinho_quantidadeItem",
+				"itemCarrinho_totalItem"},
 			new int[] {
 				R.id.itemCarrinho_thumbLivro,
 				R.id.itemCarrinho_txtTituloLivro,

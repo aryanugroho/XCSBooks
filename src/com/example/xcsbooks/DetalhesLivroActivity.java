@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.example.xcsbooks.control.GetBookCover;
 import com.example.xcsbooks.control.JSONParser;
 import com.example.xcsbooks.model.Dinheiro;
+import com.example.xcsbooks.model.ItemPedido;
 import com.example.xcsbooks.model.LivroNovo;
 
 public class DetalhesLivroActivity extends BaseActivity {
@@ -96,28 +97,23 @@ public class DetalhesLivroActivity extends BaseActivity {
 	private boolean addLivroAoCarrinho() {
 		//Obter livros do carrinho
 		SharedPreferences prefs = getSharedPreferences("CARRINHO", MODE_PRIVATE);
-		String carrinho = prefs.getString("LIVROS", JSONParser.DEFAULT_PRODUTOS);
-		List<LivroNovo> list = JSONParser.LivroFromJSON(carrinho);
-		//List<ItemPedido> itens = JSONParser.ItemFromJSON(carrinho);
+		String carrinho = prefs.getString("ITENSPEDIDO", JSONParser.DEFAULT_PRODUTOS);
+		//List<LivroNovo> list = JSONParser.LivroFromJSON(carrinho);
+		List<ItemPedido> itens = JSONParser.ItemPedidoFromJSON(carrinho);
 		
 		boolean add = true;
-		for(LivroNovo l : list){
-			if(l.getCodigo() == livro.getCodigo())
+		for(ItemPedido ip : itens){
+			if(ip.getProduto().getCodigo() == livro.getCodigo())
 				add = false;
 		}
 		
 		if(add)
-			list.add(livro);
+			itens.add(new ItemPedido(1, new LivroNovo(livro), new Dinheiro(livro.getPreco().toString())));
 		
-		carrinho = JSONParser.LivroToJSON(list);
+		carrinho = JSONParser.ItemPedidoToJSON(itens);
 		SharedPreferences.Editor editor = prefs.edit();
-		editor.putString("LIVROS", carrinho);
-		if(add){
-			editor.putInt("LIVROS" + livro.getCodigo(), 1);
-		} else {
-			int prev = prefs.getInt("LIVROS" + livro.getCodigo(), 1);
-			editor.remove("LIVROS" + livro.getCodigo()).putInt("LIVROS" + livro.getCodigo(), prev + 1);
-		}
+		editor.putString("ITENSCARRINHO", carrinho);
+		
 		editor.commit();
 		return true;
 	}
