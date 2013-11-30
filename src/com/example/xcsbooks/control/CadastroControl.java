@@ -30,13 +30,10 @@ public class CadastroControl {
 		
 		if(resposta != null){
 			
-			try{
-				int test = Integer.parseInt(resposta);
-				if(test < 0)
-					return null;
-			} catch (NumberFormatException e){
-				Log.e("PARSE_EX", "Error parsing resposta to Integer");
-			}
+
+			int test = JSONParser.parseResposta(resposta);
+			if(test < 0)
+				return null;
 			
 			//Cliente(String * 7, Endereco(S	tring * 7))
 			Cliente cli = 

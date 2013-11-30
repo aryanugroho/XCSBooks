@@ -93,7 +93,7 @@ public class ComprarActivity extends BaseActivity {
 				public void onClick(View v) {
 					int resposta = ComprarControl.comprar(pedido);
 					Log.d("COMPRAR_ACT", "resposta:" + resposta);
-					if(resposta > 0){
+					if(resposta >= 0){
 						//TODO trocar para string recurso
 						Toast.makeText(ComprarActivity.this, "Compra realizada com sucesso" , Toast.LENGTH_SHORT).show();
 						

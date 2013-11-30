@@ -41,15 +41,10 @@ public class GetBookCover {
 		}
 		
 		if(resposta != null){
-		
-			try{
-				int test = Integer.parseInt(resposta);
-				if(test < 0){
-					Log.d("SEARCH_F", "Resposta: " + test);
-					return null;
-				}
-			} catch (NumberFormatException e){
-				Log.e("PARSE_EX", "Error parsing resposta to Integer");
+			int test = JSONParser.parseResposta(resposta);
+			if(test < 0){
+				Log.d("SEARCH_F", "Resposta: " + test);
+				return null;
 			}
 			
 			//Obtem a resposta e transforma em um Bitmap
@@ -97,7 +92,7 @@ public class GetBookCover {
 			return cover;
 		} else {
 			cover = getCoverFromBackEnd(isbn);
-			Toast.makeText(myApp.getApplicationContext(), "Got " + isbn + " cover from back-end" , Toast.LENGTH_LONG).show();
+			Log.d("COVER", "Got " + isbn + " cover from back-end");
 			if(cover != null){
 				return cover;
 			}

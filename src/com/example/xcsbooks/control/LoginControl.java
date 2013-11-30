@@ -40,12 +40,10 @@ public class LoginControl {
 		
 		if(resposta != null){
 			
-			Integer test = ResponseControl.parseInt(resposta);
-			if(test != null){
-				if(test < 0)
-					return null;
-			}
-			
+			int test = JSONParser.parseResposta(resposta);
+			if(test < 0)
+				return null;
+				
 			//Obtém resposta JSON parseada
 			Map<String, Object> u = JSONParser.parseLogin(resposta);
 			//Cria um novo Usuário e salva a session
@@ -82,7 +80,6 @@ public class LoginControl {
 			
 			return cli;
 		}
-		
 		return null;
 	}
 	

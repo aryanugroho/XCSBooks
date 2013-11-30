@@ -45,15 +45,9 @@ public class ComprarControl {
 		}
 		
 		if(resposta != null){
-			Log.d("COMPRAR_R", "Resposta: " + resposta);
-			try{
-				int test = Integer.parseInt(resposta);
-					Log.d("COMPRAR", "Resposta: " + test);
-					return test;
-			} catch (NumberFormatException e){
-				Log.e("PARSE_EX", "Error parsing resposta to Integer");
-				return -5;
-			}
+			int test = JSONParser.parseResposta(resposta);
+			Log.d("COMPRAR", "Resposta: " + test);
+			return test;
 		}
 		return -6;
 	}
