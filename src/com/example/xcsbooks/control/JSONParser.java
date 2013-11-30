@@ -11,12 +11,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.example.xcsbooks.model.Dinheiro;
+import com.example.xcsbooks.model.ItemPedido;
 import com.example.xcsbooks.model.LivroNovo;
 
 import android.util.Log;
 
 public class JSONParser {
-	public static final String DEFAULT_LIVROS = "{ login: [] }";
+	public static final String DEFAULT_PRODUTOS = "{ login: [] }";
 	
 	public static int parseResposta(String JSONStr){
 		int r = -99;
@@ -185,5 +186,57 @@ public class JSONParser {
 		}
 
 		return list;
+	}
+	
+	public static List<ItemPedido> ItemPedidoFromJSON(String json){
+		List<ItemPedido> list = new ArrayList<ItemPedido>();
+		
+		try{
+			JSONObject jobj = new JSONObject(json);
+			JSONArray itensPedido = jobj.getJSONArray("itensPedido");
+			ItemPedido item;
+			for(int i = 0; i < itensPedido.length(); i++){
+				JSONObject it = itensPedido.getJSONObject(i);
+				item = new ItemPedido(0, new LivroNovo(
+						Integer.parseInt(it.getString("codigo")),
+						Integer.parseInt(it.getString("quantidade")),
+						new Dinheiro(it.getString("preco")),
+						it.getString("isbn"),
+						it.getString("titulo"),
+						it.getString("autor"),
+						it.getString("editora")));
+				
+				list.add(item);
+			}
+			
+		} catch (JSONException e) {
+			Log.e("JSON", "Error parsing JSONString: " + json);
+		}
+
+		return list;
+	}
+	
+	public static String ItemPedidoToJSON(List<ItemPedido> list){
+		String json = "{ \"livros\": [";
+		
+		for(int i = 0; i < list.size(); i++){
+			json += "{";
+				ItemPedido item = list.get(i);/*
+				json += "\"codigo\":\"" + item.getCodigo() + "\",";
+				json += "\"isbn\":\"" + item.getIsbn() + "\",";
+				json += "\"titulo\":\"" + item.getTitulo() + "\",";
+				json += "\"autor\":\"" + item.getAutor() + "\",";
+				json += "\"editora\":\"" + item.getEditora() + "\",";
+				json += "\"quantidade\":\"" + item.getQuantidade() + "\",";
+				json += "\"preco\":\"" + item.getPreco() + "\"";
+				
+				if(i < list.size() - 1)
+					json += "},";
+				else
+					json += "}";			*/
+		}
+
+		json += "]}";
+		return json;
 	}
 }
