@@ -4,9 +4,9 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Produto implements Parcelable {
-	private int codigo;
-	private int quantidade;
-	private Dinheiro preco;
+	protected int codigo;
+	protected int quantidade;
+	protected Dinheiro preco;
 	
 	public Produto(int codigo, int quantidade, Dinheiro preco) {
 		super();

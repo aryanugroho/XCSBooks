@@ -8,17 +8,13 @@
         android:id="@+id/detalhePedido_txtId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="2dp"
-        android:textSize="18sp" >    
+        android:textSize="20sp" >    
     </TextView>
     
     <TextView 
         android:id="@+id/detalhePedido_txtDatahora"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="2dp"
-        android:layout_marginTop="5dp"
         android:textSize="16sp" >    
     </TextView>
     
@@ -26,8 +22,6 @@
         android:id="@+id/detalhePedido_txtTotal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="2dp"
         android:textSize="16sp" >    
     </TextView>
     
@@ -35,8 +29,6 @@
         android:id="@+id/detalhePedido_txtEstado"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
-        android:layout_marginLeft="2dp"
         android:textSize="16sp" >    
     </TextView>     
 

@@ -16,7 +16,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.xcsbooks.control.GetBookCover;
-import com.example.xcsbooks.model.Livro;
 import com.example.xcsbooks.model.LivroNovo;
 import com.example.xcsbooks.model.Pedido;
 import com.example.xcsbooks.model.Produto;
@@ -48,29 +47,32 @@ public class DetalhesPedidoActivity extends BaseActivity {
 
 		if(pedido.getId()!= 0){
 			mTxtIdPedido.setText(r.getString(R.string.pedidoid) + ": " + pedido.getId());
-			mTxtDatahoraPedido.setText(r.getString(R.string.datahora)+ ": " + pedido.getDatahora());
+			mTxtDatahoraPedido.setText(r.getString(R.string.data)+ ": " + pedido.getDatahora().substring(0, 10)+ " "+
+					r.getString(R.string.hora)+": "+pedido.getDatahora().substring(11,19));
 			mTxtEstadPedido.setText(r.getString(R.string.status) + ": " + pedido.getEstado());
 			mTxtTotalPedido.setText(r.getString(R.string.total) + ": " + pedido.getTotal().toString());
 		}
 		
 		List searchList = new ArrayList();
 		Map map = null;
-		//TODO: Adicionar preço e quantidade em cada um dos itens da lista!
+		//TODO: Adicionar quantidade em cada um dos itens da lista!
 		for(Produto p : pedido.getProdutos()) {
 			map = new HashMap();
-			map.put("itemLista_thumbLivro", GetBookCover.getCover(((Livro)p).getIsbn()));
-			map.put("itemLista_tituloLivro", ((Livro)p).getTitulo());
-			map.put("itemLista_autorLivro", ((Livro)p).getAutor());
+			map.put("itemProdutoListaPedido_thumbLivro", GetBookCover.getCover(((LivroNovo)p).getIsbn()));
+			map.put("itemProdutoListaPedido_tituloLivro", getResources().getString(R.string.titulo) +": "+((LivroNovo)p).getTitulo());
+			map.put("itemProdutoListaPedido_autorLivro", ((LivroNovo)p).getAutor());
+			map.put("itemProdutoListaPedido_precoLivro", getResources().getString(R.string.preco)+": "+((LivroNovo)p).getPreco());
+			map.put("itemProdutoListaPedido_quantidadeProduto", getResources().getString(R.string.quantidade)+": "+((LivroNovo)p).getQuantidade());
 			searchList.add(map);
 		}
-		String[] t = {"itemLista_thumbLivro","itemLista_tituloLivro",
-				"itemLista_autorLivro"};
+		String[] t = {"itemProdutoListaPedido_thumbLivro","itemProdutoListaPedido_tituloLivro","itemProdutoListaPedido_autorLivro",
+				"itemProdutoListaPedido_precoLivro", "itemProdutoListaPedido_quantidadeProduto"};
 		
-		int[] item = {R.id.itemLista_thumbLivro,
-				R.id.itemLista_tituloLivro, R.id.itemLista_autorLivro};
+		int[] item = {R.id.itemProdutoListaPedido_thumbLivro,R.id.itemProdutoListaPedido_tituloLivro, R.id.itemProdutoListaPedido_autorLivro,
+				R.id.itemProdutoListaPedido_precoLivro, R.id.itemProdutoListaPedido_quantidadeProduto};
 	
 		//Adapter
-		final ExtendedSimpleAdapter adapter = new ExtendedSimpleAdapter(this, (List<HashMap<String, Object>>) searchList, R.layout.item_lista, t , item);
+		final ExtendedSimpleAdapter adapter = new ExtendedSimpleAdapter(this, (List<HashMap<String, Object>>) searchList, R.layout.item_produto_lista_pedido, t , item);
 		
 		mLv.setAdapter(adapter);
 	}

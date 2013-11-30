@@ -11,12 +11,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.example.xcsbooks.model.Dinheiro;
+import com.example.xcsbooks.model.ItemPedido;
 import com.example.xcsbooks.model.LivroNovo;
 
 import android.util.Log;
 
 public class JSONParser {
-	public static final String DEFAULT_LIVROS = "{ login: [] }";
+	public static final String DEFAULT_PRODUTOS = "{ login: [] }";
 	
 	public static int parseResposta(String JSONStr){
 		int r = -99;
@@ -185,5 +186,73 @@ public class JSONParser {
 		}
 
 		return list;
+	}
+	
+	public static List<ItemPedido> ItemPedidoFromJSON(String json){
+		List<ItemPedido> list = new ArrayList<ItemPedido>();
+		
+		try{
+			JSONObject jobj = new JSONObject(json);
+			JSONArray itensPedido = jobj.getJSONArray("itensPedido");
+			
+			JSONObject jLivro;
+
+			ItemPedido item;
+			for(int i = 0; i < itensPedido.length(); i++){
+				JSONObject ip = itensPedido.getJSONObject(i);
+				
+				jLivro = ip.getJSONObject("produto");
+				
+				item = new ItemPedido(Integer.parseInt(ip.getString("quantidade")),
+						new LivroNovo(
+							Integer.parseInt(jLivro.getString("codigo")),
+							Integer.parseInt(jLivro.getString("quantidade")),
+							new Dinheiro(jLivro.getString("preco")),
+							jLivro.getString("isbn"),
+							jLivro.getString("titulo"),
+							jLivro.getString("autor"),
+							jLivro.getString("editora")),
+						new Dinheiro(ip.getString("totalItem")));
+				
+				list.add(item);
+			}
+			
+		} catch (JSONException e) {
+			Log.e("JSON", "Error parsing JSONString: " + json);
+		}
+
+		return list;
+	}
+	
+	public static String ItemPedidoToJSON(List<ItemPedido> list){
+		String json = "{ \"itensPedido\": [";
+		int i=0;
+		for(ItemPedido item : list){
+			json += "{";
+			json += "\"quantidade\":\""+item.getQuantidade()+"\",";
+			json += "\"produto\":{";
+			
+				
+				json += "\"codigo\":\"" + item.getProduto().getCodigo() + "\",";
+				json += "\"isbn\":\"" + ((LivroNovo)item.getProduto()).getIsbn() + "\",";
+				json += "\"titulo\":\"" + ((LivroNovo)item.getProduto()).getTitulo() + "\",";
+				json += "\"autor\":\"" + ((LivroNovo)item.getProduto()).getAutor() + "\",";
+				json += "\"editora\":\"" + ((LivroNovo)item.getProduto()).getEditora() + "\",";
+				json += "\"quantidade\":\"" + ((LivroNovo)item.getProduto()).getQuantidade() + "\",";
+				json += "\"preco\":\"" + ((LivroNovo)item.getProduto()).getPreco() + "\"";
+				
+				json += "},";
+				
+				json += "\"totalItem\":\"" + item.getTotalItem() + "\"";
+				
+				i++;
+				if(i < list.size() - 1)
+					json += "},";
+				else
+					json += "}";			
+		}
+
+		json += "]}";
+		return json;
 	}
 }

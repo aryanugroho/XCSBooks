@@ -77,7 +77,7 @@ public class CarrinhoListAdapter extends ExtendedSimpleAdapter {
 					
 					// Efetivamente removendo o livro do carrinho
 					SharedPreferences prefs = context.getSharedPreferences("CARRINHO", context.MODE_PRIVATE);
-					String strlivros = prefs.getString("LIVROS", JSONParser.DEFAULT_LIVROS);
+					String strlivros = prefs.getString("LIVROS", JSONParser.DEFAULT_PRODUTOS);
 					
 					// Obtem a lista de livros que está guardada como um JSON
 					List<LivroNovo> livros = JSONParser.LivroFromJSON(strlivros);

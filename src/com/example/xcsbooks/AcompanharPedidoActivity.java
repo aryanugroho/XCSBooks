@@ -38,10 +38,11 @@ public class AcompanharPedidoActivity extends BaseActivity {
 		Map map = null;
 		for(Pedido pedido : pedidos) {
 			map = new HashMap();
-			map.put("itemListaPedido_idPedido", pedido.getId());
-			map.put("itemListaPedido_datahoraPedido", pedido.getDatahora());
-			map.put("itemListaPedido_estadoPedido", pedido.getEstado());
-			map.put("itemListaPedido_totalPedido", String.valueOf(pedido.getTotal()));
+			map.put("itemListaPedido_idPedido", getResources().getString(R.string.pedidoid) + ": " +pedido.getId());
+			map.put("itemListaPedido_datahoraPedido", getResources().getString(R.string.data) + ": " + pedido.getDatahora().substring(0, 10) + " "+
+					getResources().getString(R.string.hora)+": "+pedido.getDatahora().substring(11,19));
+			map.put("itemListaPedido_estadoPedido", getResources().getString(R.string.status) +": "+ pedido.getEstado());
+			map.put("itemListaPedido_totalPedido", getResources().getString(R.string.total)+": "+String.valueOf(pedido.getTotal()));
 			searchList.add(map);
 		}
 		

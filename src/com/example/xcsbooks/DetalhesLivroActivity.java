@@ -96,8 +96,9 @@ public class DetalhesLivroActivity extends BaseActivity {
 	private boolean addLivroAoCarrinho() {
 		//Obter livros do carrinho
 		SharedPreferences prefs = getSharedPreferences("CARRINHO", MODE_PRIVATE);
-		String carrinho = prefs.getString("LIVROS", JSONParser.DEFAULT_LIVROS);
+		String carrinho = prefs.getString("LIVROS", JSONParser.DEFAULT_PRODUTOS);
 		List<LivroNovo> list = JSONParser.LivroFromJSON(carrinho);
+		//List<ItemPedido> itens = JSONParser.ItemFromJSON(carrinho);
 		
 		boolean add = true;
 		for(LivroNovo l : list){

@@ -42,7 +42,7 @@ public class ComprarActivity extends BaseActivity {
 		} else {
 			//Obtém dados do carrinho para preencher lista
 			prefs = getSharedPreferences("CARRINHO", MODE_PRIVATE);
-			String strlivros = prefs.getString("LIVROS", JSONParser.DEFAULT_LIVROS);
+			String strlivros = prefs.getString("LIVROS", JSONParser.DEFAULT_PRODUTOS);
 			List<LivroNovo> livros = JSONParser.LivroFromJSON(strlivros);
 			
 			//Preenche lista, adiciona header e footer...

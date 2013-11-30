@@ -15,6 +15,7 @@ public class Pedido implements Parcelable {
 	private String estado;
 	private Dinheiro total;
 	private List<Produto> produtos; 
+	private List<ItemPedido> itens;
 	
 	
 	public Pedido() {
@@ -28,6 +29,7 @@ public class Pedido implements Parcelable {
 		this.estado = estado;
 		this.total = total;
 		this.produtos = new ArrayList<Produto>();
+		this.itens = new ArrayList<ItemPedido>();
 	}
 
 	public int getId() {
@@ -54,6 +56,14 @@ public class Pedido implements Parcelable {
 	public void setProdutos(List<Produto> produtos) {
 		this.produtos = produtos;
 	}
+	public List<ItemPedido> getItens() {
+		return itens;
+	}
+
+	public void setItens(List<ItemPedido> itens) {
+		this.itens = itens;
+	}
+
 	public Dinheiro getTotal() {
 		return total;
 	}

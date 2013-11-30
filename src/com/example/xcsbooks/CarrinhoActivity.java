@@ -36,8 +36,6 @@ public class CarrinhoActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_carrinho);
 		
-		//mBtnComprar = (Button) findViewById(R.id.carrinho_btnComprar);
-		
 		mLv = (ListView) findViewById(R.id.carrinho_listaItensView);
 		
 		buildShoppingCart();
@@ -65,7 +63,7 @@ public class CarrinhoActivity extends BaseActivity {
 	
 	private void buildShoppingCart(){
 		prefs = getSharedPreferences("CARRINHO", MODE_PRIVATE);
-		String strlivros = prefs.getString("LIVROS", JSONParser.DEFAULT_LIVROS);
+		String strlivros = prefs.getString("LIVROS", JSONParser.DEFAULT_PRODUTOS);
 		livros = JSONParser.LivroFromJSON(strlivros);
 		
 		

@@ -13,7 +13,6 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.example.xcsbooks.model.Dinheiro;
-import com.example.xcsbooks.model.Livro;
 import com.example.xcsbooks.model.LivroNovo;
 import com.example.xcsbooks.model.Pedido;
 import com.example.xcsbooks.model.Produto;
@@ -120,13 +119,14 @@ public class BuscaControl {
 				Map mp = null;
 				for(int j = 0; j < lp.size(); j++){
 					mp = lp.get(j);
-					Livro l = new Livro(
+					LivroNovo l = new LivroNovo(
+							Integer.parseInt(mp.get("codigo").toString()),
+							Integer.parseInt(mp.get("quantidade").toString()),
+							new Dinheiro(mp.get("preco").toString()),
 							(String)mp.get("isbn"),
 							(String)mp.get("titulo"),
-							null,
-							null);
-					l.setQuantidade(Integer.parseInt(mp.get("quantidade").toString()));
-					l.setPreco(new Dinheiro(mp.get("preco").toString()));
+							(String)mp.get("autor"),
+							(String)mp.get("editora"));
 					listProduto.add(l);	
 				}
 				p.setProdutos(listProduto);
