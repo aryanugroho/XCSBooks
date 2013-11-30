@@ -104,7 +104,7 @@ public class BuscaControl {
 			}
 			
 			//Obtém resposta JSON parseada
-			List <? extends Map<String, ?>> u = JSONParser.parseBuscaLivro(resposta);
+			List <? extends Map<String, ?>> u = JSONParser.parseBuscaPedido(resposta);
 		
 			Map t = null;
 			List<Pedido> listPedido = new ArrayList<Pedido>();
@@ -114,23 +114,24 @@ public class BuscaControl {
 				t = u.get(i);
 				//Mapa do pedido contém 5 itens: id, datahora, estado, total e lista de produtos
 				Pedido p = new Pedido(
-						Integer.parseInt((String) t.get("id")),
+						Integer.parseInt(t.get("id").toString()),
 						(String) t.get("datahora"),
 						(String) t.get("estado"),
-						new Dinheiro((String) t.get("total"))
+						new Dinheiro((t.get("total").toString()))
 						);
 				
 				List<? extends Map<String, Object>> lp = (List<? extends Map<String, Object>>) t.get("produtos");
+				listProduto = new ArrayList<Produto>();
 				Map mp = null;
 				for(int j = 0; j < lp.size(); j++){
-					mp = lp.get(i);
+					mp = lp.get(j);
 					Livro l = new Livro(
 							(String)mp.get("isbn"),
 							(String)mp.get("titulo"),
 							null,
 							null);
-					l.setQuantidade(Integer.parseInt((String) mp.get("quantidade")));
-					l.setPreco(new Dinheiro((String) mp.get("preco")));
+					l.setQuantidade(Integer.parseInt(mp.get("quantidade").toString()));
+					l.setPreco(new Dinheiro(mp.get("preco").toString()));
 					listProduto.add(l);	
 				}
 				p.setProdutos(listProduto);

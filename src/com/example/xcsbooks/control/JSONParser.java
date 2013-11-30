@@ -84,7 +84,7 @@ public class JSONParser {
 			}
 			
 		} catch (JSONException e) {
-			Log.e("JSON", "Error parsing JSONString: " + JSONStr);
+			Log.e("JSON", "Error parsing JSONString Livro: " + JSONStr);
 		}
 		
 		return list;
@@ -98,7 +98,8 @@ public class JSONParser {
 		try{
 			JSONObject jobj = new JSONObject(JSONStr);
 			JSONArray pedidos = jobj.getJSONArray("pedidos");
-
+			Log.d("JSON", "Pedido length = " + pedidos.length());
+			
 			for(int i = 0; i < pedidos.length(); i++){
 				map = new HashMap<String, Object>();
 				JSONObject t = pedidos.getJSONObject(i);
@@ -113,7 +114,7 @@ public class JSONParser {
 				listProdutos = new ArrayList<Map<String,Object>>();
 				for(int j = 0; j < produtos.length(); j++){
 					map_prod = new HashMap<String, Object>();
-					JSONObject p = produtos.getJSONObject(i);
+					JSONObject p = produtos.getJSONObject(j);
 					map_prod.put("isbn", p.getString("isbn"));
 					map_prod.put("titulo", p.getString("titulo"));
 					map_prod.put("quantidade", p.getInt("quantidade"));
@@ -127,7 +128,8 @@ public class JSONParser {
 			}
 			
 		} catch (JSONException e) {
-			Log.e("JSON", "Error parsing JSONString: " + JSONStr);
+			Log.e("JSON", "Error parsing JSONString Pedido: " + JSONStr);
+			Log.e("JSON", "Error message: " + e.getMessage() +", " + e.getCause());
 		}
 		
 		return list;
