@@ -91,10 +91,9 @@ public class CarrinhoListAdapter extends ExtendedSimpleAdapter {
 					editor.clear();
 					editor.putString("ITENSCARRINHO", carrinho);
 					editor.commit();
-					//editor.remove("ITENSPEDIDO").putString("ITENSPEDIDO", carrinho);
-					//editor.remove("LIVROS" + cod).commit();
+
 					//Notifica o usuario, atualiza a lista
-					Toast.makeText(context, "Item removido", Toast.LENGTH_LONG).show();
+					Toast.makeText(context, "Item removido", Toast.LENGTH_SHORT).show();
 					notifyDataSetChanged();
 				}
 			});
@@ -139,7 +138,22 @@ public class CarrinhoListAdapter extends ExtendedSimpleAdapter {
 		data.get(position).put("itemCarrinho_quantidadeItem", quant);
 		data.get(position).put("itemCarrinho_totalItem", novoPreco.toString());
 		
-	
+		//Ler carrinho do sharedpref
+		SharedPreferences prefs = context.getSharedPreferences("CARRINHO", context.MODE_PRIVATE);
+		String strItensPedido = prefs.getString("ITENSCARRINHO", JSONParser.DEFAULT_PRODUTOS);
+		
+		// Obtem a lista de livros que está guardada como um JSON
+		List<ItemPedido> itens = JSONParser.ItemPedidoFromJSON(strItensPedido);
+
+		itens.get(position).setQuantidade(quant);
+		// Transforma a nova lista em um JSON
+		String carrinho = JSONParser.ItemPedidoToJSON(itens);
+		//Guarda o novo JSON
+		SharedPreferences.Editor editor = prefs.edit();
+		editor.clear();
+		editor.putString("ITENSCARRINHO", carrinho);
+		editor.commit();
+		
 		notifyDataSetChanged();
 	}
 	
