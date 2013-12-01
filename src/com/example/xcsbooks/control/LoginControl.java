@@ -12,6 +12,8 @@ import org.apache.http.message.BasicNameValuePair;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.webkit.CookieManager;
+import android.webkit.CookieSyncManager;
 
 import com.example.xcsbooks.HomeActivity;
 import com.example.xcsbooks.LogarActivity;
@@ -116,5 +118,9 @@ public class LoginControl {
 		editor.remove("session").remove("username").remove("senha").remove("nome").remove("cpf")
 		.remove("email").remove("telefone1").remove("telefone2").commit();
 		//TODO: Remover endereço
+		
+		//Remove cookie
+		CookieManager.getInstance().removeAllCookie();
+		CookieSyncManager.getInstance().sync();
 	}
 }

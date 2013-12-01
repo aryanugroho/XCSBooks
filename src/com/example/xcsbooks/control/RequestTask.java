@@ -45,16 +45,20 @@ public class RequestTask extends AsyncTask<URI, Integer, String>{
     @Override
     protected String doInBackground(URI... uri) {
         DefaultHttpClient httpclient = new DefaultHttpClient();
-        String[] keyValueSets = CookieManager.getInstance().getCookie(DOMAIN).split(";");
-        for(String cookie : keyValueSets){
-        	String[] keyValue = cookie.split("=");
-        	String key = keyValue[0];
-        	String value = "";
-        	if(keyValue.length > 1)
-        		value = keyValue[1];
-        	BasicClientCookie bcc = new BasicClientCookie(key, value);
-        	bcc.setDomain(DOMAIN);
-        	httpclient.getCookieStore().addCookie(bcc);
+        try{
+	        String[] keyValueSets = CookieManager.getInstance().getCookie(DOMAIN).split(";");
+	        for(String cookie : keyValueSets){
+	        	String[] keyValue = cookie.split("=");
+	        	String key = keyValue[0];
+	        	String value = "";
+	        	if(keyValue.length > 1)
+	        		value = keyValue[1];
+	        	BasicClientCookie bcc = new BasicClientCookie(key, value);
+	        	bcc.setDomain(DOMAIN);
+	        	httpclient.getCookieStore().addCookie(bcc);
+	        }
+        } catch (NullPointerException e){
+        	e.printStackTrace();
         }
         
         HttpResponse response;
