@@ -47,8 +47,10 @@ public class GetBookCover {
 				return null;
 			}
 			
+			
+			String r = JSONParser.parseImage(resposta);
 			//Obtem a resposta e transforma em um Bitmap
-			byte[] array = Base64.decode(resposta, Base64.DEFAULT);
+			byte[] array = Base64.decode(r, Base64.DEFAULT);
 			Bitmap cover = BitmapFactory.decodeByteArray(array, 0, array.length);
 			Log.d("IMG_BYTES", resposta.getBytes().toString());
 			File coverfile = getOutputMediaFile(isbn);

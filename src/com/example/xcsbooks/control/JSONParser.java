@@ -1,20 +1,20 @@
 package com.example.xcsbooks.control;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.util.Log;
+
 import com.example.xcsbooks.model.Dinheiro;
 import com.example.xcsbooks.model.ItemPedido;
 import com.example.xcsbooks.model.LivroNovo;
-
-import android.util.Log;
 
 public class JSONParser {
 	public static final String DEFAULT_PRODUTOS = "{ \"itensPedido\": [] }";
@@ -28,8 +28,29 @@ public class JSONParser {
 			Log.d("GENERIC_RESPONSE", "Response: " + r);
 		} catch (JSONException e) {
 			Log.e("JSON", "Error parsing JSONString: " + JSONStr);
+			byte[] b = JSONStr.getBytes();
+			if(b[0] == 10){
+				Log.d("BYTE", "Byte maldito");
+				for(int i = 0; i < b.length - 1; i++){
+					b[i] = b[i+1];
+				}
+				String n = "";
+				try {
+					n = new String(b, "UTF-8");
+				} catch (UnsupportedEncodingException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				try{
+					JSONObject jobj2 = new JSONObject(n);
+					r = jobj2.getInt("resposta");
+				} catch (JSONException e2){
+					Log.e("JSON", "Error parsing JSONString: " + n);
+				}
+			}
 		}
-		
+
 		return r;
 	}
 
@@ -255,5 +276,18 @@ public class JSONParser {
 
 		json += "]}";
 		return json;
+	}
+	
+	public static String parseImage(String JSONStr){
+		String img = "";
+		
+		try{
+			JSONObject jobj = new JSONObject(JSONStr);
+			img = jobj.getString("image"); 
+		} catch (JSONException e){
+			e.printStackTrace();
+		}
+		
+		return img;
 	}
 }
