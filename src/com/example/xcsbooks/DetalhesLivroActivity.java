@@ -45,7 +45,6 @@ public class DetalhesLivroActivity extends BaseActivity {
 		mTxtPrecoLivro = (TextView) findViewById(R.id.detalheLivro_txtPreco);
 		mTxtIsbaLivro = (TextView) findViewById(R.id.detalheLivro_txtIsbn);
 		mBtnAdicionarCarrinho = (Button) findViewById(R.id.detalheLivro_btnAdicionarCarrinho);
-		mBtnComprar = (Button) findViewById(R.id.detalheLivro_btnComprar);
 		ImageView im = (ImageView) findViewById(R.id.detalheLivro_imagemLivro);
 		
 		//Obtem o objeto livro passado
@@ -61,6 +60,12 @@ public class DetalhesLivroActivity extends BaseActivity {
 		mTxtPrecoLivro.setText(r.getString(R.string.preco) + ": " + livro.getPreco().toString());
 		mTxtIsbaLivro.setText(r.getString(R.string.isbn) + ": " + livro.getIsbn());
 		
+		if(livro.getQuantidade() < 1) {
+			mBtnAdicionarCarrinho.setText("Indisponível");
+			mBtnAdicionarCarrinho.setEnabled(false);
+		}
+		
+		
 		mBtnAdicionarCarrinho.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -69,19 +74,7 @@ public class DetalhesLivroActivity extends BaseActivity {
 				
 				Toast.makeText(getApplicationContext(), "Livro adicionado ao carrinho", Toast.LENGTH_SHORT).show();
 			}
-		});
-		
-		mBtnComprar.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				addLivroAoCarrinho();
-				
-				Intent intent = new Intent(DetalhesLivroActivity.this, CarrinhoActivity.class);
-				startActivity(intent);
-			}
-		});
-	
+		});	
 	}
 	
 

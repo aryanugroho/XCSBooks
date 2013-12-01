@@ -122,9 +122,17 @@ public class CarrinhoListAdapter extends ExtendedSimpleAdapter {
 		Dinheiro precoOriginal = new Dinheiro(prevPreco.div(quant));
 		Log.d("PRECO", "PrecoOriginal = " + precoOriginal.toString());
 		
+		//Ler carrinho do sharedpref
+		SharedPreferences prefs = context.getSharedPreferences("CARRINHO", context.MODE_PRIVATE);
+		String strItensPedido = prefs.getString("ITENSCARRINHO", JSONParser.DEFAULT_PRODUTOS);
+		
+		// Obtem a lista de livros que está guardada como um JSON
+		List<ItemPedido> itens = JSONParser.ItemPedidoFromJSON(strItensPedido);
+
+		int quantidadeDisponivel = itens.get(position).getProduto().getQuantidade();
 		
 		if(q < 0){
-			if(quant > 1)
+			if(quant > 1 && quant <= quantidadeDisponivel)
 				quant += q;
 			else 
 				return;
@@ -134,17 +142,9 @@ public class CarrinhoListAdapter extends ExtendedSimpleAdapter {
 		}
 		
 		Dinheiro novoPreco = new Dinheiro(precoOriginal.mult(quant));
-		Log.d("PRECO", "novoPreco = " + novoPreco.toString());
 		data.get(position).put("itemCarrinho_quantidadeItem", quant);
 		data.get(position).put("itemCarrinho_totalItem", novoPreco.toString());
 		
-		//Ler carrinho do sharedpref
-		SharedPreferences prefs = context.getSharedPreferences("CARRINHO", context.MODE_PRIVATE);
-		String strItensPedido = prefs.getString("ITENSCARRINHO", JSONParser.DEFAULT_PRODUTOS);
-		
-		// Obtem a lista de livros que está guardada como um JSON
-		List<ItemPedido> itens = JSONParser.ItemPedidoFromJSON(strItensPedido);
-
 		itens.get(position).setQuantidade(quant);
 		// Transforma a nova lista em um JSON
 		String carrinho = JSONParser.ItemPedidoToJSON(itens);
