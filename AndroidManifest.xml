@@ -97,6 +97,14 @@
             android:name="com.example.xcsbooks.AlterarCadastroEnderecoActivity"
             android:label="@string/title_activity_alterar_cadastro_endereco" >
         </activity>
+        <activity
+            android:name="com.example.xcsbooks.AlterarSenhaActivity"
+            android:label="@string/title_activity_alterar_senha" >
+        </activity>
+        <activity
+            android:name="com.example.xcsbooks.AlterarSelecionarActivity"
+            android:label="@string/title_activity_alterar_selecionar" >
+        </activity>
     </application>
 
 </manifest>
