@@ -76,8 +76,15 @@ public class LoginControl {
 			editor.putString("email", cli.getEmail());
 			editor.putString("telefone1", cli.getTelefone1());
 			editor.putString("telefone2", cli.getTelefone2());
+			editor.putString("logradouro", cli.getEndereco().getLogradouro());
+			editor.putString("numero", String.valueOf(cli.getEndereco().getNumero()));
+			editor.putString("complemento", cli.getEndereco().getComplemento());
+			editor.putString("bairro", cli.getEndereco().getBairro());
+			editor.putString("cidade", cli.getEndereco().getCidade());
+			editor.putString("uf", cli.getEndereco().getUf());
+			editor.putString("cep", cli.getEndereco().getCep());
 			editor.commit();
-			//TODO: Colocar endereço (serializar)
+			
 			
 			return cli;
 		}
@@ -104,8 +111,16 @@ public class LoginControl {
 							prefs.getString("email", "NULL"),
 							prefs.getString("telefone1", "NULL"),
 							prefs.getString("telefone2", "NULL"),
-							null);
-			//TODO: Obter Endereço
+							new Endereco(
+									prefs.getString("logradouro", "NULL"),
+									Integer.valueOf(prefs.getString("numero", "NULL")),
+									prefs.getString("complemento", "NULL"),
+									prefs.getString("bairro", "NULL"),
+									prefs.getString("cidade", "NULL"),
+									prefs.getString("uf", "NULL"),
+									prefs.getString("cep", "NULL")
+									));
+			
 		}
 		
 		return cli;
@@ -116,7 +131,8 @@ public class LoginControl {
 		SharedPreferences.Editor editor = prefs.edit();
 		
 		editor.remove("session").remove("username").remove("senha").remove("nome").remove("cpf")
-		.remove("email").remove("telefone1").remove("telefone2").commit();
+		.remove("email").remove("telefone1").remove("telefone2").remove("logradouro").remove("numero")
+		.remove("complemento").remove("bairro").remove("cidade").remove("uf").remove("cep").commit();
 		//TODO: Remover endereço
 		
 		//Remove cookie
