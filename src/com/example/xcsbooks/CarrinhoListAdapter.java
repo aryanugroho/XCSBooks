@@ -132,12 +132,12 @@ public class CarrinhoListAdapter extends ExtendedSimpleAdapter {
 		int quantidadeDisponivel = itens.get(position).getProduto().getQuantidade();
 		
 		if(q < 0){
-			if(quant > 1 && quant <= quantidadeDisponivel)
+			if(quant > 1)
 				quant += q;
 			else 
 				return;
 		} else {
-			if(quant >= 1)
+			if(quant >= 1 && quant < quantidadeDisponivel)
 				quant += q;
 		}
 		
