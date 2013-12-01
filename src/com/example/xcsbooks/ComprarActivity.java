@@ -44,7 +44,7 @@ public class ComprarActivity extends BaseActivity {
 		} else {
 			//Obtém dados do carrinho para preencher lista
 			prefs = getSharedPreferences("CARRINHO", MODE_PRIVATE);
-			String strlivros = prefs.getString("ITENSPEDIDO", JSONParser.DEFAULT_PRODUTOS);
+			String strlivros = prefs.getString("ITENSCARRINHO", JSONParser.DEFAULT_PRODUTOS);
 			List<ItemPedido> itens = JSONParser.ItemPedidoFromJSON(strlivros);
 			
 			//Preenche lista, adiciona header e footer...
@@ -56,8 +56,9 @@ public class ComprarActivity extends BaseActivity {
 			Dinheiro precoFinal = new Dinheiro(0);
 			
 			for(ItemPedido ip : itens) {
-				
+				map = new HashMap<String, Object>();
 				map.put("itemCarrinho_quantidadeItem", ip.getQuantidade());
+				Log.d("QUANTIDADE", ip.getQuantidade()+"");
 				map.put("itemCarrinho_codLivro", ip.getProduto().getCodigo());
 				map.put("itemCarrinho_thumbLivro", GetBookCover.getCover(((LivroNovo)ip.getProduto()).getIsbn()));
 				map.put("itemCarrinho_tituloLivro", ((LivroNovo)ip.getProduto()).getTitulo().toString());

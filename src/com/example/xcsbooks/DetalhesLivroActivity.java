@@ -104,9 +104,10 @@ public class DetalhesLivroActivity extends BaseActivity {
 		
 		boolean add = true;
 		for(ItemPedido ip : itens){
-			if(ip.getProduto().getCodigo() == livro.getCodigo())
+			if(ip.getProduto().getCodigo() == livro.getCodigo()){
 				ip.setQuantidade(ip.getQuantidade() + 1);
 				add = false;
+			}
 		}
 		
 		if(add){
