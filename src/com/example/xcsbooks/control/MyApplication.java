@@ -11,8 +11,6 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        CookieManager cm = new CookieManager(new myCookieStore(this), java.net.CookiePolicy.ACCEPT_ALL);
-        CookieHandler.setDefault(cm);
         instance = this;
     }
 

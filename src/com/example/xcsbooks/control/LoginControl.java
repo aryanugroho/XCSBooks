@@ -68,7 +68,6 @@ public class LoginControl {
 			SharedPreferences.Editor editor = prefs.edit();
 			
 			editor.putString("session", (String) u.get("session_id"));
-			Log.d("SESSION", "Value: " + u.get("session_id"));
 			editor.putString("username", username);
 			editor.putString("nome", cli.getNome());
 			editor.putString("cpf", cli.getCpf());
@@ -85,7 +84,6 @@ public class LoginControl {
 	
 	private static boolean isLogged(SharedPreferences prefs){
 		String sessionId = prefs.getString("session", "-1");
-		Log.d("SESSION", "Value: " + sessionId);
 		if(!sessionId.equals("-1")){
 			return true;
 		}
