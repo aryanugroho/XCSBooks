@@ -13,6 +13,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.example.xcsbooks.model.Dinheiro;
+import com.example.xcsbooks.model.ItemPedido;
 import com.example.xcsbooks.model.LivroNovo;
 import com.example.xcsbooks.model.Pedido;
 import com.example.xcsbooks.model.Produto;
@@ -102,7 +103,7 @@ public class BuscaControl {
 		
 			Map t = null;
 			List<Pedido> listPedido = new ArrayList<Pedido>();
-			List<Produto> listProduto = null;
+			List<ItemPedido> itensPedido = null;
 			for(int i = 0; i < u.size(); i++){
 				t = new HashMap();
 				t = u.get(i);
@@ -115,21 +116,24 @@ public class BuscaControl {
 						);
 				
 				List<? extends Map<String, Object>> lp = (List<? extends Map<String, Object>>) t.get("produtos");
-				listProduto = new ArrayList<Produto>();
+				itensPedido = new ArrayList<ItemPedido>();
 				Map mp = null;
 				for(int j = 0; j < lp.size(); j++){
 					mp = lp.get(j);
-					LivroNovo l = new LivroNovo(
-							Integer.parseInt(mp.get("codigo").toString()),
-							Integer.parseInt(mp.get("quantidade").toString()),
-							new Dinheiro(mp.get("preco").toString()),
-							(String)mp.get("isbn"),
-							(String)mp.get("titulo"),
-							(String)mp.get("autor"),
-							(String)mp.get("editora"));
-					listProduto.add(l);	
+					ItemPedido ip = new ItemPedido(Integer.valueOf(mp.get("quantidade").toString()),
+							new LivroNovo(
+								0,
+								0,
+								new Dinheiro(mp.get("preco").toString()),
+								(String)mp.get("isbn"),
+								(String)mp.get("titulo"),
+								(String)mp.get("autor"),
+								(String)mp.get("editora")));
+					ip.setTotalItem(new Dinheiro(mp.get("preco").toString()));
+					ip.setTotalItem(new Dinheiro(ip.getTotalItem().mult(ip.getQuantidade())));
+					itensPedido.add(ip);	
 				}
-				p.setProdutos(listProduto);
+				p.setItens(itensPedido);
 				listPedido.add(p);
 			}
 			

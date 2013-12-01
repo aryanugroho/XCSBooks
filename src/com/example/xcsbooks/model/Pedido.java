@@ -81,7 +81,7 @@ public class Pedido implements Parcelable {
 		dest.writeString(getDatahora());
 		dest.writeString(getEstado());
 		dest.writeString(getTotal().toString());
-		dest.writeList(getProdutos());
+		dest.writeList(getItens());
 	}
 	
 	public static final Parcelable.Creator<Pedido> CREATOR = new Parcelable.Creator<Pedido>() {
@@ -106,8 +106,8 @@ public class Pedido implements Parcelable {
 		setDatahora(in.readString());
 		setEstado(in.readString());
 		setTotal(new Dinheiro(in.readString()));
-		produtos = new ArrayList<Produto>();
-		in.readList(produtos, Produto.class.getClassLoader());
+		itens = new ArrayList<ItemPedido>();
+		in.readList(itens, ItemPedido.class.getClassLoader());
 	}
 	
 }

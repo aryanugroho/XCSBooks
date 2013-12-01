@@ -16,6 +16,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.xcsbooks.control.GetBookCover;
+import com.example.xcsbooks.model.ItemPedido;
 import com.example.xcsbooks.model.LivroNovo;
 import com.example.xcsbooks.model.Pedido;
 import com.example.xcsbooks.model.Produto;
@@ -45,28 +46,28 @@ public class DetalhesPedidoActivity extends BaseActivity {
 		
 		pedido = (Pedido) i.getParcelableExtra(AcompanharPedidoActivity.KEY_PEDIDO);
 
-		if(pedido.getId()!= 0){
+		//if(pedido.getId()!= 0){
 			mTxtIdPedido.setText(r.getString(R.string.pedidoid) + ": " + pedido.getId());
 			mTxtDatahoraPedido.setText(r.getString(R.string.data)+ ": " + pedido.getDatahora().substring(0, 10)+ " "+
 					r.getString(R.string.hora)+": "+pedido.getDatahora().substring(11,19));
 			mTxtEstadPedido.setText(r.getString(R.string.status) + ": " + pedido.getEstado());
 			mTxtTotalPedido.setText(r.getString(R.string.total) + ": " + pedido.getTotal().toString());
-		}
+		//}
 		
 		List searchList = new ArrayList();
 		Map map = null;
-		//TODO: Adicionar quantidade em cada um dos itens da lista!
-		for(Produto p : pedido.getProdutos()) {
+		
+		for(ItemPedido ip : pedido.getItens()) {
 			map = new HashMap();
-			map.put("itemProdutoListaPedido_thumbLivro", GetBookCover.getCover(((LivroNovo)p).getIsbn()));
-			map.put("itemProdutoListaPedido_tituloLivro", getResources().getString(R.string.titulo) +": "+((LivroNovo)p).getTitulo());
-			map.put("itemProdutoListaPedido_autorLivro", ((LivroNovo)p).getAutor());
-			map.put("itemProdutoListaPedido_precoLivro", getResources().getString(R.string.preco)+": "+((LivroNovo)p).getPreco());
-			map.put("itemProdutoListaPedido_quantidadeProduto", getResources().getString(R.string.quantidade)+": "+((LivroNovo)p).getQuantidade());
+			map.put("itemProdutoListaPedido_thumbLivro", GetBookCover.getCover(((LivroNovo)ip.getProduto()).getIsbn()));
+			map.put("itemProdutoListaPedido_tituloLivro", getResources().getString(R.string.titulo) +": "+((LivroNovo)ip.getProduto()).getTitulo());
+			map.put("itemProdutoListaPedido_autorLivro", ((LivroNovo)ip.getProduto()).getAutor());
+			map.put("itemProdutoListaPedido_totalLivro", getResources().getString(R.string.preco)+": "+ip.getTotalItem());
+			map.put("itemProdutoListaPedido_quantidadeProduto", getResources().getString(R.string.quantidade)+": "+ip.getQuantidade());
 			searchList.add(map);
 		}
 		String[] t = {"itemProdutoListaPedido_thumbLivro","itemProdutoListaPedido_tituloLivro","itemProdutoListaPedido_autorLivro",
-				"itemProdutoListaPedido_precoLivro", "itemProdutoListaPedido_quantidadeProduto"};
+				"itemProdutoListaPedido_totalLivro", "itemProdutoListaPedido_quantidadeProduto"};
 		
 		int[] item = {R.id.itemProdutoListaPedido_thumbLivro,R.id.itemProdutoListaPedido_tituloLivro, R.id.itemProdutoListaPedido_autorLivro,
 				R.id.itemProdutoListaPedido_precoLivro, R.id.itemProdutoListaPedido_quantidadeProduto};
