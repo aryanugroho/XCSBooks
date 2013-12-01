@@ -61,11 +61,11 @@ public class CadastrarClienteActivity extends BaseActivity {
 			mEdtPwdAgain.setVisibility(View.GONE);
 			
 			mEdtNome.setText(cliente.getNome());
-			mEdtCPF.setText("CPF: " + cliente.getCpf());
+			mEdtCPF.setText(cliente.getCpf());
 			mEdtEmail.setText(cliente.getEmail());
 			mEditTel1.setText(cliente.getTelefone1());
 			mEditTel2.setText(cliente.getTelefone2());
-			mEdtUsername.setText("Usuário: " + cliente.getUsername());
+			mEdtUsername.setText(cliente.getUsername());
 		}
 		
 		mBtnContinue.setOnClickListener(new OnClickListener() {

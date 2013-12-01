@@ -23,7 +23,7 @@ import android.widget.Toast;
 public class AlterarCadastroEnderecoActivity extends BaseActivity {
 
 	private Cliente cliente;
-	private Button mBtnCadastrar;
+	private Button mBtnAtualizar;
 	private EditText mEditLogr;
 	private EditText mEditNum;
 	private EditText mEditCompl;
@@ -47,7 +47,7 @@ public class AlterarCadastroEnderecoActivity extends BaseActivity {
 		
 		cliente = LoginControl.getClienteLogado();
 		
-		mBtnCadastrar = (Button) findViewById(R.id.alterarEndereco_btnCadastrar);
+		mBtnAtualizar = (Button) findViewById(R.id.alterarEndereco_btnAtualizar);
 		mEditLogr = (EditText) findViewById(R.id.alterarEndereco_txtLogradouro);
 		mEditNum = (EditText) findViewById(R.id.alterarEndereco_txtNumero);
 		mEditCompl = (EditText) findViewById(R.id.alterarEndereco_txtComplemento);
@@ -67,7 +67,7 @@ public class AlterarCadastroEnderecoActivity extends BaseActivity {
 			mEditCEP.setText(cliente.getEndereco().getCep());
 		}
 		
-		mBtnCadastrar.setOnClickListener(new OnClickListener() {
+		mBtnAtualizar.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
