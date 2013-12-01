@@ -57,7 +57,7 @@ public class ComprarActivity extends BaseActivity {
 			
 			for(ItemPedido ip : itens) {
 				map = new HashMap<String, Object>();
-				map.put("itemCarrinho_quantidadeItem", ip.getQuantidade());
+				map.put("itemCarrinho_quantidadeItem", getResources().getString(R.string.quantidade)+": "+ip.getQuantidade());
 				Log.d("QUANTIDADE", ip.getQuantidade()+"a");
 				map.put("itemCarrinho_codLivro", ip.getProduto().getCodigo());
 				map.put("itemCarrinho_thumbLivro", GetBookCover.getCover(((LivroNovo)ip.getProduto()).getIsbn()));
@@ -65,7 +65,7 @@ public class ComprarActivity extends BaseActivity {
 				map.put("itemCarrinho_autorLivro", ((LivroNovo)ip.getProduto()).getAutor().toString());
 				map.put("itemCarrinho_editoraLivro", ((LivroNovo)ip.getProduto()).getEditora());
 				ip.setTotalItem(new Dinheiro(ip.getProduto().getPreco().mult(ip.getQuantidade())));
-				map.put("itemCarrinho_totalItem", ip.getTotalItem().toString());
+				map.put("itemCarrinho_totalItem",  getResources().getString(R.string.total)+": "+ip.getTotalItem().toString());
 				
 				pedido.add(map);
 				
