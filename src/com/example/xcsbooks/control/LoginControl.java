@@ -74,13 +74,6 @@ public class LoginControl {
 			editor.putString("email", cli.getEmail());
 			editor.putString("telefone1", cli.getTelefone1());
 			editor.putString("telefone2", cli.getTelefone2());
-			editor.putString("logradouro", cli.getEndereco().getLogradouro());
-			editor.putString("numero", String.valueOf(cli.getEndereco().getNumero()));
-			editor.putString("complemento", cli.getEndereco().getComplemento());
-			editor.putString("bairro", cli.getEndereco().getBairro());
-			editor.putString("cidade", cli.getEndereco().getCidade());
-			editor.putString("uf", cli.getEndereco().getUf());
-			editor.putString("cep", cli.getEndereco().getCep());
 			editor.commit();
 			//TODO: Colocar endereço (serializar)
 			
