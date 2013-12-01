@@ -63,9 +63,9 @@ public class CadastrarLivroUsadoActivity extends BaseActivity {
 
 				
 				
-				livrousado = CadastrarLivroUsadaControl.cadastrar(list);
+				int r = CadastrarLivroUsadaControl.cadastrar(list);
 				
-				if(livrousado != null){
+				if(r >= 0){
 					Toast.makeText(getApplicationContext(), "Cadastro realizado com sucesso", Toast.LENGTH_LONG).show();
 					intent 	= new Intent(CadastrarLivroUsadoActivity.this, HomeActivity.class);
 					startActivity(intent);

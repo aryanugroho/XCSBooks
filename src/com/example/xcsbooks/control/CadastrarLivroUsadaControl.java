@@ -14,7 +14,7 @@ import com.example.xcsbooks.model.LivroUsado;
 public class CadastrarLivroUsadaControl {
 	public static String CADASTROLIVROUSADO_URI = "http://diskexplosivo.com/xcsbooks/insert_usedbook.php";
 
-	public static LivroUsado cadastrar(List<NameValuePair> list) {
+	public static int cadastrar(List<NameValuePair> list) {
 		AsyncTask<URI, Integer, String> task;
 		String resposta = null;
 	
@@ -28,26 +28,8 @@ public class CadastrarLivroUsadaControl {
 		}
 		
 		if(resposta != null){
-
-			int test = JSONParser.parseResposta(resposta);
-			if(test < 0)
-				return null;
-
-			LivroUsado l = 
-				new LivroUsado(
-					Integer.valueOf(list.get(0).getValue()),
-					Integer.valueOf(list.get(1).getValue()),
-					new Dinheiro(list.get(2).getValue().toString()),
-					list.get(3).getValue(),
-					list.get(4).getValue(),
-					list.get(5).getValue(),
-					list.get(6).getValue(),
-					list.get(7).getValue(),
-					Integer.valueOf(list.get(8).getValue()),
-					list.get(9).getValue());
-			return l;
-			
-		}			
-		return null;
+			return JSONParser.parseResposta(resposta);
+		}
+		return -99;
 	}
 }

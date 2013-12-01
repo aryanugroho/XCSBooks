@@ -49,6 +49,6 @@ public class ComprarControl {
 			Log.d("COMPRAR", "Resposta: " + test);
 			return test;
 		}
-		return -6;
+		return -99;
 	}
 }
