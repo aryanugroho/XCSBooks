@@ -21,7 +21,7 @@ public class Dinheiro {
 	public Dinheiro(BigDecimal bd) {
 		valor = bd;
 	}
-
+	
 	public BigDecimal soma(Dinheiro outroValor){
 		return valor.add(outroValor.valor);
 	}
@@ -48,5 +48,9 @@ public class Dinheiro {
 	
 	public String toString() {
 		return "R$ " + valor.toString();
+	}
+	
+	public double toDouble(){
+		return valor.doubleValue();
 	}
 }

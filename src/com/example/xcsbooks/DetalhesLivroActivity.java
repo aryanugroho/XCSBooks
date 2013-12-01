@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -97,7 +98,7 @@ public class DetalhesLivroActivity extends BaseActivity {
 	private boolean addLivroAoCarrinho() {
 		//Obter livros do carrinho
 		SharedPreferences prefs = getSharedPreferences("CARRINHO", MODE_PRIVATE);
-		String carrinho = prefs.getString("ITENSPEDIDO", JSONParser.DEFAULT_PRODUTOS);
+		String carrinho = prefs.getString("ITENSCARRINHO", JSONParser.DEFAULT_PRODUTOS);
 		//List<LivroNovo> list = JSONParser.LivroFromJSON(carrinho);
 		List<ItemPedido> itens = JSONParser.ItemPedidoFromJSON(carrinho);
 		
@@ -111,7 +112,9 @@ public class DetalhesLivroActivity extends BaseActivity {
 			itens.add(new ItemPedido(1, new LivroNovo(livro), new Dinheiro(livro.getPreco().toString())));
 		
 		carrinho = JSONParser.ItemPedidoToJSON(itens);
+		Log.d("carrinho", carrinho);
 		SharedPreferences.Editor editor = prefs.edit();
+		editor.clear();
 		editor.putString("ITENSCARRINHO", carrinho);
 		
 		editor.commit();

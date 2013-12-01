@@ -17,7 +17,7 @@ import com.example.xcsbooks.model.LivroNovo;
 import android.util.Log;
 
 public class JSONParser {
-	public static final String DEFAULT_PRODUTOS = "{ login: [] }";
+	public static final String DEFAULT_PRODUTOS = "{ \"itensPedido\": [] }";
 	
 	public static int parseResposta(String JSONStr){
 		int r = -99;
@@ -226,7 +226,7 @@ public class JSONParser {
 	
 	public static String ItemPedidoToJSON(List<ItemPedido> list){
 		String json = "{ \"itensPedido\": [";
-		int i=0;
+		int i = 0;
 		for(ItemPedido item : list){
 			json += "{";
 			json += "\"quantidade\":\""+item.getQuantidade()+"\",";
@@ -239,17 +239,18 @@ public class JSONParser {
 				json += "\"autor\":\"" + ((LivroNovo)item.getProduto()).getAutor() + "\",";
 				json += "\"editora\":\"" + ((LivroNovo)item.getProduto()).getEditora() + "\",";
 				json += "\"quantidade\":\"" + ((LivroNovo)item.getProduto()).getQuantidade() + "\",";
-				json += "\"preco\":\"" + ((LivroNovo)item.getProduto()).getPreco() + "\"";
+				json += "\"preco\":\"" + ((LivroNovo)item.getProduto()).getPreco().toDouble() + "\"";
 				
 				json += "},";
 				
-				json += "\"totalItem\":\"" + item.getTotalItem() + "\"";
+				json += "\"totalItem\":\"" + item.getTotalItem().toDouble() + "\"";
 				
-				i++;
+				
 				if(i < list.size() - 1)
 					json += "},";
 				else
-					json += "}";			
+					json += "}";	
+				i++;
 		}
 
 		json += "]}";

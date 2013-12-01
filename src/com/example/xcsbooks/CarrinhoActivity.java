@@ -64,7 +64,7 @@ public class CarrinhoActivity extends BaseActivity {
 	
 	private void buildShoppingCart(){
 		prefs = getSharedPreferences("CARRINHO", MODE_PRIVATE);
-		String stritenspedido = prefs.getString("ITENSPEDIDO", JSONParser.DEFAULT_PRODUTOS);
+		String stritenspedido = prefs.getString("ITENSCARRINHO", JSONParser.DEFAULT_PRODUTOS);
 		itens = JSONParser.ItemPedidoFromJSON(stritenspedido);
 		
 		

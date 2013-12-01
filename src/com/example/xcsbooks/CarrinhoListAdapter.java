@@ -114,8 +114,8 @@ public class CarrinhoListAdapter extends ExtendedSimpleAdapter {
 	}
 	
 	private void updateQuantPreco(int q, int position){
-		int quant = (Integer) data.get(position).get("itemCarrinho_quantidade");
-		Dinheiro prevPreco = new Dinheiro((String) data.get(position).get("itemCarrinho_precoLivro"));
+		int quant = (Integer) data.get(position).get("itemCarrinho_quantidadeItem");
+		Dinheiro prevPreco = new Dinheiro((String) data.get(position).get("itemCarrinho_totalItem"));
 		Log.d("PRECO", "PrevPreco = " + prevPreco.toString());
 		Dinheiro precoOriginal = new Dinheiro(prevPreco.div(quant));
 		Log.d("PRECO", "PrecoOriginal = " + precoOriginal.toString());
@@ -133,8 +133,8 @@ public class CarrinhoListAdapter extends ExtendedSimpleAdapter {
 		
 		Dinheiro novoPreco = new Dinheiro(precoOriginal.mult(quant));
 		Log.d("PRECO", "novoPreco = " + novoPreco.toString());
-		data.get(position).put("itemCarrinho_quantidade", quant);
-		data.get(position).put("itemCarrinho_precoLivro", novoPreco.toString());
+		data.get(position).put("itemCarrinho_quantidadeItem", quant);
+		data.get(position).put("itemCarrinho_totalItem", novoPreco.toString());
 		int cod = (Integer) data.get(position).get("itemCarrinho_codLivro");
 		
 		//Update o sharedpref
