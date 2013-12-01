@@ -59,7 +59,7 @@
     <string name="logue_para_comprar">Logue para poder comprar</string>
     <string name="title_activity_basic_fragment">BasicFragment</string>
     <string name="hello_world">Hello world!</string>
-    <string name="title_activity_comprar">ComprarActivity</string>
+    <string name="title_activity_comprar">Confirmar Compra</string>
     <string name="autor">Autor</string>
     <string name="preco">Preço</string>
     <string name="editora">Editora</string>
@@ -73,7 +73,7 @@
     <string name="quantidade">Quantidade</string>
     <string name="confirmar_compra">Confirmar Compra</string>
     <string name="confirmar_compra_botao">Confirmar</string>
-    <string name="title_activity_alterar_cadastro_cliente">XCSBooks</string>
+    <string name="title_activity_alterar_cadastro_cliente">Alterar dados</string>
 
 
 </resources>

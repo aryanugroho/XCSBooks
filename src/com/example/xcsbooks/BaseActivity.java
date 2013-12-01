@@ -60,6 +60,8 @@ public class BaseActivity extends FragmentActivity {
 		case R.id.action_deslogar:
 			LoginControl.logout();
 			HomeActivity.getInstance().changeLoginFragment();
+			intent = new Intent(this, HomeActivity.class);
+			startActivity(intent);
 			break;
 		case R.id.action_alterar_cadastro:
 			intent = new Intent(this, CadastrarClienteActivity.class);

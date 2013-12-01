@@ -133,7 +133,13 @@ public class LoginControl {
 		editor.remove("session").remove("username").remove("senha").remove("nome").remove("cpf")
 		.remove("email").remove("telefone1").remove("telefone2").remove("logradouro").remove("numero")
 		.remove("complemento").remove("bairro").remove("cidade").remove("uf").remove("cep").commit();
-		//TODO: Remover endereço
+		
+		
+		// remover carrinho
+		prefs = HomeActivity.getInstance().getSharedPreferences("CARRINHO", HomeActivity.MODE_PRIVATE);
+		editor = prefs.edit();
+		editor.clear();
+		editor.commit();
 		
 		//Remove cookie
 		CookieManager.getInstance().removeAllCookie();
