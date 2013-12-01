@@ -57,8 +57,7 @@ public class ComprarActivity extends BaseActivity {
 			
 			for(ItemPedido ip : itens) {
 				map = new HashMap<String, Object>();
-				map.put("itemCarrinho_quantidadeItem", getResources().getString(R.string.quantidade)+": "+ip.getQuantidade());
-				Log.d("QUANTIDADE", ip.getQuantidade()+"a");
+				map.put("itemCarrinho_quantidadeItem", ip.getQuantidade());
 				map.put("itemCarrinho_codLivro", ip.getProduto().getCodigo());
 				map.put("itemCarrinho_thumbLivro", GetBookCover.getCover(((LivroNovo)ip.getProduto()).getIsbn()));
 				map.put("itemCarrinho_tituloLivro", ((LivroNovo)ip.getProduto()).getTitulo().toString());

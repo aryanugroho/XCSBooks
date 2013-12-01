@@ -17,6 +17,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.cookie.Cookie;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.cookie.BasicClientCookie;
 
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -44,7 +45,18 @@ public class RequestTask extends AsyncTask<URI, Integer, String>{
     @Override
     protected String doInBackground(URI... uri) {
         DefaultHttpClient httpclient = new DefaultHttpClient();
-        //String[] keyValueSets = CookieManager.getInstance().getCookie(URI_FOR_DOMAIN)
+        String[] keyValueSets = CookieManager.getInstance().getCookie(DOMAIN).split(";");
+        for(String cookie : keyValueSets){
+        	String[] keyValue = cookie.split("=");
+        	String key = keyValue[0];
+        	String value = "";
+        	if(keyValue.length > 1)
+        		value = keyValue[1];
+        	BasicClientCookie bcc = new BasicClientCookie(key, value);
+        	bcc.setDomain(DOMAIN);
+        	httpclient.getCookieStore().addCookie(bcc);
+        }
+        
         HttpResponse response;
         String responseString = null;
         
@@ -88,7 +100,7 @@ public class RequestTask extends AsyncTask<URI, Integer, String>{
                 		CookieManager.getInstance().setCookie(cookie.getDomain(), cookieString);
                 	}
                 }
-                //CookieSyncManager.getInstance().sync();
+               
             } else { 
                 //Closes the connection.
                 response.getEntity().getContent().close();
@@ -101,4 +113,10 @@ public class RequestTask extends AsyncTask<URI, Integer, String>{
         }
         return responseString;
     }  
+    
+    @Override
+    protected void onPostExecute(String result) {
+    	super.onPostExecute(result);
+    	 CookieSyncManager.getInstance().sync();
+    }
 }

@@ -1,10 +1,8 @@
 package com.example.xcsbooks.control;
 
-import java.net.CookieHandler;
-import java.net.CookieManager;
-
 import android.app.Application;
 import android.content.Context;
+import android.webkit.CookieSyncManager;
 
 public class MyApplication extends Application {
     private static MyApplication instance;
@@ -13,6 +11,7 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         MyApplication.context = getApplicationContext();
+        CookieSyncManager.createInstance(context);
         instance = this;
     }
 
