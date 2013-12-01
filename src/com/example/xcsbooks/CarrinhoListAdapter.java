@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.xcsbooks.control.JSONParser;
 import com.example.xcsbooks.model.Dinheiro;
+import com.example.xcsbooks.model.ItemPedido;
 import com.example.xcsbooks.model.LivroNovo;
 
 //TODO: Corrigir bug de não mostrar corretamente a lista
@@ -77,19 +78,21 @@ public class CarrinhoListAdapter extends ExtendedSimpleAdapter {
 					
 					// Efetivamente removendo o livro do carrinho
 					SharedPreferences prefs = context.getSharedPreferences("CARRINHO", context.MODE_PRIVATE);
-					String strlivros = prefs.getString("LIVROS", JSONParser.DEFAULT_PRODUTOS);
+					String stritenspedido = prefs.getString("ITENSPEDIDO", JSONParser.DEFAULT_PRODUTOS);
 					
 					// Obtem a lista de livros que está guardada como um JSON
-					List<LivroNovo> livros = JSONParser.LivroFromJSON(strlivros);
-					int cod = livros.get(position).getCodigo();
-					livros.remove(position);
+					List<ItemPedido> itens = JSONParser.ItemPedidoFromJSON(stritenspedido);
+
+					itens.remove(position);
 					// Transforma a nova lista em um JSON
-					String carrinho = JSONParser.LivroToJSON(livros);
+					String carrinho = JSONParser.ItemPedidoToJSON(itens);
 					//Guarda o novo JSON
 					SharedPreferences.Editor editor = prefs.edit();
-					//editor.clear();
-					editor.remove("LIVROS").putString("LIVROS", carrinho);
-					editor.remove("LIVROS" + cod).commit();
+					editor.clear();
+					editor.putString("ITENSCARRINHO", carrinho);
+					editor.commit();
+					//editor.remove("ITENSPEDIDO").putString("ITENSPEDIDO", carrinho);
+					//editor.remove("LIVROS" + cod).commit();
 					//Notifica o usuario, atualiza a lista
 					Toast.makeText(context, "Item removido", Toast.LENGTH_LONG).show();
 					notifyDataSetChanged();
@@ -135,13 +138,8 @@ public class CarrinhoListAdapter extends ExtendedSimpleAdapter {
 		Log.d("PRECO", "novoPreco = " + novoPreco.toString());
 		data.get(position).put("itemCarrinho_quantidadeItem", quant);
 		data.get(position).put("itemCarrinho_totalItem", novoPreco.toString());
-		int cod = (Integer) data.get(position).get("itemCarrinho_codLivro");
 		
-		//Update o sharedpref
-		SharedPreferences prefs = context.getSharedPreferences("CARRINHO", context.MODE_PRIVATE);
-		SharedPreferences.Editor editor = prefs.edit();
-		editor.putInt("LIVROS" + cod, quant).commit();
-		
+	
 		notifyDataSetChanged();
 	}
 	
