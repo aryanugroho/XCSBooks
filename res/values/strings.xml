@@ -73,11 +73,7 @@
     <string name="quantidade">Quantidade</string>
     <string name="confirmar_compra">Confirmar Compra</string>
     <string name="confirmar_compra_botao">Confirmar</string>
-<<<<<<< HEAD
-    <string name="title_activity_detalhes_pedido">DetalhesPedidoActivity</string>
     <string name="title_activity_alterar_cadastro_cliente">XCSBooks</string>
-=======
 
->>>>>>> e96ded67c696230342d54725a802a9c5ed649d16
 
 </resources>

@@ -3,8 +3,6 @@ package com.example.xcsbooks.control;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.URI;
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.List;
 
 import org.apache.http.HttpResponse;
@@ -16,19 +14,15 @@ import org.apache.http.client.CookieStore;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.protocol.ClientContext;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.cookie.Cookie;
-import org.apache.http.impl.client.AbstractHttpClient;
-import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.impl.cookie.BasicClientCookie;
-import org.apache.http.protocol.BasicHttpContext;
-import org.apache.http.protocol.HttpContext;
 
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.webkit.CookieManager;
+import android.webkit.CookieSyncManager;
 
 public class RequestTask extends AsyncTask<URI, Integer, String>{
 	private List<NameValuePair> args;
@@ -49,26 +43,8 @@ public class RequestTask extends AsyncTask<URI, Integer, String>{
 	
     @Override
     protected String doInBackground(URI... uri) {
-        AbstractHttpClient httpclient = new DefaultHttpClient();
-        HttpContext localContext = new BasicHttpContext();
-        CookieStore ckStore = new BasicCookieStore();
-        
-        prefs = MyApplication.getInstance().getSharedPreferences("COOKIES", MyApplication.getInstance().MODE_PRIVATE);
-		String ckName = prefs.getString("CK_NAME", "Test");
-		String ckValue = prefs.getString(ckName, "Test");
-		String ckPath = prefs.getString("CK_PATH", "/");
-		String ckDomain = prefs.getString("CK_DOMAIN", DOMAIN);
-		//@SuppressWarnings("deprecation")
-		//Date ckDate = new Date(prefs.getString("CK_DATE", "2013-11-23"));
-		Log.d("COOKIE_CONSTR", ckName + ckValue);
-		
-        BasicClientCookie cookie = new BasicClientCookie(ckName, ckValue);
-        cookie.setDomain(ckDomain);
-        cookie.setPath(ckPath);
-        //cookie.setExpiryDate(ckDate);
-        
-        ckStore.addCookie(cookie);
-        localContext.setAttribute(ClientContext.COOKIE_STORE, ckStore);
+        DefaultHttpClient httpclient = new DefaultHttpClient();
+        //String[] keyValueSets = CookieManager.getInstance().getCookie(URI_FOR_DOMAIN)
         HttpResponse response;
         String responseString = null;
         
@@ -82,12 +58,12 @@ public class RequestTask extends AsyncTask<URI, Integer, String>{
         		
         		Log.d("URL_GET", "URL: " + urlArg);
         		HttpGet get = new HttpGet(urlArg);
-        		response = httpclient.execute(get, localContext);
+        		response = httpclient.execute(get);
         	} else {
         		HttpPost post = new HttpPost(urlArg);
         		System.out.println(urlArg);
             	post.setEntity(new UrlEncodedFormEntity(args));
-                response = httpclient.execute(post, localContext);
+                response = httpclient.execute(post);
         	}
         	
             
@@ -104,22 +80,15 @@ public class RequestTask extends AsyncTask<URI, Integer, String>{
                 CookieStore cookieStore = httpclient.getCookieStore();
                 List<Cookie> cookies = cookieStore.getCookies();
                 //Save cookie to sharedpref
-                for(Cookie c : cookies){
-                	Log.d("COOKIES", c.getName() + c.getValue());
-                	SharedPreferences prefs = MyApplication.getInstance().getSharedPreferences("COOKIES", MyApplication.getInstance().MODE_PRIVATE);
-                	String t = prefs.getString(c.getName(), "NULL");
-                	SharedPreferences.Editor editor = prefs.edit();
-                	if(t.equals("PHPSESSID")){
-                		editor.putString(c.getName(), c.getValue());
-                		editor.putString("CK_NAME", c.getName());
-                		editor.putString("CK_DOMAIN", c.getDomain());
-                		editor.putString("CK_EXPIRY", c.getExpiryDate().toString());
-                		editor.putString("CK_PATH", c.getPath());
-                		Log.d("COOKIES", c.getName() + ": " + c.getValue());
+                if(cookies != null){
+                	for(Cookie cookie : cookies){
+                		Log.d("COOKIES", cookie.getName() + ": " + cookie.getValue());
+                		String cookieString = cookie.getName() + "=" + cookie.getValue() + "; domain=" + cookie.getDomain();
+                		Log.d("DOMAIN", cookie.getDomain());
+                		CookieManager.getInstance().setCookie(cookie.getDomain(), cookieString);
                 	}
-                	editor.commit();
                 }
-                
+                //CookieSyncManager.getInstance().sync();
             } else { 
                 //Closes the connection.
                 response.getEntity().getContent().close();
