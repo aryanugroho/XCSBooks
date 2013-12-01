@@ -64,7 +64,7 @@ public class BaseActivity extends FragmentActivity {
 			startActivity(intent);
 			break;
 		case R.id.action_alterar_cadastro:
-			intent = new Intent(this, CadastrarClienteActivity.class);
+			intent = new Intent(this, AlterarCadastroClienteActivity.class);
 			intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 			startActivity(intent);
 			break;

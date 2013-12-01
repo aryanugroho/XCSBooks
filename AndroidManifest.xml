@@ -93,6 +93,10 @@
             android:name="com.example.xcsbooks.AlterarCadastroClienteActivity"
             android:label="@string/title_activity_alterar_cadastro_cliente" >
         </activity>
+        <activity
+            android:name="com.example.xcsbooks.AlterarCadastroEnderecoActivity"
+            android:label="@string/title_activity_alterar_cadastro_endereco" >
+        </activity>
     </application>
 
 </manifest>

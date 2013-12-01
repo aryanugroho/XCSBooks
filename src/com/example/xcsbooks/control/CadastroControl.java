@@ -67,7 +67,7 @@ public class CadastroControl {
 		try {
 			//Faz um request para LOGIN_URI com os dados digitados
 			task = new RequestTask(list, ALTERA_CADASTRO_URI, RequestTask.REQUEST_POST).execute();
-			//Obt�m a resposta do back-end
+			//Obtem a resposta do back-end
 			resposta = task.get();
 		} catch (Exception e){
 			Log.e("CADASTRO_REQUEST", "Error on POST REQUEST to URL");
