@@ -290,4 +290,16 @@ public class JSONParser {
 		
 		return img;
 	}
+	
+	public static LivroNovo parseBuscaISBN(String json){
+		LivroNovo livro = null;
+		try{
+			JSONObject jobj = new JSONObject(json);
+			livro = new LivroNovo(0, 0, null, jobj.getString("isbn"), jobj.getString("titulo"), jobj.getString("autor"), jobj.getString("editora"));
+		} catch(JSONException e){
+			Log.e("BUSCA_ISBN_JSON", "Erro ao parsear: " + json);
+		}
+		
+		return livro;
+	}
 }

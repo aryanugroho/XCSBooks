@@ -68,6 +68,11 @@ public class BaseActivity extends FragmentActivity {
 			intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 			startActivity(intent);
 			break;
+		case R.id.action_alterar_senha:
+			intent = new Intent(this, AlterarSenhaActivity.class);
+			intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+			startActivity(intent);
+			break;
 		case R.id.action_busca:
 			intent = new Intent(this, BuscarActivity.class);
 			intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);

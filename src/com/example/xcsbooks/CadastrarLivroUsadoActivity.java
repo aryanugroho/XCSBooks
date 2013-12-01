@@ -6,18 +6,21 @@ import java.util.List;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
-import com.example.xcsbooks.control.CadastrarLivroUsadaControl;
-import com.example.xcsbooks.model.LivroUsado;
-
-import android.os.Bundle;
 import android.content.Intent;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
+
+import com.example.xcsbooks.control.BuscaControl;
+import com.example.xcsbooks.control.CadastrarLivroUsadaControl;
+import com.example.xcsbooks.model.LivroNovo;
+import com.example.xcsbooks.model.LivroUsado;
 
 public class CadastrarLivroUsadoActivity extends BaseActivity {
 
@@ -72,17 +75,26 @@ public class CadastrarLivroUsadoActivity extends BaseActivity {
 
 			}
 		});
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		return super.onCreateOptionsMenu(menu);
+		
+		mEditIsbn.setOnEditorActionListener(new OnEditorActionListener() {
+			
+			@Override
+			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+				String isbn = v.getText().toString();
+				atualizaCampos(isbn);
+				return true;
+			}
+		});
 	}
 	
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item){
-		return super.onOptionsItemSelected(item);
+	public void atualizaCampos(String isbn){
+		LivroNovo livro = (LivroNovo) BuscaControl.buscaISBN(isbn);
+		if(livro != null){
+			mEditTitulo.setText(livro.getTitulo());
+			mEditAutor.setText(livro.getAutor());
+			mEditEditora.setText(livro.getEditora());
+		} else {
+			Toast.makeText(this, "Não foi possível obter os dados do livro", Toast.LENGTH_SHORT).show();
+		}
 	}
-
 }

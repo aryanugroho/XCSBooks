@@ -3,10 +3,16 @@ package com.example.xcsbooks;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
-public class AlterarSenhaActivity extends Activity {
+import com.example.xcsbooks.control.CadastroControl;
+
+public class AlterarSenhaActivity extends BaseActivity {
 	private EditText prevSenhaEdit;
 	private EditText newSenhaEdit;
 	private Button submit;
@@ -20,18 +26,24 @@ public class AlterarSenhaActivity extends Activity {
 		newSenhaEdit = (EditText) findViewById(R.id.newSenha);
 		submit = (Button) findViewById(R.id.submitNewSenha);
 		
-		String prevSenha = prevSenhaEdit.getText().toString();
-		String newSenha = newSenhaEdit.getText().toString();
 		
-		//TODO enviar senha control
+		submit.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				String prevSenha = prevSenhaEdit.getText().toString(); 
+				String newSenha = newSenhaEdit.getText().toString();
+				int r = CadastroControl.alterarSenha(newSenha, prevSenha);
+				if(r < 0){
+					Toast.makeText(AlterarSenhaActivity.this, "Erro ao alterar senha", Toast.LENGTH_SHORT).show();
+				} else {
+					Toast.makeText(AlterarSenhaActivity.this, "Senha alterada com sucesso", Toast.LENGTH_SHORT).show();
+					finish();
+				}
+			}
+		});
 		
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.alterar_senha, menu);
-		return true;
-	}
 
 }

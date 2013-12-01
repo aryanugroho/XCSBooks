@@ -84,8 +84,8 @@ public class AlterarCadastroEnderecoActivity extends BaseActivity {
 				list.add(new BasicNameValuePair("complemento", mEditCompl.getText().toString()));
 				list.add(new BasicNameValuePair("bairro", mEditBairro.getText().toString()));
 				list.add(new BasicNameValuePair("cidade", mEditCidade.getText().toString()));
-				list.add(new BasicNameValuePair("UF", mEditUF.getText().toString()));
-				list.add(new BasicNameValuePair("CEP", mEditCEP.getText().toString()));
+				list.add(new BasicNameValuePair("estado", mEditUF.getText().toString()));
+				list.add(new BasicNameValuePair("cep", mEditCEP.getText().toString()));
 				//---
 				
 
@@ -106,7 +106,7 @@ public class AlterarCadastroEnderecoActivity extends BaseActivity {
 					cliente.getEndereco().setUf(mEditUF.getText().toString());
 					cliente.getEndereco().setCep(mEditCEP.getText().toString());
 					
-					Toast.makeText(getApplicationContext(), "AlteraÃ§Ã£o realizada com sucesso", Toast.LENGTH_LONG).show();
+					Toast.makeText(getApplicationContext(), "Alteração realizada com sucesso", Toast.LENGTH_LONG).show();
 					intent 	= new Intent(AlterarCadastroEnderecoActivity.this, HomeActivity.class);
 					startActivity(intent);
 				}
@@ -114,16 +114,4 @@ public class AlterarCadastroEnderecoActivity extends BaseActivity {
 			}
 		});
 	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		return super.onCreateOptionsMenu(menu);
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item){
-		return super.onOptionsItemSelected(item);
-	}
-
 }

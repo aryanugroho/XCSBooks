@@ -49,5 +49,11 @@
         android:orderInCategory="100"
         android:showAsAction="never"
         android:title="@string/title_alterar_cadastro"/>
+     
+     <item
+        android:id="@+id/action_alterar_senha"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/title_activity_alterar_senha"/>
     
 </menu>

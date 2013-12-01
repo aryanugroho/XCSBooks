@@ -16,11 +16,11 @@ import com.example.xcsbooks.model.Dinheiro;
 import com.example.xcsbooks.model.ItemPedido;
 import com.example.xcsbooks.model.LivroNovo;
 import com.example.xcsbooks.model.Pedido;
-import com.example.xcsbooks.model.Produto;
 
 public class BuscaControl {
 	public static String BUSCA_LIVRO_URI = "http://diskexplosivo.com/xcsbooks/search.php";
 	public static String BUSCA_PEDIDO_URI = "http://diskexplosivo.com/xcsbooks/pedido_cliente.php";
+	public static String BUSCA_ISBN_URI = "http://diskexplosivo.com/xcsbooks/bookDetails.php";
 	
 	 public static List<LivroNovo> buscarLivro(String termo){
          AsyncTask<URI, Integer, String> task;
@@ -143,4 +143,36 @@ public class BuscaControl {
 
 		return listaPedidos;
 	}
+	
+	public static LivroNovo buscaISBN(String isbn){
+	    AsyncTask<URI, Integer, String> task;
+        String resposta = null;
+		List<NameValuePair> list = new ArrayList<NameValuePair>();
+		
+		List<NameValuePair> searchData = new ArrayList<NameValuePair>();
+		searchData.add(new BasicNameValuePair("isbn", isbn));
+		
+		try {
+			//Faz um request para BUSCA_PEDIDO_URI com os dados digitados
+			task = new RequestTask(searchData, BUSCA_ISBN_URI, RequestTask.REQUEST_GET).execute();
+			//Obtém a resposta do back-end
+			resposta = task.get();
+		} catch (Exception e){
+			Log.e("SEARCH_REQUEST", "Error on GET REQUEST to URL");
+		}
+		
+		if(resposta != null){
+			
+			int test = JSONParser.parseResposta(resposta);
+			if(test < 0){
+				LivroNovo livro = JSONParser.parseBuscaISBN(resposta);
+				return livro;
+			} else {
+				return null;
+			}
+		
+		}
+		return null;
+	}
+	
 }

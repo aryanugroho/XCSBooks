@@ -76,7 +76,7 @@
     <string name="confirmar_compra_botao">Confirmar</string>
     <string name="title_activity_alterar_cadastro_cliente">Alterar dados</string>
     <string name="title_activity_alterar_cadastro_endereco">Alterar Endereco</string>
-    <string name="title_activity_alterar_senha">AlterarSenha</string>
+    <string name="title_activity_alterar_senha">Alterar Senha</string>
     <string name="title_activity_alterar_selecionar">AlterarSelecionarActivity</string>
 
 </resources>

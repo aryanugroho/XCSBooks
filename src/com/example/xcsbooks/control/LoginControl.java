@@ -113,7 +113,7 @@ public class LoginControl {
 							prefs.getString("telefone2", "NULL"),
 							new Endereco(
 									prefs.getString("logradouro", "NULL"),
-									Integer.valueOf(prefs.getString("numero", "NULL")),
+									Integer.valueOf(prefs.getString("numero", "0")),
 									prefs.getString("complemento", "NULL"),
 									prefs.getString("bairro", "NULL"),
 									prefs.getString("cidade", "NULL"),
