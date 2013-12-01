@@ -1,12 +1,9 @@
 package com.example.xcsbooks.model;
 
-import java.util.Date;
-
 public class LivroUsado extends LivroNovo {
 	private String estado;
 	private int porcentagemVenda;
-	private Date dataCadastro;
-	private String horaCadastro;
+	private String datahoraCadastro;
 	
 	public LivroUsado() {
 		super();
@@ -14,12 +11,11 @@ public class LivroUsado extends LivroNovo {
 
 	public LivroUsado(int codigo, int quantidade, Dinheiro preco, String isbn,
 			String titulo, String autor, String editora, String estado,
-			int porcentagemVenda, Date dataCadastro, String horaCadastro) {
+			int porcentagemVenda, String datahoraCadastro) {
 		super(codigo, quantidade, preco, isbn, titulo, autor, editora);
 		this.estado = estado;
 		this.porcentagemVenda = porcentagemVenda;
-		this.dataCadastro = dataCadastro;
-		this.horaCadastro = horaCadastro;
+		this.datahoraCadastro = datahoraCadastro;
 	}
 
 	public String getEstado() {
@@ -38,20 +34,14 @@ public class LivroUsado extends LivroNovo {
 		this.porcentagemVenda = porcentagemVenda;
 	}
 
-	public Date getDataCadastro() {
-		return dataCadastro;
+	public String getDatahoraCadastro() {
+		return datahoraCadastro;
 	}
 
-	public void setDataCadastro(Date dataCadastro) {
-		this.dataCadastro = dataCadastro;
+	public void setDatahoraCadastro(String datahoraCadastro) {
+		this.datahoraCadastro = datahoraCadastro;
 	}
 
-	public String getHoraCadastro() {
-		return horaCadastro;
-	}
 
-	public void setHoraCadastro(String horaCadastro) {
-		this.horaCadastro = horaCadastro;
-	}
 	
 }
