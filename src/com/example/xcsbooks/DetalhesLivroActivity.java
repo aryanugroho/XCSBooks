@@ -105,16 +105,16 @@ public class DetalhesLivroActivity extends BaseActivity {
 		boolean add = true;
 		for(ItemPedido ip : itens){
 			if(ip.getProduto().getCodigo() == livro.getCodigo())
+				ip.setQuantidade(ip.getQuantidade() + 1);
 				add = false;
 		}
 		
-		if(add)
+		if(add){
 			itens.add(new ItemPedido(1, new LivroNovo(livro), new Dinheiro(livro.getPreco().toString())));
+		}
 		
 		carrinho = JSONParser.ItemPedidoToJSON(itens);
-		Log.d("carrinho", carrinho);
-		SharedPreferences.Editor editor = prefs.edit();
-		editor.clear();
+		SharedPreferences.Editor editor = prefs.edit();;
 		editor.putString("ITENSCARRINHO", carrinho);
 		
 		editor.commit();

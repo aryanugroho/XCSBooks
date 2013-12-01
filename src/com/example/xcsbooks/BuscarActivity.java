@@ -90,7 +90,7 @@ public class BuscarActivity extends BaseActivity {
 			map.put("itemLista_thumbLivro", GetBookCover.getCover(livro.getIsbn()));
 			map.put("itemLista_tituloLivro", livro.getTitulo());
 			map.put("itemLista_autorLivro", livro.getAutor());
-			map.put("itemLista_precoLivro", "R$ " + String.valueOf(livro.getPreco()));
+			map.put("itemLista_precoLivro", livro.getPreco().toString());
 			searchList.add(map);
 		}
 	}
