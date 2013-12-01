@@ -51,7 +51,7 @@ public class ComprarActivity extends BaseActivity {
 			ListView lv = (ListView) findViewById(R.id.compra_listaCarrinho);
 			
 			pedido = new ArrayList<HashMap<String, Object>>();
-			HashMap<String, Object> map = null;
+			HashMap<String, Object> map = new HashMap<String, Object>();;
 			
 			Dinheiro precoFinal = new Dinheiro(0);
 			
