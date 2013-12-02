@@ -15,7 +15,6 @@ import android.widget.Button;
 import android.widget.EditText;
 
 public class CadastrarClienteActivity extends BaseActivity {
-	private Cliente cliente;
 	private Button mBtnContinue;
 	private EditText mEdtNome;
 	private EditText mEdtCPF;
@@ -37,7 +36,6 @@ public class CadastrarClienteActivity extends BaseActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		cliente = LoginControl.getClienteLogado();
 		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_cadastrar_cliente);
@@ -52,33 +50,63 @@ public class CadastrarClienteActivity extends BaseActivity {
 		mEdtPwd = (EditText) findViewById(R.id.cadastrarCliente_txtPassword);
 		mEdtPwdAgain = (EditText) findViewById(R.id.cadastrarCliente_txtValidePassword);
 		
-		if(cliente != null){ //Loggado - Alterar cadastro
-			setTitle("Alterar Cadastro");
-			mEdtCPF.setEnabled(false);
-			mEdtUsername.setEnabled(false);
-			
-			mEdtPwd.setVisibility(View.GONE);
-			mEdtPwdAgain.setVisibility(View.GONE);
-			
-			mEdtNome.setText(cliente.getNome());
-			mEdtCPF.setText(cliente.getCpf());
-			mEdtEmail.setText(cliente.getEmail());
-			mEditTel1.setText(cliente.getTelefone1());
-			mEditTel2.setText(cliente.getTelefone2());
-			mEdtUsername.setText(cliente.getUsername());
-		}
-		
 		mBtnContinue.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				boolean teste = true;
+				String message = "";
+				String title = "";
 				
-				if (cliente == null){
-					String pwd = mEdtPwd.getText().toString();
-					String pwd2 = mEdtPwdAgain.getText().toString();
-					teste = pwd.equals(pwd2);
+				String nome = mEdtNome.getText().toString();
+				String email = mEdtEmail.getText().toString();
+				String tel1 = mEditTel1.getText().toString();
+				String CPF = mEdtCPF.getText().toString();
+				String username = mEdtUsername.getText().toString();
+				String pwd = mEdtPwd.getText().toString();
+				String pwd2 = mEdtPwdAgain.getText().toString();
+				
+				if (teste != pwd.equals(pwd2)){
+					teste = false;
+					title = "Senha";
+					message = "Senhas não confere!";
 				}
+				if (pwd2.isEmpty()){
+					teste = false;
+					title = "Senha";
+					message = "Confirme a senha!";
+				}
+				if (pwd.isEmpty()){
+					teste = false;
+					title = "Senha";
+					message = "Digite sua senha!";
+				}
+				if (username.isEmpty()){
+					teste = false;
+					title = "Usuário";
+					message = "Digite seu usuário!";
+				}
+				if (tel1.isEmpty()){
+					teste = false;
+					title = "Celular";
+					message = "Digite seu celular!";
+				}
+				if (email.isEmpty()){
+					teste = false;
+					title = "Email";
+					message = "Digite seu email!";
+				}
+				if (CPF.isEmpty()){
+					teste = false;
+					title = "CPF";
+					message = "Digite seu CPF!";
+				}
+				if (nome.isEmpty()){
+					teste = false;
+					title = "Nome";
+					message = "Digite seu nome!";
+				}
+				
 				if(teste){
 					Intent intent = new Intent(CadastrarClienteActivity.this, CadastrarEnderecoActivity.class);
 					intent.putExtra(KEY_NOME, mEdtNome.getText().toString());
@@ -87,13 +115,11 @@ public class CadastrarClienteActivity extends BaseActivity {
 					intent.putExtra(KEY_TEL2, mEditTel2.getText().toString());
 					intent.putExtra(KEY_CPF, mEdtCPF.getText().toString());
 					intent.putExtra(KEY_UNAME, mEdtUsername.getText().toString());
-					if (cliente == null){
-						intent.putExtra(KEY_PWD, mEdtPwd.getText().toString());
-					}
+					intent.putExtra(KEY_PWD, mEdtPwd.getText().toString());
 					startActivity(intent);
 				} else {
 					AlertDialog.Builder builder = new AlertDialog.Builder(CadastrarClienteActivity.this, android.R.style.Theme_DeviceDefault_Dialog_MinWidth);
-					builder.setMessage("Senha n�o confere").setTitle("Senha").setCancelable(false).setIcon(android.R.drawable.stat_sys_warning)
+					builder.setMessage(message).setTitle(title).setCancelable(false).setIcon(android.R.drawable.stat_sys_warning)
 											.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener(){
 													@Override
 												public void onClick(

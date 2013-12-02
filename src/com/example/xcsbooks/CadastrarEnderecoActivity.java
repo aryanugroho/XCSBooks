@@ -11,6 +11,8 @@ import com.example.xcsbooks.control.CadastroControl;
 import com.example.xcsbooks.control.LoginControl;
 import com.example.xcsbooks.model.Cliente;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -58,30 +60,88 @@ public class CadastrarEnderecoActivity extends BaseActivity {
 			
 			@Override
 			public void onClick(View v) {
-				// Envia dados para o controller! Muitos dados!!!
-				Intent intent = getIntent();
-				List<NameValuePair> list = new ArrayList<NameValuePair>();
-				list.add(new BasicNameValuePair("nome", intent.getStringExtra(CadastrarClienteActivity.KEY_NOME)));
-				list.add(new BasicNameValuePair("cpf", intent.getStringExtra(CadastrarClienteActivity.KEY_CPF)));
-				list.add(new BasicNameValuePair("email", intent.getStringExtra(CadastrarClienteActivity.KEY_EMAIL)));
-				list.add(new BasicNameValuePair("tel1", intent.getStringExtra(CadastrarClienteActivity.KEY_TEL1)));
-				list.add(new BasicNameValuePair("tel2", intent.getStringExtra(CadastrarClienteActivity.KEY_TEL2)));
-				list.add(new BasicNameValuePair("username", intent.getStringExtra(CadastrarClienteActivity.KEY_UNAME)));
-				list.add(new BasicNameValuePair("senha", intent.getStringExtra(CadastrarClienteActivity.KEY_PWD)));
-				list.add(new BasicNameValuePair("logradouro", mEditLogr.getText().toString()));
-				list.add(new BasicNameValuePair("numero", mEditNum.getText().toString()));
-				list.add(new BasicNameValuePair("complemento", mEditCompl.getText().toString()));
-				list.add(new BasicNameValuePair("bairro", mEditBairro.getText().toString()));
-				list.add(new BasicNameValuePair("cidade", mEditCidade.getText().toString()));
-				list.add(new BasicNameValuePair("estado", mEditUF.getText().toString()));
-				list.add(new BasicNameValuePair("cep", mEditCEP.getText().toString()));
-
-				Cliente cli = CadastroControl.cadastrar(list);
-					
-				if(cli != null){
-					Toast.makeText(getApplicationContext(), "Cadastro realizado com sucesso", Toast.LENGTH_LONG).show();
-					intent 	= new Intent(CadastrarEnderecoActivity.this, HomeActivity.class);
-					startActivity(intent);
+				boolean teste = true;
+				String message = "";
+				String title = "";
+				
+				String logra = mEditLogr.getText().toString();
+				String num = mEditNum.getText().toString();
+				String bairro = mEditBairro.getText().toString();
+				String cidade = mEditCidade.getText().toString();
+				String uf = mEditUF.getText().toString();
+				String cep = mEditCEP.getText().toString();
+				
+				if (cep.isEmpty()){
+					teste = false;
+					title = "CEP";
+					message = "Digite CEP!";
+				}
+				if (uf.isEmpty()){
+					teste = false;
+					title = "UF";
+					message = "Digite UF!";
+				}
+				if (cidade.isEmpty()){
+					teste = false;
+					title = "Cidade";
+					message = "Digite cidade!";
+				}
+				if (bairro.isEmpty()){
+					teste = false;
+					title = "Bairro";
+					message = "Digite bairro!";
+				}				
+				if (num.isEmpty()){
+					teste = false;
+					title = "Número";
+					message = "Digite número!";
+				}
+				if (logra.isEmpty()){
+					teste = false;
+					title = "Logradouro";
+					message = "Digite logradouro!";
+				}
+				
+				if(teste){
+					// Envia dados para o controller! Muitos dados!!!
+					Intent intent = getIntent();
+					List<NameValuePair> list = new ArrayList<NameValuePair>();
+					list.add(new BasicNameValuePair("nome", intent.getStringExtra(CadastrarClienteActivity.KEY_NOME)));
+					list.add(new BasicNameValuePair("cpf", intent.getStringExtra(CadastrarClienteActivity.KEY_CPF)));
+					list.add(new BasicNameValuePair("email", intent.getStringExtra(CadastrarClienteActivity.KEY_EMAIL)));
+					list.add(new BasicNameValuePair("tel1", intent.getStringExtra(CadastrarClienteActivity.KEY_TEL1)));
+					list.add(new BasicNameValuePair("tel2", intent.getStringExtra(CadastrarClienteActivity.KEY_TEL2)));
+					list.add(new BasicNameValuePair("username", intent.getStringExtra(CadastrarClienteActivity.KEY_UNAME)));
+					list.add(new BasicNameValuePair("senha", intent.getStringExtra(CadastrarClienteActivity.KEY_PWD)));
+					list.add(new BasicNameValuePair("logradouro", mEditLogr.getText().toString()));
+					list.add(new BasicNameValuePair("numero", mEditNum.getText().toString()));
+					list.add(new BasicNameValuePair("complemento", mEditCompl.getText().toString()));
+					list.add(new BasicNameValuePair("bairro", mEditBairro.getText().toString()));
+					list.add(new BasicNameValuePair("cidade", mEditCidade.getText().toString()));
+					list.add(new BasicNameValuePair("estado", mEditUF.getText().toString()));
+					list.add(new BasicNameValuePair("cep", mEditCEP.getText().toString()));
+	
+					Cliente cli = CadastroControl.cadastrar(list);
+						
+					if(cli != null){
+						Toast.makeText(getApplicationContext(), "Cadastro realizado com sucesso", Toast.LENGTH_LONG).show();
+						intent 	= new Intent(CadastrarEnderecoActivity.this, HomeActivity.class);
+						startActivity(intent);
+					}
+				} else {
+					AlertDialog.Builder builder = new AlertDialog.Builder(CadastrarEnderecoActivity.this, android.R.style.Theme_DeviceDefault_Dialog_MinWidth);
+					builder.setMessage(message).setTitle(title).setCancelable(false).setIcon(android.R.drawable.stat_sys_warning)
+											.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener(){
+													@Override
+												public void onClick(
+														DialogInterface dialog,
+														int which) {
+													dialog.dismiss();
+												}
+												
+											});
+					AlertDialog dialog = builder.create();
+					dialog.show();
 				}
 			}
 		});
