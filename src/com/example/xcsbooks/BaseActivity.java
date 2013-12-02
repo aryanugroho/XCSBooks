@@ -29,12 +29,14 @@ public class BaseActivity extends FragmentActivity {
 			menu.getItem(5).setVisible(false);
 			menu.getItem(6).setVisible(false);
 			menu.getItem(7).setVisible(false);
+			menu.getItem(8).setVisible(false);
 		} else {
 			menu.getItem(3).setVisible(false);
 			menu.getItem(4).setVisible(true);
 			menu.getItem(5).setVisible(true);
 			menu.getItem(6).setVisible(true);
 			menu.getItem(7).setVisible(true);
+			menu.getItem(8).setVisible(true);
 		}
 		return true;
 	}

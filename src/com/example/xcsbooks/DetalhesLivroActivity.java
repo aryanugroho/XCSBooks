@@ -29,8 +29,8 @@ public class DetalhesLivroActivity extends BaseActivity {
 	private TextView mTxtEditoraLivro;
 	private TextView mTxtPrecoLivro;
 	private TextView mTxtIsbaLivro;
+	private TextView mTxtUsadoLivro;
 	private Button mBtnAdicionarCarrinho;
-	private Button mBtnComprar;
 	private LivroNovo livro;
 	
 
@@ -44,6 +44,7 @@ public class DetalhesLivroActivity extends BaseActivity {
 		mTxtEditoraLivro = (TextView) findViewById(R.id.detalheLivro_txtEditora);
 		mTxtPrecoLivro = (TextView) findViewById(R.id.detalheLivro_txtPreco);
 		mTxtIsbaLivro = (TextView) findViewById(R.id.detalheLivro_txtIsbn);
+		mTxtUsadoLivro = (TextView) findViewById(R.id.detalheLivro_txtUsado);
 		mBtnAdicionarCarrinho = (Button) findViewById(R.id.detalheLivro_btnAdicionarCarrinho);
 		ImageView im = (ImageView) findViewById(R.id.detalheLivro_imagemLivro);
 		
@@ -59,6 +60,8 @@ public class DetalhesLivroActivity extends BaseActivity {
 		mTxtEditoraLivro.setText(r.getString(R.string.editora) + ": " + livro.getEditora());
 		mTxtPrecoLivro.setText(r.getString(R.string.preco) + ": " + livro.getPreco().toString());
 		mTxtIsbaLivro.setText(r.getString(R.string.isbn) + ": " + livro.getIsbn());
+		if(!livro.getUsado().toString().equals("nao"))
+			mTxtUsadoLivro.setText(r.getString(R.string.status)+": "+ livro.getUsado());
 		
 		if(livro.getQuantidade() < 1) {
 			mBtnAdicionarCarrinho.setText("Indisponível");
