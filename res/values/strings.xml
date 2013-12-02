@@ -75,6 +75,8 @@
     <string name="usado">Usado</string>
     <string name="confirmar_compra">Confirmar Compra</string>
     <string name="confirmar_compra_botao">Confirmar</string>
+    <string name="lblquantidade">Quantidade:</string>
+    <string name="lbltotalitem">Total item:</string>
     <string name="title_activity_alterar_cadastro_cliente">Alterar dados</string>
     <string name="title_activity_alterar_cadastro_endereco">Alterar Endereco</string>
     <string name="title_activity_alterar_senha">Alterar Senha</string>

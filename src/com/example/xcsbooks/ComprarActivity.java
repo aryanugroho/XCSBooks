@@ -64,7 +64,7 @@ public class ComprarActivity extends BaseActivity {
 				map.put("itemCarrinho_autorLivro", ((LivroNovo)ip.getProduto()).getAutor().toString());
 				map.put("itemCarrinho_editoraLivro", ((LivroNovo)ip.getProduto()).getEditora());
 				ip.setTotalItem(new Dinheiro(ip.getProduto().getPreco().mult(ip.getQuantidade())));
-				map.put("itemCarrinho_totalItem",  getResources().getString(R.string.total)+": "+ip.getTotalItem().toString());
+				map.put("itemCarrinho_totalItem",  ip.getTotalItem().toString());
 				
 				pedido.add(map);
 				
