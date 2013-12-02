@@ -48,6 +48,7 @@ public class LoginControl {
 				
 			//Obtém resposta JSON parseada
 			Map<String, Object> u = JSONParser.parseLogin(resposta);
+			Log.d("ENDERECO_LOGIN", (String) u.get("cidade"));
 			//Cria um novo Usuário e salva a session
 			Cliente cli = 
 				new Cliente(username, password, 
@@ -101,7 +102,7 @@ public class LoginControl {
 	
 	public static Cliente getClienteLogado(){
 		Cliente cli = null;
-		SharedPreferences prefs = HomeActivity.getInstance().getSharedPreferences("LOGIN_CREDENTIALS", HomeActivity.MODE_PRIVATE);
+		SharedPreferences prefs = MyApplication.getInstance().getSharedPreferences("LOGIN_CREDENTIALS", MyApplication.MODE_PRIVATE);
 		
 		if(isLogged(prefs)){
 			cli = new Cliente(prefs.getString("username", "NULL"),

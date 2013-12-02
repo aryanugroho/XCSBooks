@@ -54,25 +54,52 @@ public class CadastrarLivroUsadoActivity extends BaseActivity {
 				// Envia dados para o controller! 
 				Intent intent = getIntent();
 				List<NameValuePair> list = new ArrayList<NameValuePair>();
-
-				list.add(new BasicNameValuePair("isbn", mEditIsbn.getText().toString()));
-				list.add(new BasicNameValuePair("titulo", mEditTitulo.getText().toString()));
-				list.add(new BasicNameValuePair("autor", mEditAutor.getText().toString()));
-				list.add(new BasicNameValuePair("editora", mEditEditora.getText().toString()));
-				list.add(new BasicNameValuePair("preco", mPreco.getText().toString()));
-
 				
+				boolean teste = true;
+				String isbn = mEditIsbn.getText().toString();
+				String titulo = mEditTitulo.getText().toString();
+				String autor = mEditAutor.getText().toString();
+				String editora = mEditEditora.getText().toString();
+				String preco = mPreco.getText().toString();
 				
-				int r = CadastrarLivroUsadaControl.cadastrar(list);
-				
-				if(r >= 0){
-					Toast.makeText(getApplicationContext(), "Cadastro realizado com sucesso", Toast.LENGTH_LONG).show();
-					intent 	= new Intent(CadastrarLivroUsadoActivity.this, HomeActivity.class);
-					startActivity(intent);
-				} else {
-					Toast.makeText(getApplicationContext(), "Erro no cadastro", Toast.LENGTH_LONG).show();
+				if(isbn.isEmpty()){
+					teste = false;
+					mEditIsbn.setError("Digite o ISBN do livro");
+				} 
+				if(titulo.isEmpty()){
+					teste = false;
+					mEditTitulo.setError("Digite o título do livro");
+				}
+				if(autor.isEmpty()){
+					teste = false;
+					mEditAutor.setError("Digite o autor do livro");
+				}
+				if(editora.isEmpty()){
+					teste = false;
+					mEditEditora.setError("Digite a editora");
+				}
+				if(preco.isEmpty()){
+					teste = false;
+					mPreco.setError("Digite um preço");
 				}
 
+				list.add(new BasicNameValuePair("isbn", isbn));
+				list.add(new BasicNameValuePair("titulo", titulo));
+				list.add(new BasicNameValuePair("autor", autor));
+				list.add(new BasicNameValuePair("editora", editora));
+				list.add(new BasicNameValuePair("preco", preco));
+				
+				if(teste){
+					int r = CadastrarLivroUsadaControl.cadastrar(list);
+					
+					if(r >= 0){
+						Toast.makeText(getApplicationContext(), "Cadastro realizado com sucesso", Toast.LENGTH_LONG).show();
+						intent 	= new Intent(CadastrarLivroUsadoActivity.this, HomeActivity.class);
+						startActivity(intent);
+					} else {
+						Toast.makeText(getApplicationContext(), "Erro no cadastro", Toast.LENGTH_LONG).show();
+					}
+				}
 			}
 		});
 		

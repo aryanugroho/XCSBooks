@@ -33,12 +33,28 @@ public class AlterarSenhaActivity extends BaseActivity {
 			public void onClick(View v) {
 				String prevSenha = prevSenhaEdit.getText().toString(); 
 				String newSenha = newSenhaEdit.getText().toString();
-				int r = CadastroControl.alterarSenha(newSenha, prevSenha);
-				if(r < 0){
-					Toast.makeText(AlterarSenhaActivity.this, "Erro ao alterar senha", Toast.LENGTH_SHORT).show();
-				} else {
-					Toast.makeText(AlterarSenhaActivity.this, "Senha alterada com sucesso", Toast.LENGTH_SHORT).show();
-					finish();
+				
+				boolean teste = true;
+				if(prevSenha.isEmpty()){
+					teste = false;
+					prevSenhaEdit.setError("Digite sua senha atual");
+				}
+				if(newSenha.isEmpty()){
+					teste = false;
+					newSenhaEdit.setError("Digite sua nova senha");
+				}
+				
+				if(teste){
+					int r = CadastroControl.alterarSenha(newSenha, prevSenha);
+					if(r < 0){
+						if(r == -2)
+							prevSenhaEdit.setError("Senha incorreta");
+						else
+							Toast.makeText(AlterarSenhaActivity.this, "Erro ao alterar senha", Toast.LENGTH_SHORT).show();
+					} else {
+						Toast.makeText(AlterarSenhaActivity.this, "Senha alterada com sucesso", Toast.LENGTH_SHORT).show();
+						finish();
+					}
 				}
 			}
 		});

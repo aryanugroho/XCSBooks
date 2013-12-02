@@ -74,6 +74,7 @@ public class JSONParser {
 			map.put("numero", e.getInt("numero"));
 			map.put("complemento", e.getString("complemento"));
 			map.put("bairro", e.getString("bairro"));
+			map.put("cidade", e.getString("cidade"));
 			map.put("uf", e.getString("uf"));
 			map.put("cep", e.getString("cep"));
 			

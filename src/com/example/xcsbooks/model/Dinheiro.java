@@ -47,7 +47,7 @@ public class Dinheiro {
 	}
 	
 	public String toString() {
-		return "R$ " + valor.toString();
+		return "R$ " + valor.setScale(2).toString();
 	}
 	
 	public double toDouble(){

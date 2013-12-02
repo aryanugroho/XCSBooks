@@ -69,42 +69,62 @@ public class CadastrarClienteActivity extends BaseActivity {
 				if (teste != pwd.equals(pwd2)){
 					teste = false;
 					title = "Senha";
-					message = "Senhas n√£o confere!";
+					message = "Senhas n„o confere!";
+					mEdtPwdAgain.setError(message);
 				}
 				if (pwd2.isEmpty()){
 					teste = false;
 					title = "Senha";
 					message = "Confirme a senha!";
+					mEdtPwdAgain.setError(message);
 				}
 				if (pwd.isEmpty()){
 					teste = false;
 					title = "Senha";
 					message = "Digite sua senha!";
+					mEdtPwd.setError(message);
 				}
 				if (username.isEmpty()){
 					teste = false;
-					title = "Usu√°rio";
-					message = "Digite seu usu√°rio!";
+					title = "Usu·rio";
+					message = "Digite seu usu·rio!";
+					mEdtUsername.setError(message);
 				}
 				if (tel1.isEmpty()){
 					teste = false;
 					title = "Celular";
 					message = "Digite seu celular!";
+					mEditTel1.setError(message);
 				}
 				if (email.isEmpty()){
 					teste = false;
 					title = "Email";
 					message = "Digite seu email!";
+					mEdtEmail.setError(message);
+				} else {
+					//Regex para validar email
+					String pattern = "\\b[a-z0-9._%+-]+@(?:[a-z0-9-]+\\.)+[a-z]{2,4}\\b";
+					email = email.toLowerCase();
+					if(!email.matches(pattern)){
+						teste = false;
+						title = "Email";
+						message = "E-mail inv·lido!";
+						mEdtEmail.setError(message);
+					}
 				}
+				
+				
 				if (CPF.isEmpty()){
 					teste = false;
 					title = "CPF";
 					message = "Digite seu CPF!";
+					mEdtCPF.setError(message);
 				}
 				if (nome.isEmpty()){
 					teste = false;
 					title = "Nome";
 					message = "Digite seu nome!";
+					mEdtNome.setError(message);
 				}
 				
 				if(teste){
@@ -118,6 +138,7 @@ public class CadastrarClienteActivity extends BaseActivity {
 					intent.putExtra(KEY_PWD, mEdtPwd.getText().toString());
 					startActivity(intent);
 				} else {
+					/*
 					AlertDialog.Builder builder = new AlertDialog.Builder(CadastrarClienteActivity.this, android.R.style.Theme_DeviceDefault_Dialog_MinWidth);
 					builder.setMessage(message).setTitle(title).setCancelable(false).setIcon(android.R.drawable.stat_sys_warning)
 											.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener(){
@@ -131,6 +152,7 @@ public class CadastrarClienteActivity extends BaseActivity {
 											});
 					AlertDialog dialog = builder.create();
 					dialog.show();
+					*/
 				}
 			}
 		});

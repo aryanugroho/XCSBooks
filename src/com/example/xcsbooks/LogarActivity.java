@@ -46,6 +46,16 @@ public class LogarActivity extends BaseActivity {
 				String password = mEditPassword.getText().toString();
 				Log.d("USER_INFO", "String Senha: " + password);
 				
+				boolean teste = true;
+				if(username.isEmpty()){
+					mEditLogin.setError("Entre com seu nome de usuário");
+					teste = false;
+				}
+				if(password.isEmpty()){
+					mEditPassword.setError("Entre com sua senha");
+					teste = false;
+				}
+				
 				NetworkInfo i = conMgr.getActiveNetworkInfo();
 				if (i == null || !i.isConnected() || !i.isAvailable()){
 					AlertDialog.Builder builder = new AlertDialog.Builder(LogarActivity.this, android.R.style.Theme_DeviceDefault_Dialog_MinWidth);
@@ -64,29 +74,32 @@ public class LogarActivity extends BaseActivity {
 					dialog.show();
 				} else {
 				
-					Cliente cli = LoginControl.logar(username, password);
+					Cliente cli = null;
+					if(teste){
+						cli = LoginControl.logar(username, password);
 					
-					if(cli != null){
-						//Intent intent = new Intent(LogarActivity.this, HomeActivity.class);
-						//startActivity(intent);
-						HomeActivity.getInstance().changeLoginFragment();
-						finish();
-					} else {
-						//Login errado
-						AlertDialog.Builder builder = new AlertDialog.Builder(LogarActivity.this, android.R.style.Theme_DeviceDefault_Dialog_MinWidth);
-						builder.setMessage(R.string.login_erro_info).setTitle(R.string.login_erro).setCancelable(false).setIcon(android.R.drawable.stat_sys_warning)
-												.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener(){
-
-													@Override
-													public void onClick(
-															DialogInterface dialog,
-															int which) {
-														dialog.dismiss();
-													}
-													
-												});
-						AlertDialog dialog = builder.create();
-						dialog.show();
+						if(cli != null){
+							//Intent intent = new Intent(LogarActivity.this, HomeActivity.class);
+							//startActivity(intent);
+							HomeActivity.getInstance().changeLoginFragment();
+							finish();
+						} else {
+							//Login errado
+							AlertDialog.Builder builder = new AlertDialog.Builder(LogarActivity.this, android.R.style.Theme_DeviceDefault_Dialog_MinWidth);
+							builder.setMessage(R.string.login_erro_info).setTitle(R.string.login_erro).setCancelable(false).setIcon(android.R.drawable.stat_sys_warning)
+													.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener(){
+	
+														@Override
+														public void onClick(
+																DialogInterface dialog,
+																int which) {
+															dialog.dismiss();
+														}
+														
+													});
+							AlertDialog dialog = builder.create();
+							dialog.show();
+						}
 					}
 				}
 				    

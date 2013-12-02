@@ -96,21 +96,26 @@ public class ComprarActivity extends BaseActivity {
 				
 				@Override
 				public void onClick(View v) {
-					int resposta = ComprarControl.comprar(pedido);
-					Log.d("COMPRAR_ACT", "resposta:" + resposta);
-					if(resposta >= 0){
-						//TODO trocar para string recurso
-						Toast.makeText(ComprarActivity.this, "Compra realizada com sucesso" , Toast.LENGTH_SHORT).show();
-						
-						//Limpar carrinho
-						SharedPreferences.Editor editor = prefs.edit();
-						editor.clear().commit();
-						
-						Intent intent = new Intent(ComprarActivity.this, HomeActivity.class);
-						intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-						startActivity(intent);
+	
+					if(!pedido.isEmpty()){
+						int resposta = ComprarControl.comprar(pedido);
+						Log.d("COMPRAR_ACT", "resposta:" + resposta);
+						if(resposta >= 0){
+							//TODO trocar para string recurso
+							Toast.makeText(ComprarActivity.this, "Compra realizada com sucesso" , Toast.LENGTH_SHORT).show();
+							
+							//Limpar carrinho
+							SharedPreferences.Editor editor = prefs.edit();
+							editor.clear().commit();
+							
+							Intent intent = new Intent(ComprarActivity.this, HomeActivity.class);
+							intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+							startActivity(intent);
+						} else {
+							Toast.makeText(ComprarActivity.this, "Erro na realização da compra" , Toast.LENGTH_SHORT).show();
+						}
 					} else {
-						Toast.makeText(ComprarActivity.this, "Erro na realização da compra" , Toast.LENGTH_SHORT).show();
+						Toast.makeText(ComprarActivity.this, "Seu carrinho está vazio", Toast.LENGTH_SHORT).show();
 					}
 				}
 			});

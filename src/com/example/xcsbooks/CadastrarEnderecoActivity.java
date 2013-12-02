@@ -73,33 +73,33 @@ public class CadastrarEnderecoActivity extends BaseActivity {
 				
 				if (cep.isEmpty()){
 					teste = false;
-					title = "CEP";
 					message = "Digite CEP!";
+					mEditCEP.setError(message);
 				}
 				if (uf.isEmpty()){
 					teste = false;
-					title = "UF";
 					message = "Digite UF!";
+					mEditUF.setError(message);
 				}
 				if (cidade.isEmpty()){
 					teste = false;
-					title = "Cidade";
 					message = "Digite cidade!";
+					mEditCidade.setError(message);
 				}
 				if (bairro.isEmpty()){
 					teste = false;
-					title = "Bairro";
 					message = "Digite bairro!";
+					mEditBairro.setError(message);
 				}				
 				if (num.isEmpty()){
 					teste = false;
-					title = "Número";
-					message = "Digite número!";
+					message = "Digite n�mero!";
+					mEditNum.setError(message);
 				}
 				if (logra.isEmpty()){
 					teste = false;
-					title = "Logradouro";
 					message = "Digite logradouro!";
+					mEditLogr.setError(message);
 				}
 				
 				if(teste){
@@ -128,21 +128,7 @@ public class CadastrarEnderecoActivity extends BaseActivity {
 						intent 	= new Intent(CadastrarEnderecoActivity.this, HomeActivity.class);
 						startActivity(intent);
 					}
-				} else {
-					AlertDialog.Builder builder = new AlertDialog.Builder(CadastrarEnderecoActivity.this, android.R.style.Theme_DeviceDefault_Dialog_MinWidth);
-					builder.setMessage(message).setTitle(title).setCancelable(false).setIcon(android.R.drawable.stat_sys_warning)
-											.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener(){
-													@Override
-												public void onClick(
-														DialogInterface dialog,
-														int which) {
-													dialog.dismiss();
-												}
-												
-											});
-					AlertDialog dialog = builder.create();
-					dialog.show();
-				}
+				} 
 			}
 		});
 		

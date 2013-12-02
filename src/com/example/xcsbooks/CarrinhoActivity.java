@@ -44,6 +44,9 @@ public class CarrinhoActivity extends BaseActivity {
 		Button footerComprar = (Button) v.findViewById(R.id.carrinho_btnComprar);
 		mLv.addFooterView(v);
 		
+		if(itens.isEmpty()){
+			footerComprar.setEnabled(false);
+		}
 		
 		footerComprar.setOnClickListener(new OnClickListener() {
 			
