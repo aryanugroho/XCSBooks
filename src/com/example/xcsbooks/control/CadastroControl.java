@@ -10,6 +10,7 @@ import org.apache.http.message.BasicNameValuePair;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.xcsbooks.HomeActivity;
 import com.example.xcsbooks.model.Cliente;
@@ -37,8 +38,34 @@ public class CadastroControl {
 			
 
 			int test = JSONParser.parseResposta(resposta);
-			if(test < 0)
+			if(test < 0){
+				switch(test){
+				case -20:
+					makeToast("Preencha o nome de usuário");
+					break;
+				case -21:
+					makeToast("Preencha a senha");
+					break;
+				case -22:
+					makeToast("Preencha seus dados");
+					break;
+				case -23:
+					makeToast("Preencha seu e-mail");
+					break;
+				case -30:
+					makeToast("Preencha seu endereço");
+					break;
+				case -11:
+					makeToast("Erro ao enviar informações do cliente");
+					break;
+				case -10:
+					makeToast("Erro ao enviar endereço do cliente");
+					break;
+				}
+				
 				return null;
+			}
+				
 			
 			//Cliente(String * 7, Endereco(S	tring * 7))
 			Cliente cli = 
@@ -149,5 +176,9 @@ public class CadastroControl {
 			return test;
 		}
 		return -99;
+	}
+	
+	private static void makeToast(String text){
+		Toast.makeText(MyApplication.getInstance(), text, Toast.LENGTH_LONG).show();
 	}
 }

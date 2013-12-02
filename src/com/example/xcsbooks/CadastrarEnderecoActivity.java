@@ -22,7 +22,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class CadastrarEnderecoActivity extends BaseActivity {
-	private Cliente cliente;
 	private Button mBtnCadastrar;
 	private EditText mEditLogr;
 	private EditText mEditNum;
@@ -42,7 +41,6 @@ public class CadastrarEnderecoActivity extends BaseActivity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		cliente = LoginControl.getClienteLogado();
 		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_cadastrar_endereco);
@@ -55,19 +53,7 @@ public class CadastrarEnderecoActivity extends BaseActivity {
 		mEditCidade = (EditText) findViewById(R.id.cadastrarEndereco_txtCidade);
 		mEditUF = (EditText) findViewById(R.id.cadastrarEndereco_txtEstado);
 		mEditCEP = (EditText) findViewById(R.id.cadastrarEndereco_txtCep);
-		
-		if(cliente != null){ //Loggado - Alterar cadastro
-			if(cliente.getEndereco() != null){ 
-				mEditLogr.setText(cliente.getEndereco().getLogradouro());
-				mEditNum.setText(cliente.getEndereco().getNumero());
-				mEditCompl.setText(cliente.getEndereco().getComplemento());
-				mEditBairro.setText(cliente.getEndereco().getBairro());
-				mEditCidade.setText(cliente.getEndereco().getCidade());
-				mEditUF.setText(cliente.getEndereco().getUf());
-				mEditCEP.setText(cliente.getEndereco().getCep());
-			}
-		}
-		
+			
 		mBtnCadastrar.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -81,47 +67,24 @@ public class CadastrarEnderecoActivity extends BaseActivity {
 				list.add(new BasicNameValuePair("tel1", intent.getStringExtra(CadastrarClienteActivity.KEY_TEL1)));
 				list.add(new BasicNameValuePair("tel2", intent.getStringExtra(CadastrarClienteActivity.KEY_TEL2)));
 				list.add(new BasicNameValuePair("username", intent.getStringExtra(CadastrarClienteActivity.KEY_UNAME)));
-				if (cliente == null) //Novo cadastro
-					list.add(new BasicNameValuePair("senha", intent.getStringExtra(CadastrarClienteActivity.KEY_PWD)));
-				//---
+				list.add(new BasicNameValuePair("senha", intent.getStringExtra(CadastrarClienteActivity.KEY_PWD)));
 				list.add(new BasicNameValuePair("logradouro", mEditLogr.getText().toString()));
 				list.add(new BasicNameValuePair("numero", mEditNum.getText().toString()));
 				list.add(new BasicNameValuePair("complemento", mEditCompl.getText().toString()));
 				list.add(new BasicNameValuePair("bairro", mEditBairro.getText().toString()));
 				list.add(new BasicNameValuePair("cidade", mEditCidade.getText().toString()));
-				list.add(new BasicNameValuePair("UF", mEditUF.getText().toString()));
-				list.add(new BasicNameValuePair("CEP", mEditCEP.getText().toString()));
-				//---
-				
-				if (cliente == null){
-					Cliente cli = CadastroControl.cadastrar(list);
+				list.add(new BasicNameValuePair("estado", mEditUF.getText().toString()));
+				list.add(new BasicNameValuePair("cep", mEditCEP.getText().toString()));
+
+				Cliente cli = CadastroControl.cadastrar(list);
 					
-					if(cli != null){
-						Toast.makeText(getApplicationContext(), "Cadastro realizado com sucesso", Toast.LENGTH_LONG).show();
-						intent 	= new Intent(CadastrarEnderecoActivity.this, HomeActivity.class);
-						startActivity(intent);
-					}
-				} else {
-					Cliente cli = CadastroControl.alterar(list);
-					
-					if(cli != null){
-						Toast.makeText(getApplicationContext(), "Alteração realizada com sucesso", Toast.LENGTH_LONG).show();
-						intent 	= new Intent(CadastrarEnderecoActivity.this, HomeActivity.class);
-						startActivity(intent);
-					}
+				if(cli != null){
+					Toast.makeText(getApplicationContext(), "Cadastro realizado com sucesso", Toast.LENGTH_LONG).show();
+					intent 	= new Intent(CadastrarEnderecoActivity.this, HomeActivity.class);
+					startActivity(intent);
 				}
 			}
 		});
 		
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		return super.onCreateOptionsMenu(menu);
-	}
-	
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item){
-		return super.onOptionsItemSelected(item);
 	}
 }

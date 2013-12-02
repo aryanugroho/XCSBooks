@@ -93,7 +93,7 @@ public class CadastrarClienteActivity extends BaseActivity {
 					startActivity(intent);
 				} else {
 					AlertDialog.Builder builder = new AlertDialog.Builder(CadastrarClienteActivity.this, android.R.style.Theme_DeviceDefault_Dialog_MinWidth);
-					builder.setMessage("Senha n√£o confere").setTitle("Senha").setCancelable(false).setIcon(android.R.drawable.stat_sys_warning)
+					builder.setMessage("Senha n„o confere").setTitle("Senha").setCancelable(false).setIcon(android.R.drawable.stat_sys_warning)
 											.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener(){
 													@Override
 												public void onClick(
@@ -108,16 +108,6 @@ public class CadastrarClienteActivity extends BaseActivity {
 				}
 			}
 		});
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		return super.onCreateOptionsMenu(menu);
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item){
-		return super.onOptionsItemSelected(item);
 	}
 	
 }
