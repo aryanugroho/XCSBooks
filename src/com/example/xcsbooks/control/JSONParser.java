@@ -102,6 +102,7 @@ public class JSONParser {
 				map.put("editora", t.getString("editora"));
 				map.put("quantidade", t.getString("quantidade"));
 				map.put("preco", t.getString("preco"));
+				map.put("usado", t.getString("usado"));
 				list.add(map);
 			}
 			
@@ -169,7 +170,8 @@ public class JSONParser {
 				json += "\"autor\":\"" + ln.getAutor() + "\",";
 				json += "\"editora\":\"" + ln.getEditora() + "\",";
 				json += "\"quantidade\":\"" + ln.getQuantidade() + "\",";
-				json += "\"preco\":\"" + ln.getPreco() + "\"";
+				json += "\"preco\":\"" + ln.getPreco() + "\",";
+				json += "\"usado\":\"" + ln.getUsado() + "\"";
 				
 				if(i < list.size() - 1)
 					json += "},";
@@ -197,7 +199,8 @@ public class JSONParser {
 						t.getString("isbn"),
 						t.getString("titulo"),
 						t.getString("autor"),
-						t.getString("editora"));
+						t.getString("editora"),
+						t.getString("usado"));
 				
 				list.add(ln);
 			}

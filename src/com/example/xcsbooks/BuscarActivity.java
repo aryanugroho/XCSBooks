@@ -46,10 +46,12 @@ public class BuscarActivity extends BaseActivity {
 		performSearch(termo);
 		
 		String[] t = {"itemLista_thumbLivro","itemLista_tituloLivro",
-					"itemLista_autorLivro", "itemLista_precoLivro"};
+					"itemLista_autorLivro", "itemLista_precoLivro",
+					"itemLista_usadoLivro"};
 			
 		int[] i = {R.id.itemLista_thumbLivro,
-					R.id.itemLista_tituloLivro, R.id.itemLista_autorLivro, R.id.itemLista_precoLivro};
+					R.id.itemLista_tituloLivro, R.id.itemLista_autorLivro, R.id.itemLista_precoLivro,
+					R.id.itemLista_usadoLivro};
 		
 		//Adapter
 	
@@ -91,6 +93,10 @@ public class BuscarActivity extends BaseActivity {
 			map.put("itemLista_tituloLivro", livro.getTitulo());
 			map.put("itemLista_autorLivro", livro.getAutor());
 			map.put("itemLista_precoLivro", livro.getPreco().toString());
+			if(livro.getUsado().toString().equals("nao"))
+				map.put("itemLista_usadoLivro", "");
+			else
+				map.put("itemLista_usadoLivro", getResources().getString(R.string.usado));
 			searchList.add(map);
 		}
 	}

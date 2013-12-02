@@ -8,6 +8,7 @@ public class LivroNovo extends Produto implements Parcelable {
 	protected String titulo;
 	protected String autor;
 	protected String editora;
+	protected String usado;
 
 	public LivroNovo() {
 		super();
@@ -19,6 +20,15 @@ public class LivroNovo extends Produto implements Parcelable {
 		this.titulo = titulo;
 		this.autor = autor;
 		this.editora = editora;
+	}
+	public LivroNovo(int codigo, int quantidade, Dinheiro preco, String isbn,
+			String titulo, String autor, String editora, String estado) {
+		super(codigo, quantidade, preco);
+		this.isbn = isbn;
+		this.titulo = titulo;
+		this.autor = autor;
+		this.editora = editora;
+		this.usado = estado;
 	}
 	public LivroNovo(LivroNovo livro) {
 		super(livro.getCodigo(), livro.getQuantidade(), livro.getPreco());
@@ -58,7 +68,13 @@ public class LivroNovo extends Produto implements Parcelable {
 	public void setEditora(String editora) {
 		this.editora=editora;
 	}
-
+	public String getUsado() {
+		return usado;
+	}
+	public void setUsado(String usado) {
+		this.usado = usado;
+	}
+	
 	@Override
 	public int describeContents() {
 		return 0;
@@ -73,6 +89,7 @@ public class LivroNovo extends Produto implements Parcelable {
 		dest.writeString(getTitulo());
 		dest.writeString(getAutor());
 		dest.writeString(getEditora());
+		dest.writeString(getUsado());
 	}
 
 	public static final Parcelable.Creator<LivroNovo> CREATOR = new Parcelable.Creator<LivroNovo>() {
@@ -96,6 +113,7 @@ public class LivroNovo extends Produto implements Parcelable {
 		setTitulo(in.readString());
 		setAutor(in.readString());
 		setEditora(in.readString());
+		setUsado(in.readString());
 	}
 	
 }

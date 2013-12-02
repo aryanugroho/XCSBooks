@@ -72,6 +72,7 @@
     <string name="total">Total</string>
     <string name="atualizar">Atualizar</string>
     <string name="quantidade">Quantidade</string>
+    <string name="usado">Usado</string>
     <string name="confirmar_compra">Confirmar Compra</string>
     <string name="confirmar_compra_botao">Confirmar</string>
     <string name="title_activity_alterar_cadastro_cliente">Alterar dados</string>

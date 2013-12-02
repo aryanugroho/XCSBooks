@@ -43,7 +43,7 @@ public class BuscaControl {
         	 int test = JSONParser.parseResposta(resposta);
              if(test < 0){
             	 Log.d("SEARCH_F", "Resposta: " + test);
-                 return new ArrayList();
+                 return new ArrayList<LivroNovo>();
              }
              //Obtém resposta JSON parseada
              List <? extends Map<String, ?>> u = JSONParser.parseBuscaLivro(resposta);
@@ -60,7 +60,8 @@ public class BuscaControl {
                                      (String)t.get("isbn"),
                                      (String)t.get("titulo"),
                                      (String)t.get("autor"),
-                                     (String)t.get("editora"));
+                                     (String)t.get("editora"),
+                                     (String)t.get("usado"));
                      list.add(l);
                      Log.d("LIVRO_I", "Nome: " + l.getTitulo());
              }
@@ -69,7 +70,7 @@ public class BuscaControl {
              return list;
          }
    
-         return new ArrayList();
+         return new ArrayList<LivroNovo>();
  }
 	
 
